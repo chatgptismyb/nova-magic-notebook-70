@@ -36,8 +36,8 @@ export const NovaCompanion = () => {
     <div className="fixed bottom-6 right-6 z-50">
       {/* Chat Bubble */}
       <div className="mb-4 max-w-xs">
-        <div className="bg-slate-800/90 backdrop-blur-sm text-white p-4 rounded-2xl rounded-br-sm border border-purple-500/30 shadow-lg relative animate-fade-in">
-          <p className="text-sm italic text-purple-200">{message}</p>
+        <div className="bg-slate-800/90 backdrop-blur-sm text-white p-4 rounded-2xl rounded-br-sm border border-yellow-500/30 shadow-lg relative animate-fade-in">
+          <p className="text-sm italic text-yellow-200">{message}</p>
           
           {/* Speech bubble tail */}
           <div className="absolute -bottom-2 right-4 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-slate-800/90" />
@@ -48,20 +48,22 @@ export const NovaCompanion = () => {
       <div className="relative">
         <button
           onClick={() => setIsVisible(false)}
-          className="group relative w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-purple-500/50 transition-all duration-300 hover:scale-110 animate-bounce"
+          className="group relative w-16 h-16 bg-gradient-to-br from-yellow-500 to-amber-500 rounded-full flex items-center justify-center shadow-lg hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-110 animate-bounce overflow-hidden"
           style={{ animationDuration: '3s' }}
         >
           {/* Floating rings */}
           <div className="absolute inset-0">
-            <div className="absolute inset-1 border border-purple-300/50 rounded-full animate-spin" style={{ animationDuration: '4s' }} />
-            <div className="absolute inset-2 border border-pink-300/50 rounded-full animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }} />
+            <div className="absolute inset-1 border border-yellow-300/50 rounded-full animate-spin" style={{ animationDuration: '4s' }} />
+            <div className="absolute inset-2 border border-amber-300/50 rounded-full animate-spin" style={{ animationDuration: '6s', animationDirection: 'reverse' }} />
           </div>
           
           {/* Nova's face */}
-          <div className="relative z-10 text-2xl transform group-hover:scale-110 transition-transform duration-300">
-            <div className={`transition-all duration-200 ${isBlinking ? 'scale-y-50' : 'scale-y-100'}`}>
-              🧙‍♀️
-            </div>
+          <div className="relative z-10 w-full h-full transform group-hover:scale-110 transition-transform duration-300">
+            <img 
+              src="/lovable-uploads/d28b8fdc-6ad3-421a-99b7-7b12e0aaff5d.png" 
+              alt="Nova" 
+              className={`w-full h-full object-cover rounded-full transition-all duration-200 ${isBlinking ? 'scale-y-50' : 'scale-y-100'}`}
+            />
           </div>
           
           {/* Sparkles on hover */}
