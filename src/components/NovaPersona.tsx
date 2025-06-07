@@ -4,6 +4,15 @@ import { useState } from 'react';
 export const NovaPersona = () => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const floatingNotes = [
+    { text: "/cast morning routine", position: "top-10 left-10", delay: "0s" },
+    { text: "/automate email workflow", position: "top-20 right-16", delay: "2s" },
+    { text: "/organize project tasks", position: "bottom-32 left-1/4", delay: "4s" },
+    { text: "/schedule meditation time", position: "bottom-20 right-20", delay: "1s" },
+    { text: "/track fitness goals", position: "top-1/3 left-1/3", delay: "3s" },
+    { text: "/plan weekend getaway", position: "bottom-1/3 right-1/3", delay: "5s" }
+  ];
+
   return (
     <section className="py-20 px-6 relative bg-transparent">
       <div className="max-w-6xl mx-auto">
@@ -29,6 +38,22 @@ export const NovaPersona = () => {
                   className="w-64 h-64 object-cover rounded-full transform transition-transform duration-300" 
                   style={{ transform: isHovered ? 'scale(1.1)' : 'scale(1)' }}
                 />
+              </div>
+              
+              {/* Floating command notes */}
+              <div className="absolute inset-0 pointer-events-none overflow-visible">
+                {floatingNotes.map((note, i) => (
+                  <div
+                    key={i}
+                    className={`absolute ${note.position} bg-yellow-400/20 p-2 rounded-lg backdrop-blur-sm border border-yellow-400/40 animate-wind-drift text-xs text-yellow-200 font-mono max-w-32`}
+                    style={{ animationDelay: note.delay }}
+                  >
+                    <div className="flex items-center gap-1">
+                      <span>🪄</span>
+                      <span>{note.text}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
               
               {/* Floating sparkles */}
@@ -60,22 +85,22 @@ export const NovaPersona = () => {
             
             <div className="bg-slate-800/50 p-6 rounded-xl border border-yellow-500/20">
               <p className="text-lg text-gray-300 leading-relaxed mb-4">
-                Nova is your magical co-pilot — a wise, intuitive AI companion who guides you through your projects. 
-                She's intelligent, creative, and always ready to help.
+                Nova is your magical co-pilot — a wise, intuitive AI companion who transforms your thoughts into 
+                powerful productivity spells. Watch as she brings your ideas to life with enchanting automation.
               </p>
               <p className="text-lg text-yellow-300 font-semibold">
-                She's not just an assistant. She's the magic behind the magic.
+                She's not just an assistant. She's the magic behind your transformation.
               </p>
             </div>
             
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-800/30 p-4 rounded-lg border border-amber-500/20">
-                <h4 className="font-semibold text-amber-300 mb-2">Intelligent Understanding</h4>
-                <p className="text-sm text-gray-300">Comprehends context, intentions, and the meaning between your words</p>
+                <h4 className="font-semibold text-amber-300 mb-2">Spell Recognition</h4>
+                <p className="text-sm text-gray-300">Understands your intent and crafts perfect productivity spells</p>
               </div>
               <div className="bg-slate-800/30 p-4 rounded-lg border border-yellow-500/20">
-                <h4 className="font-semibold text-yellow-300 mb-2">Always Learning</h4>
-                <p className="text-sm text-gray-300">Adapts to your workflow and grows more powerful with every interaction</p>
+                <h4 className="font-semibold text-yellow-300 mb-2">Life Orchestration</h4>
+                <p className="text-sm text-gray-300">Weaves together all aspects of your life into harmonious flow</p>
               </div>
             </div>
             
@@ -83,8 +108,8 @@ export const NovaPersona = () => {
               <div className="flex items-start gap-3">
                 <div className="text-2xl">💬</div>
                 <div>
-                  <p className="text-yellow-200 italic mb-2">"Ready to cast your next spell?"</p>
-                  <p className="text-sm text-gray-400">— Nova, whenever you need inspiration</p>
+                  <p className="text-yellow-200 italic mb-2">"Ready to cast your next life-changing spell?"</p>
+                  <p className="text-sm text-gray-400">— Nova, your magical productivity companion</p>
                 </div>
               </div>
             </div>

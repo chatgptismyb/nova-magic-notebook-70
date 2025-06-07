@@ -8,10 +8,10 @@ export const NovaCompanion = () => {
   
   const messages = [
     "Ready to cast your next spell?",
-    "Need help planning your ritual?",
-    "Ask me anything.",
-    "What magic shall we create today?",
-    "Your productivity wizard awaits..."
+    "Need help planning your magical day?",
+    "Ask me anything about productivity!",
+    "What life-changing magic shall we create?",
+    "Your transformation awaits..."
   ];
 
   useEffect(() => {
@@ -36,11 +36,11 @@ export const NovaCompanion = () => {
     <div className="fixed bottom-6 right-6 z-50">
       {/* Chat Bubble */}
       <div className="mb-4 max-w-xs">
-        <div className="bg-slate-800/90 backdrop-blur-sm text-white p-4 rounded-2xl rounded-br-sm border border-yellow-500/30 shadow-lg relative animate-fade-in">
+        <div className="bg-gradient-to-r from-yellow-900/90 to-amber-900/90 backdrop-blur-sm text-white p-4 rounded-2xl rounded-br-sm border border-yellow-500/30 shadow-lg relative animate-fade-in">
           <p className="text-sm italic text-yellow-200">{message}</p>
           
           {/* Speech bubble tail */}
-          <div className="absolute -bottom-2 right-4 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-slate-800/90" />
+          <div className="absolute -bottom-2 right-4 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-yellow-900/90" />
         </div>
       </div>
       
@@ -85,7 +85,7 @@ export const NovaCompanion = () => {
         </button>
         
         {/* Online indicator */}
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white animate-pulse" />
+        <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white animate-pulse" />
       </div>
     </div>
   );
