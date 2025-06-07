@@ -2,6 +2,7 @@
 import { Hero } from '@/components/Hero';
 import { WhatItIs } from '@/components/WhatItIs';
 import { Features } from '@/components/Features';
+import { AppMockups } from '@/components/AppMockups';
 import { NovaPersona } from '@/components/NovaPersona';
 import { Community } from '@/components/Community';
 import { Footer } from '@/components/Footer';
@@ -20,10 +21,32 @@ const Index = () => {
       <Hero />
       <WhatItIs />
       <Features />
+      <AppMockups />
       <NovaPersona />
       <Community />
       <Footer />
       <NovaCompanion />
+      
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33% { transform: translateY(-20px) rotate(1deg); }
+          66% { transform: translateY(10px) rotate(-1deg); }
+        }
+        
+        @keyframes scale-in {
+          0% { transform: scale(0.95); opacity: 0; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-scale-in {
+          animation: scale-in 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 };
