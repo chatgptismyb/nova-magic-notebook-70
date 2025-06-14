@@ -120,20 +120,48 @@ export const Community = () => {
 
   return (
     <section className="py-24 px-6 relative bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
-      {/* Magical Background Effects */}
+      {/* Magical Wind Charms Background */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute text-yellow-300/30 animate-sparkle-dance text-lg"
+            className="absolute animate-wind-drift opacity-40"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 4}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
+              animationDuration: `${8 + Math.random() * 4}s`
             }}
           >
-            ✨
+            <div className="text-yellow-300 text-2xl transform rotate-12">🌟</div>
+          </div>
+        ))}
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={`charm-${i}`}
+            className="absolute animate-sparkle-dance opacity-50"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${4 + Math.random() * 2}s`
+            }}
+          >
+            <div className="text-amber-400 text-lg">🔮</div>
+          </div>
+        ))}
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={`wand-${i}`}
+            className="absolute animate-float opacity-30"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${6 + Math.random() * 3}s`
+            }}
+          >
+            <div className="text-purple-400 text-xl">⚡</div>
           </div>
         ))}
       </div>
@@ -171,12 +199,51 @@ export const Community = () => {
               ))}
             </div>
 
-            {/* Wizard Character */}
+            {/* Nova Wizard Character - Using uploaded image as reference */}
             <div className="flex flex-col items-center relative z-10">
               <div className="mb-8 relative">
-                <div className="w-32 h-32 bg-gradient-to-br from-purple-600 to-indigo-800 rounded-full flex items-center justify-center text-6xl animate-nova-breathe shadow-2xl border-4 border-yellow-500/50">
-                  🧙‍♂️
+                {/* Nova Agent inspired by uploaded image */}
+                <div className="relative">
+                  {/* Wizard body in purple robes */}
+                  <div className="w-32 h-40 bg-gradient-to-b from-purple-600 to-purple-800 rounded-t-full rounded-b-2xl relative overflow-hidden shadow-2xl border-4 border-yellow-500/50">
+                    {/* Face */}
+                    <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-amber-100 rounded-full">
+                      {/* Eyes */}
+                      <div className="absolute top-3 left-2 w-2 h-2 bg-slate-800 rounded-full"></div>
+                      <div className="absolute top-3 right-2 w-2 h-2 bg-slate-800 rounded-full"></div>
+                      {/* Smile */}
+                      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-4 h-2 border-b-2 border-slate-800 rounded-b-full"></div>
+                    </div>
+                    
+                    {/* Hair */}
+                    <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-14 h-8 bg-slate-800 rounded-t-full"></div>
+                    
+                    {/* Purple hat */}
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-gradient-to-t from-purple-700 to-purple-500 rounded-full border-4 border-purple-800" style={{ clipPath: 'polygon(20% 100%, 80% 100%, 90% 0%, 10% 0%)' }}>
+                      <div className="absolute top-0 right-2 w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                    </div>
+                    
+                    {/* Magic wand with star */}
+                    <div className="absolute -right-8 top-12 w-12 h-2 bg-amber-800 rounded-full transform rotate-45">
+                      <div className="absolute -top-2 -right-3 text-yellow-400 text-xl animate-pulse">⭐</div>
+                    </div>
+                    
+                    {/* Magical notes */}
+                    <div className="absolute -left-6 top-16 bg-yellow-300 p-2 rounded transform -rotate-12 shadow-lg border-2 border-amber-400">
+                      <div className="text-xs text-amber-800 font-semibold">Ideas</div>
+                      <div className="text-xs text-amber-800">for app</div>
+                    </div>
+                    
+                    {/* Blue note */}
+                    <div className="absolute -right-4 bottom-2 bg-blue-300 p-1 rounded transform rotate-12 shadow-lg border-2 border-blue-400">
+                      <div className="text-xs text-blue-800">Notes</div>
+                    </div>
+                  </div>
+                  
+                  {/* Magic aura */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-purple-400/20 rounded-full animate-pulse"></div>
                 </div>
+                
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center animate-bounce">
                   🔑
                 </div>
@@ -225,7 +292,7 @@ export const Community = () => {
                 </p>
                 <div className="flex items-center justify-center gap-2 text-gray-400 text-sm">
                   <span>🔮</span>
-                  <span>The wizard holds the key to our future spells</span>
+                  <span>Nova holds the key to our future spells</span>
                   <span>🔮</span>
                 </div>
               </div>

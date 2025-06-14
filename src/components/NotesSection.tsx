@@ -69,15 +69,50 @@ export const NotesSection = () => {
 
         {/* Magical Phone App Mockup */}
         <div className="relative flex justify-center items-center mb-20">
-          {/* Floating Magic Elements */}
-          <div className="absolute -top-20 -left-20 animate-float-slow opacity-60">
-            <div className="text-6xl">🌟</div>
-          </div>
-          <div className="absolute -bottom-20 -right-20 animate-float opacity-60" style={{ animationDelay: '2s' }}>
-            <div className="text-6xl">✨</div>
-          </div>
-          <div className="absolute top-1/2 left-10 animate-wind-drift opacity-50">
-            <div className="text-4xl">🪄</div>
+          {/* Magical Wind Charms Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(20)].map((_, i) => (
+              <div
+                key={`charm-${i}`}
+                className="absolute animate-wind-drift opacity-30"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 6}s`,
+                  animationDuration: `${8 + Math.random() * 4}s`
+                }}
+              >
+                <div className="text-amber-400 text-2xl">🌟</div>
+              </div>
+            ))}
+            {[...Array(15)].map((_, i) => (
+              <div
+                key={`sparkle-${i}`}
+                className="absolute animate-sparkle-dance opacity-40"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 4}s`,
+                  animationDuration: `${3 + Math.random() * 2}s`
+                }}
+              >
+                <div className="text-yellow-400 text-lg">✨</div>
+              </div>
+            ))}
+            {[...Array(10)].map((_, i) => (
+              <div
+                key={`wand-${i}`}
+                className="absolute animate-float opacity-25"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 5}s`,
+                  animationDuration: `${6 + Math.random() * 3}s`
+                }}
+              >
+                <div className="text-purple-500 text-xl">🪄</div>
+              </div>
+            ))}
           </div>
 
           {/* Main Phone Mockup */}
@@ -85,7 +120,7 @@ export const NotesSection = () => {
             <div className="relative w-80 h-[700px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-[4rem] border-8 border-slate-700 shadow-2xl overflow-hidden">
               {/* Phone Screen */}
               <div className="w-full h-full bg-gradient-to-br from-yellow-50 via-amber-25 to-yellow-50 relative overflow-hidden">
-                {/* Magical Status Bar - removed tab info */}
+                {/* Magical Status Bar */}
                 <div className="flex justify-between items-center p-6 text-amber-800 text-sm border-b-2 border-amber-300 bg-gradient-to-r from-yellow-200 to-amber-200">
                   <span className="font-semibold">9:41 ✨</span>
                   <span className="font-bold text-amber-700 flex items-center gap-2">
@@ -178,7 +213,7 @@ export const NotesSection = () => {
             </div>
           </div>
           
-          {/* Magical Feature Bubbles - repositioned to be fully visible */}
+          {/* Magical Feature Bubbles */}
           <div className="absolute top-32 left-20 bg-yellow-200 p-6 rounded-3xl border-4 border-amber-400 animate-float max-w-xs shadow-xl transform -rotate-12">
             <div className="text-center">
               <span className="text-3xl mb-3 block">🧠</span>
