@@ -1,5 +1,10 @@
 
+import { useState } from 'react';
+import { Play, Sparkles } from 'lucide-react';
+
 export const Features = () => {
+  const [showVideo, setShowVideo] = useState(false);
+  
   const features = [
     {
       icon: '🧠',
@@ -32,15 +37,56 @@ export const Features = () => {
   ];
 
   return (
-    <section className="py-20 px-6 relative bg-transparent">
+    <section className="py-20 px-6 relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
-            ⚡ Life-Transforming Magic
+            ⚡ See the Magic Happen
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
             Discover the spells that will revolutionize your productivity and turn everyday chaos into magical efficiency
           </p>
+          
+          {/* Magic Demo Video */}
+          <div className="relative max-w-2xl mx-auto mb-12">
+            {!showVideo ? (
+              <div 
+                className="bg-gradient-to-br from-yellow-200 to-amber-200 rounded-3xl border-4 border-amber-400 p-12 cursor-pointer hover:scale-105 transition-all duration-300 relative overflow-hidden"
+                onClick={() => setShowVideo(true)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-300/20 via-transparent to-amber-300/20 animate-shimmer"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <Play className="w-8 h-8 text-white ml-1" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-amber-800 mb-4">Watch Nova's Magic</h3>
+                  <p className="text-amber-700 text-lg">See how one note becomes a complete automated workflow</p>
+                  
+                  {/* Floating magical elements */}
+                  <div className="absolute top-4 left-4 text-3xl animate-bounce">✨</div>
+                  <div className="absolute top-8 right-8 text-2xl animate-pulse">🪄</div>
+                  <div className="absolute bottom-6 left-12 text-2xl animate-spin-slow">⭐</div>
+                  <div className="absolute bottom-4 right-4 text-3xl animate-float">💫</div>
+                </div>
+              </div>
+            ) : (
+              <div className="bg-slate-800 rounded-3xl border-4 border-yellow-400 p-8 relative">
+                <div className="aspect-video bg-gradient-to-br from-yellow-100 to-amber-100 rounded-2xl flex items-center justify-center">
+                  <div className="text-center">
+                    <Sparkles className="w-16 h-16 text-amber-600 mx-auto mb-4 animate-spin-slow" />
+                    <h4 className="text-xl font-bold text-amber-800 mb-2">Magic Demo Coming Soon!</h4>
+                    <p className="text-amber-600">Watch Nova transform your notes into reality</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setShowVideo(false)}
+                  className="absolute top-4 right-4 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center hover:bg-yellow-500 transition-colors"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+          </div>
         </div>
         
         <div className="grid md:grid-cols-2 gap-8">

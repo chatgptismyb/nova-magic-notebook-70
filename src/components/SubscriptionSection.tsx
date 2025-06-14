@@ -18,7 +18,8 @@ export const SubscriptionSection = () => {
       cta: "Start Free",
       popular: false,
       gradient: "from-gray-100 to-gray-200",
-      borderColor: "border-gray-300"
+      borderColor: "border-gray-300",
+      buttonStyle: "bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300"
     },
     {
       name: "Magic Pro",
@@ -36,7 +37,8 @@ export const SubscriptionSection = () => {
       cta: "Upgrade to Pro",
       popular: true,
       gradient: "from-amber-200 to-yellow-200",
-      borderColor: "border-amber-400"
+      borderColor: "border-amber-400",
+      buttonStyle: "bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white"
     },
     {
       name: "Enterprise",
@@ -54,7 +56,8 @@ export const SubscriptionSection = () => {
       cta: "Contact Sales",
       popular: false,
       gradient: "from-purple-100 to-purple-200", 
-      borderColor: "border-purple-300"
+      borderColor: "border-purple-300",
+      buttonStyle: "bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300"
     }
   ];
 
@@ -120,14 +123,10 @@ export const SubscriptionSection = () => {
                 ))}
               </div>
               
-              {/* CTA Button */}
+              {/* CTA Button - Now consistent with pricing page */}
               <Link
                 to={plan.name === "Free" ? "/signup" : "/subscription"}
-                className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg text-center block ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white'
-                    : 'bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300'
-                }`}
+                className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg text-center block ${plan.buttonStyle}`}
               >
                 {plan.cta}
               </Link>
