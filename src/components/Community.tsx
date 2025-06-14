@@ -202,7 +202,6 @@ export const Community = () => {
             {/* Nova Wizard Character - Using uploaded image as reference */}
             <div className="flex flex-col items-center relative z-10">
               <div className="mb-8 relative">
-                {/* Nova Agent inspired by uploaded image */}
                 <div className="relative">
                   {/* Wizard body in purple robes */}
                   <div className="w-32 h-40 bg-gradient-to-b from-purple-600 to-purple-800 rounded-t-full rounded-b-2xl relative overflow-hidden shadow-2xl border-4 border-yellow-500/50">
@@ -247,6 +246,13 @@ export const Community = () => {
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center animate-bounce">
                   🔑
                 </div>
+              </div>
+
+              {/* Slogan Text Above Door */}
+              <div className="mb-8 text-center">
+                <h3 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-400 bg-clip-text text-transparent animate-pulse">
+                  Write it. Wish it. Watch it happen.
+                </h3>
               </div>
 
               {/* Magical Door */}

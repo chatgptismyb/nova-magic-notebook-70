@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, Star, ArrowDown, Play, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText } from 'lucide-react';
@@ -45,13 +44,6 @@ export const Hero = () => {
       </nav>
 
       <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
-        {/* Main Slogan Text */}
-        <div className="absolute top-28 left-1/2 transform -translate-x-1/2 z-30">
-          <h1 className="text-6xl md:text-8xl font-bold text-center bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 bg-clip-text text-transparent">
-            Write it. Wish it. Watch it happen.
-          </h1>
-        </div>
-
         {/* Floating Slogan Notes */}
         <div className="absolute top-32 left-10 bg-yellow-200 p-4 rounded-2xl border-l-6 border-amber-400 shadow-lg transform rotate-12 hover:rotate-6 transition-transform duration-300 cursor-move z-20 animate-float">
           <p className="text-amber-800 font-bold text-lg">Write it. Wish it. Watch it happen.</p>
@@ -187,10 +179,50 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Three Phone Mockups */}
+          {/* Five Phone Mockups */}
           <div className="relative">
             <div className="relative mx-auto w-96 h-96">
               
+              {/* Far Left Phone */}
+              <div className="absolute -left-8 top-12 z-5">
+                <div className="relative w-36 h-60 bg-slate-900 rounded-[1.5rem] border-4 border-slate-800 shadow-lg transform rotate-[20deg] hover:rotate-[15deg] transition-transform duration-500 overflow-hidden">
+                  <div className="absolute inset-2 bg-gradient-to-br from-blue-100 to-cyan-50 rounded-[1rem] overflow-hidden">
+                    <div className="flex justify-between items-center p-2 text-blue-800 text-xs">
+                      <span className="font-semibold">9:41</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-1 border border-blue-600 rounded-sm">
+                          <div className="w-full h-full bg-green-400 rounded-sm"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-3 pb-2">
+                      <div className="flex items-center gap-2 mb-2 bg-blue-100 p-2 rounded-lg">
+                        <img 
+                          src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                          alt="Magic Notebook Logo" 
+                          className="w-4 h-4"
+                        />
+                        <span className="text-blue-700 font-semibold text-xs">Magic Notebook</span>
+                      </div>
+                    </div>
+                    <div className="px-3 flex-1 flex flex-col items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-300 to-cyan-300 p-1 mb-2">
+                        <div className="w-full h-full bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                          📝
+                        </div>
+                      </div>
+                      <h3 className="text-xs font-bold text-blue-800 mb-1">Smart Notes</h3>
+                      <p className="text-blue-600 text-center text-xs mb-2">AI-powered writing</p>
+                      <div className="bg-blue-200 p-1 rounded-lg border border-blue-300 text-center">
+                        <p className="text-blue-700 text-xs font-medium">
+                          "Intelligent note-taking"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Left Phone */}
               <div className="absolute left-0 top-8 z-10">
                 <div className="relative w-48 h-72 bg-slate-900 rounded-[2rem] border-6 border-slate-800 shadow-xl transform rotate-12 hover:rotate-6 transition-transform duration-500 overflow-hidden">
@@ -346,6 +378,46 @@ export const Hero = () => {
                       <div className="bg-green-200 p-2 rounded-lg border border-green-300 text-center">
                         <p className="text-green-700 text-xs font-medium">
                           "Automate everything effortlessly"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Far Right Phone */}
+              <div className="absolute -right-8 top-12 z-5">
+                <div className="relative w-36 h-60 bg-slate-900 rounded-[1.5rem] border-4 border-slate-800 shadow-lg transform -rotate-[20deg] hover:-rotate-[15deg] transition-transform duration-500 overflow-hidden">
+                  <div className="absolute inset-2 bg-gradient-to-br from-orange-100 to-red-50 rounded-[1rem] overflow-hidden">
+                    <div className="flex justify-between items-center p-2 text-orange-800 text-xs">
+                      <span className="font-semibold">9:41</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-1 border border-orange-600 rounded-sm">
+                          <div className="w-full h-full bg-green-400 rounded-sm"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-3 pb-2">
+                      <div className="flex items-center gap-2 mb-2 bg-orange-100 p-2 rounded-lg">
+                        <img 
+                          src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                          alt="Magic Notebook Logo" 
+                          className="w-4 h-4"
+                        />
+                        <span className="text-orange-700 font-semibold text-xs">Magic Notebook</span>
+                      </div>
+                    </div>
+                    <div className="px-3 flex-1 flex flex-col items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-300 to-red-300 p-1 mb-2">
+                        <div className="w-full h-full bg-orange-500 rounded-full flex items-center justify-center text-white text-sm">
+                          🔥
+                        </div>
+                      </div>
+                      <h3 className="text-xs font-bold text-orange-800 mb-1">Spark Ideas</h3>
+                      <p className="text-orange-600 text-center text-xs mb-2">Instant inspiration</p>
+                      <div className="bg-orange-200 p-1 rounded-lg border border-orange-300 text-center">
+                        <p className="text-orange-700 text-xs font-medium">
+                          "Ideas that ignite action"
                         </p>
                       </div>
                     </div>
