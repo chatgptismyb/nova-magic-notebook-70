@@ -6,17 +6,17 @@ export const NovaCompanion = () => {
   const [message, setMessage] = useState("Ready to cast your next spell?");
   const [isBlinking, setIsBlinking] = useState(false);
   
-  const messages = [
-    "Ready to cast your next spell?",
-    "Need help planning your magical day?",
-    "What life-changing magic shall we create?",
-    "Your transformation awaits...",
-    "I can help automate that for you! ✨"
+  const spellMessages = [
+    "Ready to cast your next spell? ✨",
+    "Need help parsing your brain dump? 🧠",
+    "Want me to automate your dreams? 🌟",
+    "Let's create some productivity magic! 🪄",
+    "I can organize your scattered thoughts! 💫"
   ];
 
   useEffect(() => {
     const messageInterval = setInterval(() => {
-      setMessage(messages[Math.floor(Math.random() * messages.length)]);
+      setMessage(spellMessages[Math.floor(Math.random() * spellMessages.length)]);
     }, 4000);
 
     const blinkInterval = setInterval(() => {
@@ -34,7 +34,7 @@ export const NovaCompanion = () => {
 
   return (
     <div className="fixed bottom-8 right-8 z-50">
-      {/* Enhanced Chat Bubble */}
+      {/* Enhanced Sticky Note Chat Bubble */}
       <div className="mb-6 max-w-xs animate-float">
         <div className="bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-200 p-6 rounded-3xl border-4 border-amber-400 shadow-2xl relative transform rotate-2 hover:rotate-0 transition-all duration-500 hover:scale-105">
           
@@ -43,6 +43,13 @@ export const NovaCompanion = () => {
           <div className="absolute -top-3 right-6 w-8 h-5 bg-yellow-300/70 rounded border-2 border-yellow-400/60 transform rotate-12"></div>
           
           <p className="text-sm font-semibold text-amber-800 leading-relaxed mb-2">{message}</p>
+          
+          {/* Spell casting explanation */}
+          <div className="mt-3 p-3 bg-yellow-100 rounded-2xl border-2 border-amber-300">
+            <p className="text-xs text-amber-700 font-medium">
+              💡 Try saying: "Schedule my morning routine" or "Organize my project notes"
+            </p>
+          </div>
           
           {/* Enhanced magical decorations */}
           <div className="absolute -top-2 -left-2 text-amber-500 text-lg animate-spin-slow">✨</div>
@@ -55,7 +62,7 @@ export const NovaCompanion = () => {
         </div>
       </div>
       
-      {/* Enhanced Nova Avatar */}
+      {/* Enhanced Nova Avatar with her picture */}
       <div className="relative animate-float-slow">
         <button
           onClick={() => setIsVisible(false)}
@@ -65,21 +72,27 @@ export const NovaCompanion = () => {
           {/* Enhanced corner fold */}
           <div className="absolute top-0 right-0 w-8 h-8 bg-amber-300 border-l-2 border-b-2 border-amber-500 transform rotate-45 translate-x-4 -translate-y-4"></div>
           
-          {/* Nova's enhanced face container */}
+          {/* Nova's picture container with animation */}
           <div className="relative z-10 w-24 h-24 rounded-2xl overflow-hidden border-4 border-yellow-300 bg-gradient-to-br from-yellow-100 to-amber-100 shadow-inner">
             <img 
               src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
               alt="Nova - Your AI Agent" 
-              className={`w-full h-full object-cover transition-all duration-300 ${isBlinking ? 'scale-y-75' : 'scale-y-100'} group-hover:scale-110 group-hover:brightness-110`}
+              className={`w-full h-full object-cover transition-all duration-300 ${
+                isBlinking ? 'scale-y-75' : 'scale-y-100'
+              } group-hover:scale-110 group-hover:brightness-110 animate-pulse`}
+              style={{
+                filter: 'brightness(1.1) contrast(1.05)',
+                animation: 'gentle-glow 3s ease-in-out infinite'
+              }}
             />
             
-            {/* Enhanced overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/20 via-transparent to-amber-300/20 pointer-events-none" />
+            {/* Magical overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/30 via-transparent to-amber-300/30 pointer-events-none animate-shimmer" />
           </div>
           
           {/* Enhanced floating sparkles */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-visible">
-            {[...Array(12)].map((_, i) => (
+            {[...Array(15)].map((_, i) => (
               <div
                 key={i}
                 className="absolute animate-ping"
@@ -91,16 +104,17 @@ export const NovaCompanion = () => {
                   color: ['#f59e0b', '#d97706', '#92400e', '#fbbf24', '#fcd34d'][Math.floor(Math.random() * 5)]
                 }}
               >
-                {['✨', '⭐', '💫', '🌟', '💛'][Math.floor(Math.random() * 5)]}
+                {['✨', '⭐', '💫', '🌟', '🪄'][Math.floor(Math.random() * 5)]}
               </div>
             ))}
           </div>
         </button>
         
-        {/* Enhanced typing indicator */}
+        {/* Enhanced spell casting indicator */}
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
           <div className="bg-amber-200 border-3 border-amber-400 px-5 py-3 rounded-2xl shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
             <div className="flex items-center gap-2">
+              <span className="text-xs text-amber-800 font-bold">Casting spells</span>
               <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
               <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
               <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />

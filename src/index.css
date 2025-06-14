@@ -90,6 +90,27 @@ a:focus-visible {
   75% { transform: translateX(8px) translateY(-3px) rotate(1deg); }
 }
 
+@keyframes gentle-glow {
+  0%, 100% { 
+    filter: brightness(1.1) contrast(1.05);
+    transform: scale(1);
+  }
+  50% { 
+    filter: brightness(1.2) contrast(1.1);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
 /* Animation utility classes */
 .animate-float {
   animation: float 6s ease-in-out infinite;
@@ -118,6 +139,14 @@ a:focus-visible {
 
 .animate-wind-drift {
   animation: wind-drift 12s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 15s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 12s linear infinite;
 }
 
 /* Sticky note specific styles */
