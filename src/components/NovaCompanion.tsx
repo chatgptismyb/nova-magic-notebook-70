@@ -1,17 +1,21 @@
 
 import { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
 
 export const NovaCompanion = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [message, setMessage] = useState("Ready to cast your next spell?");
   const [isBlinking, setIsBlinking] = useState(false);
+  const [isGlowing, setIsGlowing] = useState(false);
   
   const spellMessages = [
     "Ready to cast your next spell? ✨",
-    "Need help parsing your brain dump? 🧠",
+    "Need help parsing your brain dump? 🧠", 
     "Want me to automate your dreams? 🌟",
     "Let's create some productivity magic! 🪄",
-    "I can organize your scattered thoughts! 💫"
+    "I can organize your scattered thoughts! 💫",
+    "Shall we turn your notes into spells? 🔮",
+    "Time to weave some automation magic! ⚡"
   ];
 
   useEffect(() => {
@@ -21,12 +25,18 @@ export const NovaCompanion = () => {
 
     const blinkInterval = setInterval(() => {
       setIsBlinking(true);
-      setTimeout(() => setIsBlinking(false), 200);
-    }, 3000);
+      setTimeout(() => setIsBlinking(false), 300);
+    }, 3500);
+
+    const glowInterval = setInterval(() => {
+      setIsGlowing(true);
+      setTimeout(() => setIsGlowing(false), 1500);
+    }, 6000);
 
     return () => {
       clearInterval(messageInterval);
       clearInterval(blinkInterval);
+      clearInterval(glowInterval);
     };
   }, []);
 
@@ -35,14 +45,22 @@ export const NovaCompanion = () => {
   return (
     <div className="fixed bottom-8 right-8 z-50">
       {/* Enhanced Sticky Note Chat Bubble */}
-      <div className="mb-6 max-w-xs animate-float">
+      <div className="mb-6 max-w-sm animate-float">
         <div className="bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-200 p-6 rounded-3xl border-4 border-amber-400 shadow-2xl relative transform rotate-2 hover:rotate-0 transition-all duration-500 hover:scale-105">
+          
+          {/* Close button */}
+          <button
+            onClick={() => setIsVisible(false)}
+            className="absolute top-2 right-2 w-6 h-6 bg-amber-400 hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors"
+          >
+            <X className="w-3 h-3 text-white" />
+          </button>
           
           {/* Sticky note tape effect */}
           <div className="absolute -top-3 left-6 w-10 h-6 bg-amber-300/70 rounded border-2 border-amber-400/60 transform -rotate-12"></div>
           <div className="absolute -top-3 right-6 w-8 h-5 bg-yellow-300/70 rounded border-2 border-yellow-400/60 transform rotate-12"></div>
           
-          <p className="text-sm font-semibold text-amber-800 leading-relaxed mb-2">{message}</p>
+          <p className="text-sm font-semibold text-amber-800 leading-relaxed mb-2 pr-6">{message}</p>
           
           {/* Spell casting explanation */}
           <div className="mt-3 p-3 bg-yellow-100 rounded-2xl border-2 border-amber-300">
@@ -53,7 +71,7 @@ export const NovaCompanion = () => {
           
           {/* Enhanced magical decorations */}
           <div className="absolute -top-2 -left-2 text-amber-500 text-lg animate-spin-slow">✨</div>
-          <div className="absolute -top-3 right-3 text-yellow-500 text-lg animate-bounce">⭐</div>
+          <div className="absolute -top-3 right-12 text-yellow-500 text-lg animate-bounce">⭐</div>
           <div className="absolute -bottom-2 left-2 text-amber-600 text-sm animate-pulse">💫</div>
           
           {/* Speech bubble tail */}
@@ -62,44 +80,51 @@ export const NovaCompanion = () => {
         </div>
       </div>
       
-      {/* Enhanced Nova Avatar with her picture */}
+      {/* Enhanced Nova Avatar with her animated picture */}
       <div className="relative animate-float-slow">
-        <button
-          onClick={() => setIsVisible(false)}
-          className="group relative w-28 h-28 bg-gradient-to-br from-yellow-300 via-amber-200 to-yellow-300 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-110 overflow-hidden border-4 border-amber-400 hover:border-amber-500 transform rotate-3 hover:rotate-0"
-        >
+        <div className="group relative w-28 h-28 bg-gradient-to-br from-yellow-300 via-amber-200 to-yellow-300 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-110 overflow-hidden border-4 border-amber-400 hover:border-amber-500 transform rotate-3 hover:rotate-0">
           
           {/* Enhanced corner fold */}
           <div className="absolute top-0 right-0 w-8 h-8 bg-amber-300 border-l-2 border-b-2 border-amber-500 transform rotate-45 translate-x-4 -translate-y-4"></div>
           
-          {/* Nova's picture container with animation */}
-          <div className="relative z-10 w-24 h-24 rounded-2xl overflow-hidden border-4 border-yellow-300 bg-gradient-to-br from-yellow-100 to-amber-100 shadow-inner">
+          {/* Nova's picture container with enhanced animation */}
+          <div className={`relative z-10 w-24 h-24 rounded-2xl overflow-hidden border-4 border-yellow-300 bg-gradient-to-br from-yellow-100 to-amber-100 shadow-inner transition-all duration-300 ${
+            isGlowing ? 'shadow-lg shadow-amber-400/60' : ''
+          }`}>
             <img 
               src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
               alt="Nova - Your AI Agent" 
               className={`w-full h-full object-cover transition-all duration-300 ${
-                isBlinking ? 'scale-y-75' : 'scale-y-100'
-              } group-hover:scale-110 group-hover:brightness-110 animate-pulse`}
+                isBlinking ? 'scale-y-90 brightness-110' : 'scale-y-100'
+              } group-hover:scale-110 group-hover:brightness-110`}
               style={{
-                filter: 'brightness(1.1) contrast(1.05)',
-                animation: 'gentle-glow 3s ease-in-out infinite'
+                filter: `brightness(1.1) contrast(1.05) ${isGlowing ? 'drop-shadow(0 0 8px rgba(245, 158, 11, 0.8))' : ''}`,
+                transform: `scale(${isGlowing ? '1.05' : '1'})`
               }}
             />
             
-            {/* Magical overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/30 via-transparent to-amber-300/30 pointer-events-none animate-shimmer" />
+            {/* Magical overlay with breathing effect */}
+            <div className={`absolute inset-0 bg-gradient-to-br from-yellow-300/30 via-transparent to-amber-300/30 pointer-events-none animate-shimmer transition-opacity duration-1000 ${
+              isGlowing ? 'opacity-80' : 'opacity-40'
+            }`} />
+            
+            {/* Gentle pulsing ring around Nova when she's thinking */}
+            {isGlowing && (
+              <div className="absolute -inset-2 border-2 border-amber-400/60 rounded-2xl animate-ping"></div>
+            )}
           </div>
           
           {/* Enhanced floating sparkles */}
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-visible">
-            {[...Array(15)].map((_, i) => (
+            {[...Array(12)].map((_, i) => (
               <div
                 key={i}
                 className="absolute animate-ping"
                 style={{
-                  left: `${-30 + Math.random() * 160}%`,
-                  top: `${-30 + Math.random() * 160}%`,
-                  animationDelay: `${Math.random() * 3}s`,
+                  left: `${-20 + Math.random() * 140}%`,
+                  top: `${-20 + Math.random() * 140}%`,
+                  animationDelay: `${Math.random() * 2}s`,
+                  animationDuration: `${1 + Math.random() * 2}s`,
                   fontSize: `${0.6 + Math.random() * 0.4}rem`,
                   color: ['#f59e0b', '#d97706', '#92400e', '#fbbf24', '#fcd34d'][Math.floor(Math.random() * 5)]
                 }}
@@ -108,7 +133,12 @@ export const NovaCompanion = () => {
               </div>
             ))}
           </div>
-        </button>
+          
+          {/* Magical aura when glowing */}
+          {isGlowing && (
+            <div className="absolute -inset-4 bg-gradient-radial from-amber-400/20 via-yellow-400/10 to-transparent rounded-full animate-pulse"></div>
+          )}
+        </div>
         
         {/* Enhanced spell casting indicator */}
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">

@@ -45,7 +45,7 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Sticky note animations */
+/* Enhanced Nova and sticky note animations */
 @keyframes float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   33% { transform: translateY(-15px) rotate(1deg); }
@@ -57,6 +57,28 @@ a:focus-visible {
   25% { transform: translateY(-10px) translateX(3px) rotate(2deg); }
   50% { transform: translateY(-5px) translateX(-3px) rotate(-1deg); }
   75% { transform: translateY(-12px) translateX(2px) rotate(1deg); }
+}
+
+@keyframes nova-breathe {
+  0%, 100% { 
+    transform: scale(1);
+    filter: brightness(1.1) contrast(1.05);
+  }
+  50% { 
+    transform: scale(1.02);
+    filter: brightness(1.15) contrast(1.1) drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+  }
+}
+
+@keyframes magical-glow {
+  0%, 100% { 
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.6), 0 0 30px rgba(245, 158, 11, 0.4);
+    transform: scale(1.05);
+  }
 }
 
 @keyframes sticky-note-wiggle {
@@ -111,6 +133,25 @@ a:focus-visible {
   to { transform: rotate(0deg); }
 }
 
+@keyframes sparkle-dance {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+  25% { 
+    transform: translateY(-5px) rotate(90deg) scale(1.1);
+    opacity: 1;
+  }
+  50% { 
+    transform: translateY(-8px) rotate(180deg) scale(0.9);
+    opacity: 0.8;
+  }
+  75% { 
+    transform: translateY(-3px) rotate(270deg) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
 /* Animation utility classes */
 .animate-float {
   animation: float 6s ease-in-out infinite;
@@ -118,6 +159,14 @@ a:focus-visible {
 
 .animate-float-slow {
   animation: float-slow 10s ease-in-out infinite;
+}
+
+.animate-nova-breathe {
+  animation: nova-breathe 4s ease-in-out infinite;
+}
+
+.animate-magical-glow {
+  animation: magical-glow 3s ease-in-out infinite;
 }
 
 .animate-sticky-wiggle {
@@ -147,6 +196,10 @@ a:focus-visible {
 
 .animate-spin-reverse {
   animation: spin-reverse 12s linear infinite;
+}
+
+.animate-sparkle-dance {
+  animation: sparkle-dance 2s ease-in-out infinite;
 }
 
 /* Sticky note specific styles */
@@ -207,4 +260,14 @@ a:focus-visible {
 
 .border-8 {
   border-width: 8px;
+}
+
+/* Nova specific enhancements */
+.nova-glow {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+  animation: magical-glow 3s ease-in-out infinite;
+}
+
+.nova-thinking {
+  animation: nova-breathe 4s ease-in-out infinite;
 }
