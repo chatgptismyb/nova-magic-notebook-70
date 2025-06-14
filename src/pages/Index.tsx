@@ -12,15 +12,15 @@ import { NovaCompanion } from '@/components/NovaCompanion';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950 text-white relative overflow-x-hidden">
-      {/* Enhanced Background Effects with purple theme */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-yellow-950/20 to-slate-950 text-white relative overflow-x-hidden">
+      {/* Enhanced Background Effects with yellow theme */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(168,85,247,0.15),transparent_70%)]" />
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(168,85,247,0.08),transparent_50%)]" />
-        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_80%,rgba(251,191,36,0.08),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.15),transparent_70%)]" />
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(251,191,36,0.08),transparent_50%)]" />
+        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.08),transparent_50%)]" />
         
         {/* Animated gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/5 via-transparent to-yellow-900/5 animate-pulse" />
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-900/5 via-transparent to-purple-900/5 animate-pulse" />
       </div>
       
       <Hero />

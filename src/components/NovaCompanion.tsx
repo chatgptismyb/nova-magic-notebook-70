@@ -36,7 +36,7 @@ export const NovaCompanion = () => {
     <div className="fixed bottom-8 right-8 z-50">
       {/* Enhanced Chat Bubble */}
       <div className="mb-6 max-w-xs">
-        <div className="bg-gradient-to-br from-yellow-900/95 via-amber-900/95 to-yellow-800/95 backdrop-blur-xl text-white p-5 rounded-3xl rounded-br-md border-2 border-yellow-400/50 shadow-2xl shadow-yellow-500/20 relative animate-fade-in">
+        <div className="bg-gradient-to-br from-yellow-900/95 via-amber-900/95 to-yellow-800/95 backdrop-blur-xl text-white p-5 rounded-3xl rounded-br-md border-2 border-yellow-400/50 shadow-2xl shadow-yellow-500/20 relative animate-scale-in">
           <p className="text-sm font-medium text-yellow-50 leading-relaxed">{message}</p>
           
           {/* Enhanced Speech bubble tail */}
