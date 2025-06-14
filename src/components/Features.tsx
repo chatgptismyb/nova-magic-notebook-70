@@ -1,34 +1,34 @@
 
 import { useState } from 'react';
-import { Play, Sparkles } from 'lucide-react';
+import { Play, Sparkles, Wand2, Zap, Link2, FileText } from 'lucide-react';
 
 export const Features = () => {
   const [showVideo, setShowVideo] = useState(false);
   
   const features = [
     {
-      icon: '🧠',
+      icon: <Wand2 className="w-8 h-8 text-yellow-400" />,
       title: 'Life-Changing Auto-Planning',
       description: 'Cast once, transform your entire workflow with intelligent task mapping that adapts to your life',
       color: 'from-yellow-500 to-yellow-700',
       spell: '/cast morning routine'
     },
     {
-      icon: '📝',
+      icon: <FileText className="w-8 h-8 text-amber-400" />,
       title: 'Enchanted Productivity Notes',
       description: 'Notes that evolve with AI insights, magical organization, and spell-powered automation',
       color: 'from-amber-500 to-amber-700',
       spell: '/cast project launch'
     },
     {
-      icon: '🔗',
+      icon: <Link2 className="w-8 h-8 text-yellow-400" />,
       title: 'Universal Spell Linking',
       description: 'Connect every aspect of your life with mystical relationship mapping across all projects',
       color: 'from-yellow-500 to-amber-700',
       spell: '/cast life balance'
     },
     {
-      icon: '⚡',
+      icon: <Zap className="w-8 h-8 text-amber-400" />,
       title: 'Reality-Bending Automation',
       description: 'Nova connects all your tools and transforms your daily chaos into effortless magic',
       color: 'from-amber-500 to-yellow-700',
@@ -93,7 +93,7 @@ export const Features = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group relative p-8 bg-slate-800/50 rounded-2xl border border-slate-700/50 hover:border-yellow-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20 overflow-hidden"
+              className="group relative p-8 bg-gradient-to-br from-slate-800/80 to-slate-700/80 rounded-2xl border-2 border-slate-700/50 hover:border-yellow-500/60 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/20 overflow-hidden backdrop-blur-sm"
             >
               {/* Wind effect background */}
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -104,7 +104,7 @@ export const Features = () => {
               <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300`} />
               
               <div className="relative z-10">
-                <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300 w-12 h-12 bg-gradient-to-br from-yellow-400/20 to-amber-400/20 rounded-xl flex items-center justify-center">
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-yellow-300 transition-colors duration-300">

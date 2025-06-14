@@ -45,6 +45,15 @@ export const Hero = () => {
       </nav>
 
       <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
+        {/* Floating Slogan Notes */}
+        <div className="absolute top-32 left-10 bg-yellow-200 p-4 rounded-2xl border-l-6 border-amber-400 shadow-lg transform rotate-12 hover:rotate-6 transition-transform duration-300 cursor-move z-20 animate-float">
+          <p className="text-amber-800 font-bold text-lg">Write it. Wish it. Watch it happen.</p>
+        </div>
+        
+        <div className="absolute top-40 right-10 bg-amber-200 p-4 rounded-2xl border-l-6 border-yellow-500 shadow-lg transform -rotate-12 hover:-rotate-6 transition-transform duration-300 cursor-move z-20 animate-float" style={{ animationDelay: '2s' }}>
+          <p className="text-amber-800 font-bold text-lg">Pairing intent with magic ✨</p>
+        </div>
+
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
           
           {/* Enhanced story-driven content with sticky note style */}
@@ -255,63 +264,12 @@ export const Hero = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Side Mockups with updated icons */}
-                <div className="absolute -left-32 top-8 w-48 h-72 bg-amber-100 rounded-3xl border-6 border-yellow-300 shadow-xl transform rotate-12 hover:rotate-6 transition-transform duration-500 z-10">
-                  <div className="p-4 text-center">
-                    <div className="text-amber-700 font-bold text-sm mb-2 flex items-center justify-center gap-2">
-                      <Lightbulb className="w-4 h-4" />
-                      Smart Suggestions
-                    </div>
-                    <div className="space-y-2">
-                      {['Schedule meeting', 'Book travel', 'Track goals'].map((item, i) => (
-                        <div key={i} className="bg-yellow-50 p-2 rounded text-xs text-amber-600 border border-amber-200 flex items-center gap-2">
-                          <Calendar className="w-3 h-3" />
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute -right-32 top-12 w-48 h-72 bg-yellow-100 rounded-3xl border-6 border-amber-300 shadow-xl transform -rotate-12 hover:-rotate-6 transition-transform duration-500 z-10">
-                  <div className="p-4 text-center">
-                    <div className="text-amber-700 font-bold text-sm mb-2 flex items-center justify-center gap-2">
-                      <FileText className="w-4 h-4" />
-                      Active Tasks
-                    </div>
-                    <div className="space-y-2">
-                      {['Project deadline', 'Team meeting', 'Gym session'].map((task, i) => (
-                        <div key={i} className="bg-amber-50 p-2 rounded text-xs text-amber-600 border border-yellow-300 flex items-center gap-2">
-                          <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
-                          <Sparkles className="w-3 h-3" />
-                          {task}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
               </div>
 
-              {/* Floating stats with better icons */}
-              <div className="absolute top-0 left-0 bg-yellow-200 px-4 py-2 rounded-xl border-2 border-amber-300 shadow-md transform rotate-3 hover:rotate-0 transition-transform">
-                <div className="flex items-center gap-2 text-xs text-amber-700">
-                  <Users className="w-3 h-3" />
-                  <span className="font-bold">12K+ Users</span>
-                </div>
+              {/* Call to action arrow */}
+              <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <ArrowDown className="w-8 h-8 text-amber-500" />
               </div>
-
-              <div className="absolute bottom-0 right-0 bg-amber-200 px-4 py-2 rounded-xl border-2 border-yellow-300 shadow-md transform -rotate-3 hover:rotate-0 transition-transform">
-                <div className="flex items-center gap-2 text-xs text-amber-700">
-                  <BookOpen className="w-3 h-3" />
-                  <span className="font-bold">100K+ Notes</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Call to action arrow */}
-            <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
-              <ArrowDown className="w-8 h-8 text-amber-500" />
             </div>
           </div>
         </div>
