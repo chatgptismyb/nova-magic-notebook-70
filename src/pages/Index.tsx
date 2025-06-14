@@ -9,21 +9,20 @@ import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
 import { Community } from '@/components/Community';
 import { Footer } from '@/components/Footer';
-import { NovaCompanion } from '@/components/NovaCompanion';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-300 text-slate-800 relative overflow-x-hidden">
-      {/* Enhanced Sticky Notes Background Pattern */}
+      {/* Enhanced Sticky Notes Background Pattern - repositioned to stay within bounds */}
       <div className="fixed inset-0 pointer-events-none">
-        {/* Enhanced floating sticky notes pattern */}
+        {/* Enhanced floating sticky notes pattern - adjusted positioning */}
         {[...Array(25)].map((_, i) => (
           <div
             key={`sticky-bg-${i}`}
             className="absolute animate-float-slow opacity-20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${10 + Math.random() * 80}%`, // Keep within 10-90% to avoid cutoff
+              top: `${10 + Math.random() * 80}%`, // Keep within 10-90% to avoid cutoff
               animationDelay: `${Math.random() * 10}s`,
               animationDuration: `${10 + Math.random() * 8}s`,
               transform: `rotate(${Math.random() * 45 - 22.5}deg)`
@@ -48,7 +47,6 @@ const Index = () => {
       <FAQ />
       <Community />
       <Footer />
-      <NovaCompanion />
     </div>
   );
 };

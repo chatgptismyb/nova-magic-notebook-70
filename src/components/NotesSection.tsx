@@ -45,7 +45,7 @@ export const NotesSection = () => {
   }, [isAnimating]);
 
   return (
-    <section className="py-32 px-6 relative bg-gradient-to-br from-amber-50 via-yellow-100 to-amber-200">
+    <section className="py-32 px-6 relative bg-gradient-to-br from-amber-50 via-yellow-100 to-amber-200 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Magical Header */}
         <div className="text-center mb-20">
@@ -76,7 +76,7 @@ export const NotesSection = () => {
           <div className="absolute -bottom-20 -right-20 animate-float opacity-60" style={{ animationDelay: '2s' }}>
             <div className="text-6xl">✨</div>
           </div>
-          <div className="absolute top-1/2 -left-32 animate-wind-drift opacity-50">
+          <div className="absolute top-1/2 left-10 animate-wind-drift opacity-50">
             <div className="text-4xl">🪄</div>
           </div>
 
@@ -85,7 +85,7 @@ export const NotesSection = () => {
             <div className="relative w-80 h-[700px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-[4rem] border-8 border-slate-700 shadow-2xl overflow-hidden">
               {/* Phone Screen */}
               <div className="w-full h-full bg-gradient-to-br from-yellow-50 via-amber-25 to-yellow-50 relative overflow-hidden">
-                {/* Magical Status Bar */}
+                {/* Magical Status Bar - removed tab info */}
                 <div className="flex justify-between items-center p-6 text-amber-800 text-sm border-b-2 border-amber-300 bg-gradient-to-r from-yellow-200 to-amber-200">
                   <span className="font-semibold">9:41 ✨</span>
                   <span className="font-bold text-amber-700 flex items-center gap-2">
@@ -178,8 +178,8 @@ export const NotesSection = () => {
             </div>
           </div>
           
-          {/* Magical Feature Bubbles */}
-          <div className="absolute top-32 -left-40 bg-yellow-200 p-6 rounded-3xl border-4 border-amber-400 animate-float max-w-xs shadow-xl transform -rotate-12">
+          {/* Magical Feature Bubbles - repositioned to be fully visible */}
+          <div className="absolute top-32 left-20 bg-yellow-200 p-6 rounded-3xl border-4 border-amber-400 animate-float max-w-xs shadow-xl transform -rotate-12">
             <div className="text-center">
               <span className="text-3xl mb-3 block">🧠</span>
               <h4 className="font-bold text-amber-800 text-lg mb-2">Spell Recognition</h4>
@@ -187,7 +187,7 @@ export const NotesSection = () => {
             </div>
           </div>
           
-          <div className="absolute bottom-32 -right-40 bg-amber-200 p-6 rounded-3xl border-4 border-yellow-400 animate-float max-w-xs shadow-xl transform rotate-12" style={{ animationDelay: '2s' }}>
+          <div className="absolute bottom-32 right-20 bg-amber-200 p-6 rounded-3xl border-4 border-yellow-400 animate-float max-w-xs shadow-xl transform rotate-12" style={{ animationDelay: '2s' }}>
             <div className="text-center">
               <span className="text-3xl mb-3 block">⚡</span>
               <h4 className="font-bold text-amber-800 text-lg mb-2">Auto Enchantment</h4>
