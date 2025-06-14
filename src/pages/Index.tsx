@@ -13,18 +13,18 @@ import { NovaCompanion } from '@/components/NovaCompanion';
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-300 text-slate-800 relative overflow-x-hidden">
-      {/* Sticky Notes Background Pattern */}
+      {/* Enhanced Sticky Notes Background Pattern */}
       <div className="fixed inset-0 pointer-events-none">
-        {/* Floating sticky notes pattern */}
-        {[...Array(20)].map((_, i) => (
+        {/* Enhanced floating sticky notes pattern */}
+        {[...Array(25)].map((_, i) => (
           <div
             key={`sticky-bg-${i}`}
             className="absolute animate-float-slow opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${8 + Math.random() * 6}s`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${10 + Math.random() * 8}s`,
               transform: `rotate(${Math.random() * 45 - 22.5}deg)`
             }}
           >
@@ -32,7 +32,7 @@ const Index = () => {
           </div>
         ))}
         
-        {/* Paper texture overlay */}
+        {/* Enhanced paper texture overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.1),transparent_70%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(245,158,11,0.05)_25%,transparent_25%,transparent_50%,rgba(245,158,11,0.05)_50%,rgba(245,158,11,0.05)_75%,transparent_75%)] bg-[length:20px_20px]" />
       </div>
@@ -94,7 +94,7 @@ const Index = () => {
         }
         
         .animate-float-slow {
-          animation: float-slow 8s ease-in-out infinite;
+          animation: float-slow 10s ease-in-out infinite;
         }
         
         .animate-spin-slow {
@@ -115,7 +115,7 @@ const Index = () => {
         }
         
         .animate-wind-drift {
-          animation: wind-drift 8s ease-in-out infinite;
+          animation: wind-drift 10s ease-in-out infinite;
         }
         
         .bg-gradient-radial {

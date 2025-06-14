@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { BookOpen, Users, Mail, MessageCircle, Shield, HelpCircle } from 'lucide-react';
 
 export const Footer = () => {
   const [secretRevealed, setSecretRevealed] = useState(false);
@@ -15,67 +16,108 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="py-12 px-6 border-t border-slate-800/50 relative bg-transparent">
+    <footer className="py-16 px-6 relative bg-gradient-to-br from-amber-50 to-yellow-100 border-t-4 border-amber-300">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4 text-yellow-300">Magic Notebook</h3>
-            <p className="text-gray-400 text-sm">
-              Transform your thoughts into spells with Nova by your side.
+        <div className="grid md:grid-cols-4 gap-8 mb-12">
+          
+          {/* Brand Section */}
+          <div className="bg-yellow-200 p-6 rounded-2xl border-4 border-amber-400 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+            <div className="flex items-center gap-3 mb-4">
+              <img 
+                src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                alt="Magic Notebook Logo" 
+                className="w-12 h-12"
+              />
+              <h3 className="text-xl font-bold text-amber-800">Magic Notebook</h3>
+            </div>
+            <p className="text-amber-700 text-sm leading-relaxed">
+              Transform your thoughts into magical productivity with Nova by your side.
             </p>
           </div>
           
-          <div>
-            <h4 className="font-semibold mb-4 text-white">Grimoire</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">📚 Documentation</a></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">🎓 Spell Academy</a></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">🔮 API Reference</a></li>
+          {/* Resources */}
+          <div className="bg-amber-100 p-6 rounded-2xl border-4 border-yellow-400 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+            <h4 className="font-bold mb-4 text-amber-800 flex items-center gap-2">
+              <BookOpen className="w-5 h-5" />
+              Resources
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <span>📚</span> Documentation
+              </a></li>
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <span>🎓</span> Magic Academy
+              </a></li>
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <span>🔮</span> API Reference
+              </a></li>
             </ul>
           </div>
           
-          <div>
-            <h4 className="font-semibold mb-4 text-white">Community</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">💬 Discord</a></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">🐦 Twitter</a></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">📱 Mobile App</a></li>
+          {/* Community */}
+          <div className="bg-yellow-100 p-6 rounded-2xl border-4 border-amber-400 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+            <h4 className="font-bold mb-4 text-amber-800 flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Community
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <MessageCircle className="w-4 h-4" /> Discord
+              </a></li>
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <span>🐦</span> Twitter
+              </a></li>
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <span>📱</span> Mobile App
+              </a></li>
             </ul>
           </div>
           
-          <div>
-            <h4 className="font-semibold mb-4 text-white">Support</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">📧 Contact</a></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">🛠️ Status</a></li>
-              <li><a href="#" className="hover:text-yellow-300 transition-colors">🔒 Privacy</a></li>
+          {/* Support */}
+          <div className="bg-amber-100 p-6 rounded-2xl border-4 border-yellow-400 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+            <h4 className="font-bold mb-4 text-amber-800 flex items-center gap-2">
+              <HelpCircle className="w-5 h-5" />
+              Support
+            </h4>
+            <ul className="space-y-3 text-sm">
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <Mail className="w-4 h-4" /> Contact Us
+              </a></li>
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <span>🛠️</span> Status
+              </a></li>
+              <li><a href="#" className="text-amber-700 hover:text-amber-900 transition-colors flex items-center gap-2">
+                <Shield className="w-4 h-4" /> Privacy
+              </a></li>
             </ul>
           </div>
         </div>
         
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-slate-800/50">
-          <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <img 
-              src="/lovable-uploads/44eb1985-1aa9-4c97-9fcd-56c35ff27b53.png" 
-              alt="Magic Notebook Logo" 
-              className="w-8 h-8 hover:animate-pulse cursor-pointer"
-            />
-            <p className="text-gray-400 text-sm">© 2024 Magic Notebook. All spells reserved.</p>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="Type a spell..."
-              className="bg-slate-800/50 border border-slate-700 rounded-lg px-3 py-1 text-sm text-gray-300 focus:outline-none focus:border-yellow-500 transition-colors"
-            />
-            {secretRevealed && (
-              <div className="text-yellow-400 text-sm animate-pulse">
-                🔮 Nova's console unlocked!
-              </div>
-            )}
+        <div className="bg-gradient-to-r from-yellow-200 to-amber-200 p-6 rounded-2xl border-4 border-amber-400">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="flex items-center gap-4 mb-4 md:mb-0">
+              <img 
+                src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                alt="Magic Notebook Logo" 
+                className="w-10 h-10 hover:animate-pulse cursor-pointer"
+              />
+              <p className="text-amber-800 text-sm font-medium">© 2024 Magic Notebook. All magical rights reserved.</p>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <input
+                type="text"
+                value={inputValue}
+                onChange={handleInputChange}
+                placeholder="Cast a spell..."
+                className="bg-yellow-50 border-2 border-amber-300 rounded-xl px-4 py-2 text-sm text-amber-800 placeholder-amber-600 focus:outline-none focus:border-amber-500 transition-colors"
+              />
+              {secretRevealed && (
+                <div className="text-amber-700 text-sm animate-pulse bg-yellow-100 px-3 py-1 rounded-full border-2 border-amber-300">
+                  🔮 Magic console unlocked!
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
