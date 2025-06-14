@@ -1,9 +1,12 @@
 
 import { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Mail } from 'lucide-react';
+import { EmailSignup } from '@/components/EmailSignup';
 
 export const NovaCompanion = () => {
   const [isVisible, setIsVisible] = useState(true);
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
+  const [showEmailSignup, setShowEmailSignup] = useState(false);
   const [message, setMessage] = useState("Ready to cast your next spell?");
   const [isBlinking, setIsBlinking] = useState(false);
   const [isGlowing, setIsGlowing] = useState(false);
@@ -40,49 +43,94 @@ export const NovaCompanion = () => {
     };
   }, []);
 
+  const handleNovaClick = () => {
+    setShowEmailCapture(true);
+  };
+
   if (!isVisible) return null;
 
   return (
     <div className="fixed bottom-8 right-8 z-50">
       {/* Enhanced Sticky Note Chat Bubble */}
-      <div className="mb-6 max-w-sm animate-float">
-        <div className="bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-200 p-6 rounded-3xl border-4 border-amber-400 shadow-2xl relative transform rotate-2 hover:rotate-0 transition-all duration-500 hover:scale-105">
-          
-          {/* Close button */}
-          <button
-            onClick={() => setIsVisible(false)}
-            className="absolute top-2 right-2 w-6 h-6 bg-amber-400 hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors"
-          >
-            <X className="w-3 h-3 text-white" />
-          </button>
-          
-          {/* Sticky note tape effect */}
-          <div className="absolute -top-3 left-6 w-10 h-6 bg-amber-300/70 rounded border-2 border-amber-400/60 transform -rotate-12"></div>
-          <div className="absolute -top-3 right-6 w-8 h-5 bg-yellow-300/70 rounded border-2 border-yellow-400/60 transform rotate-12"></div>
-          
-          <p className="text-sm font-semibold text-amber-800 leading-relaxed mb-2 pr-6">{message}</p>
-          
-          {/* Spell casting explanation */}
-          <div className="mt-3 p-3 bg-yellow-100 rounded-2xl border-2 border-amber-300">
-            <p className="text-xs text-amber-700 font-medium">
-              💡 Try saying: "Schedule my morning routine" or "Organize my project notes"
-            </p>
+      {!showEmailCapture && (
+        <div className="mb-6 max-w-sm animate-float">
+          <div className="bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-200 p-6 rounded-3xl border-4 border-amber-400 shadow-2xl relative transform rotate-2 hover:rotate-0 transition-all duration-500 hover:scale-105">
+            
+            {/* Close button */}
+            <button
+              onClick={() => setIsVisible(false)}
+              className="absolute top-2 right-2 w-6 h-6 bg-amber-400 hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors"
+            >
+              <X className="w-3 h-3 text-white" />
+            </button>
+            
+            {/* Sticky note tape effect */}
+            <div className="absolute -top-3 left-6 w-10 h-6 bg-amber-300/70 rounded border-2 border-amber-400/60 transform -rotate-12"></div>
+            <div className="absolute -top-3 right-6 w-8 h-5 bg-yellow-300/70 rounded border-2 border-yellow-400/60 transform rotate-12"></div>
+            
+            <p className="text-sm font-semibold text-amber-800 leading-relaxed mb-2 pr-6">{message}</p>
+            
+            {/* Spell casting explanation */}
+            <div className="mt-3 p-3 bg-yellow-100 rounded-2xl border-2 border-amber-300">
+              <p className="text-xs text-amber-700 font-medium">
+                💡 Try saying: "Schedule my morning routine" or "Organize my project notes"
+              </p>
+            </div>
+            
+            {/* Enhanced magical decorations */}
+            <div className="absolute -top-2 -left-2 text-amber-500 text-lg animate-spin-slow">✨</div>
+            <div className="absolute -top-3 right-12 text-yellow-500 text-lg animate-bounce">⭐</div>
+            <div className="absolute -bottom-2 left-2 text-amber-600 text-sm animate-pulse">💫</div>
+            
+            {/* Speech bubble tail */}
+            <div className="absolute -bottom-3 right-8 w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-t-[16px] border-t-yellow-200" />
+            <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[14px] border-t-amber-400" />
           </div>
-          
-          {/* Enhanced magical decorations */}
-          <div className="absolute -top-2 -left-2 text-amber-500 text-lg animate-spin-slow">✨</div>
-          <div className="absolute -top-3 right-12 text-yellow-500 text-lg animate-bounce">⭐</div>
-          <div className="absolute -bottom-2 left-2 text-amber-600 text-sm animate-pulse">💫</div>
-          
-          {/* Speech bubble tail */}
-          <div className="absolute -bottom-3 right-8 w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-t-[16px] border-t-yellow-200" />
-          <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[14px] border-t-amber-400" />
         </div>
-      </div>
+      )}
+
+      {/* Email Capture Bubble */}
+      {showEmailCapture && (
+        <div className="mb-6 max-w-sm animate-scale-in">
+          <div className="bg-gradient-to-br from-amber-200 via-yellow-100 to-amber-200 p-6 rounded-3xl border-4 border-yellow-400 shadow-2xl relative transform -rotate-1 hover:rotate-0 transition-all duration-500">
+            
+            {/* Close button */}
+            <button
+              onClick={() => setShowEmailCapture(false)}
+              className="absolute top-2 right-2 w-6 h-6 bg-yellow-400 hover:bg-yellow-500 rounded-full flex items-center justify-center transition-colors"
+            >
+              <X className="w-3 h-3 text-white" />
+            </button>
+            
+            <div className="text-center">
+              <h3 className="text-lg font-bold text-amber-800 mb-2">Want me to automate your life?</h3>
+              <p className="text-sm text-amber-700 mb-4">Let me show you the magic! Enter your email to get started.</p>
+              
+              <button
+                onClick={() => {
+                  setShowEmailSignup(true);
+                  setShowEmailCapture(false);
+                }}
+                className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+              >
+                <Mail className="w-4 h-4" />
+                Start My Magic Journey
+              </button>
+            </div>
+            
+            {/* Speech bubble tail */}
+            <div className="absolute -bottom-3 right-8 w-0 h-0 border-l-[16px] border-l-transparent border-r-[16px] border-r-transparent border-t-[16px] border-t-amber-200" />
+            <div className="absolute -bottom-2 right-8 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[14px] border-t-yellow-400" />
+          </div>
+        </div>
+      )}
       
       {/* Enhanced Nova Avatar with her animated picture */}
       <div className="relative animate-float-slow">
-        <div className="group relative w-28 h-28 bg-gradient-to-br from-yellow-300 via-amber-200 to-yellow-300 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-110 overflow-hidden border-4 border-amber-400 hover:border-amber-500 transform rotate-3 hover:rotate-0">
+        <button
+          onClick={handleNovaClick}
+          className="group relative w-28 h-28 bg-gradient-to-br from-yellow-300 via-amber-200 to-yellow-300 rounded-3xl flex items-center justify-center shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-110 overflow-hidden border-4 border-amber-400 hover:border-amber-500 transform rotate-3 hover:rotate-0 cursor-pointer"
+        >
           
           {/* Enhanced corner fold */}
           <div className="absolute top-0 right-0 w-8 h-8 bg-amber-300 border-l-2 border-b-2 border-amber-500 transform rotate-45 translate-x-4 -translate-y-4"></div>
@@ -138,13 +186,13 @@ export const NovaCompanion = () => {
           {isGlowing && (
             <div className="absolute -inset-4 bg-gradient-radial from-amber-400/20 via-yellow-400/10 to-transparent rounded-full animate-pulse"></div>
           )}
-        </div>
+        </button>
         
         {/* Enhanced spell casting indicator */}
         <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
           <div className="bg-amber-200 border-3 border-amber-400 px-5 py-3 rounded-2xl shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-300">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-amber-800 font-bold">Casting spells</span>
+              <span className="text-xs text-amber-800 font-bold">Nova</span>
               <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{ animationDelay: '0s' }} />
               <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
               <div className="w-2 h-2 bg-amber-600 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
@@ -152,6 +200,8 @@ export const NovaCompanion = () => {
           </div>
         </div>
       </div>
+
+      <EmailSignup isOpen={showEmailSignup} onClose={() => setShowEmailSignup(false)} />
     </div>
   );
 };

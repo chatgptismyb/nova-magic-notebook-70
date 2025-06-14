@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Download, Mail, Star, ArrowDown, Play, Users, BookOpen } from 'lucide-react';
+import { Download, Mail, Star, ArrowDown, Play, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { EmailSignup } from '@/components/EmailSignup';
 
@@ -35,7 +35,7 @@ export const Hero = () => {
               </Link>
               <Link 
                 to="/signup"
-                className="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-2 px-4 rounded-xl transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 Start Free
               </Link>
@@ -68,7 +68,7 @@ export const Hero = () => {
             <div className="bg-amber-100 p-8 rounded-2xl shadow-xl border-l-8 border-yellow-500 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-3 bg-yellow-300/50 px-4 py-2 rounded-full border border-amber-400/40">
-                  <Star className="w-5 h-5 text-amber-600 animate-spin-slow" />
+                  <Sparkles className="w-5 h-5 text-amber-600 animate-spin-slow" />
                   <span className="text-amber-700 font-semibold text-sm">The Magical Notebook</span>
                 </div>
                 
@@ -98,7 +98,7 @@ export const Hero = () => {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="bg-amber-50 p-4 rounded-xl shadow-md border-l-4 border-yellow-400 transform rotate-2 hover:rotate-0 transition-transform duration-300">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                  <Calendar className="w-4 h-4 text-yellow-600" />
                   <span className="font-semibold text-amber-700">Voice Magic</span>
                 </div>
                 <p className="text-sm text-slate-600">Speak your thoughts, watch them become actions</p>
@@ -106,7 +106,7 @@ export const Hero = () => {
               
               <div className="bg-yellow-50 p-4 rounded-xl shadow-md border-l-4 border-amber-400 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                  <Lightbulb className="w-4 h-4 text-amber-600" />
                   <span className="font-semibold text-amber-700">Smart Automation</span>
                 </div>
                 <p className="text-sm text-slate-600">Connect your life with intelligent workflows</p>
@@ -114,7 +114,7 @@ export const Hero = () => {
               
               <div className="bg-amber-50 p-4 rounded-xl shadow-md border-l-4 border-yellow-400 transform rotate-1 hover:rotate-0 transition-transform duration-300">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                  <Sparkles className="w-4 h-4 text-yellow-600" />
                   <span className="font-semibold text-amber-700">AI Suggestions</span>
                 </div>
                 <p className="text-sm text-slate-600">Get intelligent task suggestions from your notes</p>
@@ -122,7 +122,7 @@ export const Hero = () => {
               
               <div className="bg-yellow-50 p-4 rounded-xl shadow-md border-l-4 border-amber-400 transform -rotate-2 hover:rotate-0 transition-transform duration-300">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="w-3 h-3 bg-amber-400 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+                  <FileText className="w-4 h-4 text-amber-600" />
                   <span className="font-semibold text-amber-700">Cross-Platform</span>
                 </div>
                 <p className="text-sm text-slate-600">Access your magic on any device, anywhere</p>
@@ -134,15 +134,15 @@ export const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link 
                   to="/signup"
-                  className="bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-500 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-600 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-amber-500/40 group relative overflow-hidden flex items-center justify-center"
+                  className="bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-500 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-amber-500/40 group relative overflow-hidden flex items-center justify-center"
                 >
-                  <Star className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                  <Sparkles className="w-5 h-5 mr-2 group-hover:animate-bounce" />
                   Start Your Magic Journey
                 </Link>
                 
                 <Link
                   to="/showcase"
-                  className="border-2 border-amber-500/60 text-amber-700 hover:bg-amber-500/20 hover:border-amber-400 font-semibold py-4 px-8 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-amber-400/30 group flex items-center justify-center"
+                  className="border-2 border-amber-500/60 text-amber-700 hover:bg-amber-500/20 hover:border-amber-400 font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-amber-400/30 group flex items-center justify-center"
                 >
                   <Play className="w-5 h-5 mr-2 group-hover:animate-bounce" />
                   See Demo
@@ -171,67 +171,102 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Enhanced Phone Mockups Section */}
+          {/* Nova in iPhone Mockup */}
           <div className="relative">
             <div className="relative mx-auto w-96 h-96">
               
-              {/* Main Center Phone */}
+              {/* Main Center iPhone with Nova */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative z-20 w-64 h-96 bg-yellow-100 rounded-3xl border-8 border-amber-300 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 overflow-hidden">
-                  <div className="absolute inset-4 bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl overflow-hidden border-2 border-amber-200">
+                <div className="relative z-20 w-64 h-96 bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 overflow-hidden">
+                  {/* iPhone Screen */}
+                  <div className="absolute inset-2 bg-gradient-to-br from-yellow-100 to-amber-50 rounded-[2.5rem] overflow-hidden">
                     
-                    {/* Screen Content */}
-                    <div className="p-4 space-y-3 h-full">
-                      {/* Header */}
-                      <div className="flex items-center gap-3 mb-4 bg-amber-100 p-2 rounded-xl">
+                    {/* Status Bar */}
+                    <div className="flex justify-between items-center p-4 text-amber-800 text-xs">
+                      <span className="font-semibold">9:41</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-4 h-2 border border-amber-600 rounded-sm">
+                          <div className="w-full h-full bg-green-400 rounded-sm"></div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* App Header */}
+                    <div className="px-6 pb-4">
+                      <div className="flex items-center gap-3 mb-4 bg-amber-100 p-3 rounded-xl">
                         <img 
                           src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
                           alt="Magic Notebook Logo" 
                           className="w-8 h-8"
                         />
-                        <span className="text-amber-700 font-semibold text-sm">Magic Notebook</span>
+                        <span className="text-amber-700 font-semibold">Magic Notebook</span>
                       </div>
-                      
-                      {/* Interactive Demo Area */}
-                      <div className="bg-gradient-to-br from-yellow-200/80 to-amber-200/80 rounded-2xl p-6 border-2 border-amber-300/50 relative overflow-hidden flex-1">
-                        <div className="text-center h-full flex flex-col justify-center">
-                          <Link 
-                            to="/showcase"
-                            className="w-20 h-20 bg-gradient-to-r from-amber-600 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform cursor-pointer group shadow-lg"
-                          >
-                            <Play className="w-10 h-10 text-white ml-1" fill="currentColor" />
-                          </Link>
-                          <p className="text-amber-700 font-bold text-lg mb-2">See Magic in Action</p>
-                          <p className="text-amber-600 text-sm">Watch how notes become spells</p>
-                          
-                          {/* Mini feature preview */}
-                          <div className="mt-4 space-y-2">
-                            <div className="bg-yellow-100 p-2 rounded text-xs text-amber-700 border border-amber-200">✨ Voice Commands</div>
-                            <div className="bg-amber-100 p-2 rounded text-xs text-amber-700 border border-amber-200">🤖 AI Automation</div>
-                            <div className="bg-yellow-100 p-2 rounded text-xs text-amber-700 border border-amber-200">📋 Smart Tasks</div>
-                          </div>
+                    </div>
+                    
+                    {/* Nova's Picture Area */}
+                    <div className="px-6 flex-1 flex flex-col items-center justify-center">
+                      <div className="relative w-32 h-32 mb-6">
+                        <div className="w-full h-full rounded-full bg-gradient-to-br from-yellow-300 to-amber-300 p-1 animate-magical-glow">
+                          <img 
+                            src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                            alt="Nova - Your AI Companion" 
+                            className="w-full h-full object-cover rounded-full animate-nova-breathe"
+                          />
+                        </div>
+                        
+                        {/* Floating sparkles around Nova */}
+                        <div className="absolute inset-0 pointer-events-none">
+                          {[...Array(6)].map((_, i) => (
+                            <div
+                              key={i}
+                              className="absolute text-amber-400 animate-sparkle-dance"
+                              style={{
+                                left: `${Math.random() * 100}%`,
+                                top: `${Math.random() * 100}%`,
+                                animationDelay: `${Math.random() * 2}s`,
+                                fontSize: '0.8rem'
+                              }}
+                            >
+                              ✨
+                            </div>
+                          ))}
                         </div>
                       </div>
                       
-                      {/* Download CTA */}
-                      <Link 
-                        to="/signup"
-                        className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-3 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+                      <h3 className="text-xl font-bold text-amber-800 mb-2">Meet Nova</h3>
+                      <p className="text-amber-600 text-center text-sm mb-4">Your magical AI companion</p>
+                      
+                      <div className="bg-yellow-200 p-3 rounded-xl border-2 border-amber-300 text-center">
+                        <p className="text-amber-700 text-xs font-medium">
+                          "Ready to transform your notes into magic?"
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Bottom Action */}
+                    <div className="p-6">
+                      <button
+                        onClick={() => setShowEmailSignup(true)}
+                        className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
                       >
-                        <Download className="w-4 h-4" />
-                        Start Free Trial
-                      </Link>
+                        <Mail className="w-4 h-4" />
+                        Start Magic Journey
+                      </button>
                     </div>
                   </div>
                 </div>
 
-                {/* Additional Phone Screens */}
+                {/* Side Mockups with updated icons */}
                 <div className="absolute -left-32 top-8 w-48 h-72 bg-amber-100 rounded-3xl border-6 border-yellow-300 shadow-xl transform rotate-12 hover:rotate-6 transition-transform duration-500 z-10">
                   <div className="p-4 text-center">
-                    <div className="text-amber-700 font-bold text-sm mb-2">📱 Smart Suggestions</div>
+                    <div className="text-amber-700 font-bold text-sm mb-2 flex items-center justify-center gap-2">
+                      <Lightbulb className="w-4 h-4" />
+                      Smart Suggestions
+                    </div>
                     <div className="space-y-2">
                       {['Schedule meeting', 'Book travel', 'Track goals'].map((item, i) => (
-                        <div key={i} className="bg-yellow-50 p-2 rounded text-xs text-amber-600 border border-amber-200">
+                        <div key={i} className="bg-yellow-50 p-2 rounded text-xs text-amber-600 border border-amber-200 flex items-center gap-2">
+                          <Calendar className="w-3 h-3" />
                           {item}
                         </div>
                       ))}
@@ -241,11 +276,15 @@ export const Hero = () => {
 
                 <div className="absolute -right-32 top-12 w-48 h-72 bg-yellow-100 rounded-3xl border-6 border-amber-300 shadow-xl transform -rotate-12 hover:-rotate-6 transition-transform duration-500 z-10">
                   <div className="p-4 text-center">
-                    <div className="text-amber-700 font-bold text-sm mb-2">⚡ Active Tasks</div>
+                    <div className="text-amber-700 font-bold text-sm mb-2 flex items-center justify-center gap-2">
+                      <FileText className="w-4 h-4" />
+                      Active Tasks
+                    </div>
                     <div className="space-y-2">
                       {['Project deadline', 'Team meeting', 'Gym session'].map((task, i) => (
                         <div key={i} className="bg-amber-50 p-2 rounded text-xs text-amber-600 border border-yellow-300 flex items-center gap-2">
                           <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+                          <Sparkles className="w-3 h-3" />
                           {task}
                         </div>
                       ))}
@@ -254,7 +293,7 @@ export const Hero = () => {
                 </div>
               </div>
 
-              {/* Floating stats */}
+              {/* Floating stats with better icons */}
               <div className="absolute top-0 left-0 bg-yellow-200 px-4 py-2 rounded-xl border-2 border-amber-300 shadow-md transform rotate-3 hover:rotate-0 transition-transform">
                 <div className="flex items-center gap-2 text-xs text-amber-700">
                   <Users className="w-3 h-3" />
