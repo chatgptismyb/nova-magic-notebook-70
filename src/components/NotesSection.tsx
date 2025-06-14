@@ -1,165 +1,238 @@
 
+import { useState, useEffect } from 'react';
+import { Smartphone, Sparkles, Wand2, BookOpen } from 'lucide-react';
+
 export const NotesSection = () => {
-  const notesFeatures = [
+  const [activeNote, setActiveNote] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const magicalNotes = [
     {
-      icon: '📝',
-      title: 'Enchanted Note-Taking',
-      description: 'Your notes come alive with AI insights, automatic organization, and spell-powered connections'
+      title: "Enchanted Grocery List",
+      content: "🛒 Milk, bread, dragon eggs, unicorn tears",
+      magic: "Auto-organized by location & magical properties",
+      color: "from-yellow-300 to-amber-200",
+      icon: "🧙‍♀️"
     },
     {
-      icon: '🔗',
-      title: 'Magical Linking',
-      description: 'Notes automatically connect across projects, creating a web of knowledge that grows smarter'
+      title: "Spellbound Meeting Notes",
+      content: "📝 Discussed Q4 potions sales, new cauldron suppliers",
+      magic: "Action items extracted & reminders cast",
+      color: "from-amber-300 to-yellow-200", 
+      icon: "⚡"
     },
     {
-      icon: '🎯',
-      title: 'Action Spells',
-      description: 'Transform ideas into actionable spells that Nova can execute across your entire workflow'
-    },
-    {
-      icon: '🧠',
-      title: 'Memory Palace',
-      description: 'Never lose a thought again with AI-powered memory that recalls context and connections'
+      title: "Magical To-Do Scroll",
+      content: "✨ Call wizard council, practice levitation, feed phoenix",
+      magic: "Priorities enchanted & deadlines divined",
+      color: "from-yellow-200 to-amber-300",
+      icon: "🔮"
     }
   ];
 
-  const pricingPlans = [
-    {
-      name: 'Magic Starter',
-      price: '$9',
-      period: '/month',
-      features: [
-        '100 spells per month',
-        'Basic note enchantments',
-        'Mobile companion app',
-        'Email support'
-      ],
-      popular: false
-    },
-    {
-      name: 'Life Wizard',
-      price: '$29',
-      period: '/month',
-      features: [
-        'Unlimited spells',
-        'Advanced automation',
-        'Cross-platform sync',
-        'Priority Nova support',
-        'Custom spell creation',
-        'Team collaboration'
-      ],
-      popular: true
-    },
-    {
-      name: 'Archmage',
-      price: '$79',
-      period: '/month',
-      features: [
-        'Everything in Life Wizard',
-        'White-label Nova',
-        'API access',
-        'Custom integrations',
-        'Dedicated support',
-        'Advanced analytics'
-      ],
-      popular: false
-    }
-  ];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isAnimating) {
+        setIsAnimating(true);
+        setTimeout(() => {
+          setActiveNote((prev) => (prev + 1) % magicalNotes.length);
+          setIsAnimating(false);
+        }, 300);
+      }
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [isAnimating]);
 
   return (
-    <section className="py-20 px-6 relative bg-transparent">
-      <div className="max-w-6xl mx-auto">
-        {/* Notes Features */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
-            📓 Magical Note-Taking
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Transform your scattered thoughts into an organized, intelligent knowledge system that works magic for your productivity
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {notesFeatures.map((feature, index) => (
-            <div
-              key={index}
-              className="group p-6 bg-slate-800/50 rounded-xl border border-yellow-500/20 hover:border-yellow-500/40 transition-all duration-300 hover:scale-105"
-            >
-              <div className="text-3xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                {feature.icon}
-              </div>
-              <h3 className="text-lg font-semibold mb-3 text-yellow-300">
-                {feature.title}
-              </h3>
-              <p className="text-gray-300 text-sm">
-                {feature.description}
-              </p>
+    <section className="py-32 px-6 relative bg-gradient-to-br from-amber-50 via-yellow-100 to-amber-200">
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Magical Header */}
+        <div className="text-center mb-20">
+          <div className="bg-yellow-200 p-8 rounded-3xl border-4 border-amber-400 transform -rotate-2 hover:rotate-0 transition-transform duration-500 inline-block mb-8">
+            <div className="flex items-center gap-4">
+              <BookOpen className="w-10 h-10 text-amber-700" />
+              <span className="text-amber-800 font-bold text-3xl">Magical Note-Taking</span>
+              <Sparkles className="w-8 h-8 text-amber-600 animate-sparkle-dance" />
             </div>
-          ))}
-        </div>
-
-        {/* Pricing Section */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
-            ⚡ Choose Your Magic
+          </div>
+          
+          <h2 className="text-6xl md:text-8xl font-bold mb-8 text-amber-800">
+            Enchanted Notes
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Unlock the power of magical productivity with our spellbinding subscription plans
-          </p>
+          <div className="bg-amber-100 p-8 rounded-3xl border-4 border-yellow-400 transform rotate-1 hover:rotate-0 transition-transform duration-300 max-w-5xl mx-auto">
+            <p className="text-2xl text-amber-700 leading-relaxed">
+              Transform your scattered thoughts into an organized spellbook of productivity magic ✨
+            </p>
+          </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {pricingPlans.map((plan, index) => (
-            <div
-              key={index}
-              className={`relative p-8 rounded-2xl border transition-all duration-300 hover:scale-105 ${
-                plan.popular
-                  ? 'bg-gradient-to-b from-yellow-500/20 to-amber-500/20 border-yellow-500/50 shadow-lg shadow-yellow-500/20'
-                  : 'bg-slate-800/50 border-slate-700/50 hover:border-yellow-500/30'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <div className="bg-gradient-to-r from-yellow-600 to-amber-600 text-black px-4 py-1 rounded-full text-sm font-semibold">
-                    Most Popular ✨
+        {/* Magical Phone App Mockup */}
+        <div className="relative flex justify-center items-center mb-20">
+          {/* Floating Magic Elements */}
+          <div className="absolute -top-20 -left-20 animate-float-slow opacity-60">
+            <div className="text-6xl">🌟</div>
+          </div>
+          <div className="absolute -bottom-20 -right-20 animate-float opacity-60" style={{ animationDelay: '2s' }}>
+            <div className="text-6xl">✨</div>
+          </div>
+          <div className="absolute top-1/2 -left-32 animate-wind-drift opacity-50">
+            <div className="text-4xl">🪄</div>
+          </div>
+
+          {/* Main Phone Mockup */}
+          <div className="relative z-10 transform hover:scale-105 transition-transform duration-500">
+            <div className="relative w-80 h-[700px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-[4rem] border-8 border-slate-700 shadow-2xl overflow-hidden">
+              {/* Phone Screen */}
+              <div className="w-full h-full bg-gradient-to-br from-yellow-50 via-amber-25 to-yellow-50 relative overflow-hidden">
+                {/* Magical Status Bar */}
+                <div className="flex justify-between items-center p-6 text-amber-800 text-sm border-b-2 border-amber-300 bg-gradient-to-r from-yellow-200 to-amber-200">
+                  <span className="font-semibold">9:41 ✨</span>
+                  <span className="font-bold text-amber-700 flex items-center gap-2">
+                    <Wand2 className="w-4 h-4" />
+                    Magic Notebook
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-3 border-2 border-amber-600 rounded-sm">
+                      <div className="w-full h-full bg-green-400 rounded-sm animate-pulse"></div>
+                    </div>
                   </div>
                 </div>
-              )}
-              
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                <div className="flex items-center justify-center">
-                  <span className="text-4xl font-bold text-yellow-400">{plan.price}</span>
-                  <span className="text-gray-400 ml-2">{plan.period}</span>
+                
+                {/* App Content with Animation */}
+                <div className={`p-6 h-full flex flex-col transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                  {/* Magic Header */}
+                  <div className="text-center mb-8">
+                    <div className="flex items-center justify-center gap-3 mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-amber-300 to-yellow-300 rounded-2xl flex items-center justify-center border-3 border-amber-400">
+                        <span className="text-2xl">{magicalNotes[activeNote].icon}</span>
+                      </div>
+                      <h3 className="text-2xl font-bold text-amber-800">
+                        Today's Magic
+                      </h3>
+                    </div>
+                  </div>
+                  
+                  {/* Magical Note Display */}
+                  <div className={`flex-1 bg-gradient-to-br ${magicalNotes[activeNote].color} rounded-3xl border-4 border-amber-400 p-8 mb-8 relative overflow-hidden shadow-inner`}>
+                    {/* Floating sparkles */}
+                    <div className="absolute inset-0 pointer-events-none">
+                      {[...Array(6)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="absolute animate-sparkle-dance opacity-30"
+                          style={{
+                            left: `${20 + Math.random() * 60}%`,
+                            top: `${20 + Math.random() * 60}%`,
+                            animationDelay: `${Math.random() * 2}s`,
+                            fontSize: `${0.8 + Math.random() * 0.4}rem`
+                          }}
+                        >
+                          ✨
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Note Header */}
+                    <div className="text-center mb-6">
+                      <h4 className="text-xl font-bold text-amber-800 mb-2">
+                        {magicalNotes[activeNote].title}
+                      </h4>
+                      <div className="w-16 h-1 bg-amber-600 mx-auto rounded-full"></div>
+                    </div>
+                    
+                    {/* Note Content */}
+                    <div className="bg-white/90 p-6 rounded-2xl border-3 border-amber-300 mb-6 shadow-lg">
+                      <p className="text-amber-800 text-lg leading-relaxed">
+                        {magicalNotes[activeNote].content}
+                      </p>
+                    </div>
+                    
+                    {/* Magic Enhancement */}
+                    <div className="bg-gradient-to-r from-amber-300/80 to-yellow-300/80 p-4 rounded-2xl border-2 border-amber-400">
+                      <div className="flex items-center gap-3">
+                        <Wand2 className="w-5 h-5 text-amber-700" />
+                        <p className="text-amber-800 text-sm font-medium">
+                          Nova's Magic: {magicalNotes[activeNote].magic}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Magical Navigation */}
+                  <div className="flex items-center justify-center gap-4">
+                    {magicalNotes.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => !isAnimating && setActiveNote(i)}
+                        className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                          i === activeNote 
+                            ? 'bg-amber-600 scale-125 shadow-lg' 
+                            : 'bg-amber-300 hover:bg-amber-400 hover:scale-110'
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-              
-              <ul className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center text-gray-300">
-                    <span className="text-yellow-400 mr-3">✨</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              
-              <button
-                className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-yellow-600 to-amber-600 text-black hover:from-yellow-700 hover:to-amber-700'
-                    : 'bg-slate-700 text-white hover:bg-slate-600 border border-yellow-500/30 hover:border-yellow-500/50'
-                }`}
-              >
-                Choose {plan.name}
-              </button>
             </div>
-          ))}
+          </div>
+          
+          {/* Magical Feature Bubbles */}
+          <div className="absolute top-32 -left-40 bg-yellow-200 p-6 rounded-3xl border-4 border-amber-400 animate-float max-w-xs shadow-xl transform -rotate-12">
+            <div className="text-center">
+              <span className="text-3xl mb-3 block">🧠</span>
+              <h4 className="font-bold text-amber-800 text-lg mb-2">Spell Recognition</h4>
+              <p className="text-amber-700 text-sm">Understands your magical intent</p>
+            </div>
+          </div>
+          
+          <div className="absolute bottom-32 -right-40 bg-amber-200 p-6 rounded-3xl border-4 border-yellow-400 animate-float max-w-xs shadow-xl transform rotate-12" style={{ animationDelay: '2s' }}>
+            <div className="text-center">
+              <span className="text-3xl mb-3 block">⚡</span>
+              <h4 className="font-bold text-amber-800 text-lg mb-2">Auto Enchantment</h4>
+              <p className="text-amber-700 text-sm">Transforms notes into magic</p>
+            </div>
+          </div>
         </div>
-        
-        <div className="text-center mt-12">
-          <p className="text-gray-400 text-sm">
-            All plans include a 14-day magical trial. Cancel anytime, no binding spells.
-          </p>
+
+        {/* Magical Call to Action */}
+        <div className="text-center">
+          <div className="bg-gradient-to-br from-amber-200 to-yellow-200 p-12 rounded-3xl border-4 border-amber-400 transform -rotate-1 hover:rotate-0 transition-transform duration-300 inline-block shadow-2xl">
+            <h3 className="text-4xl font-bold text-amber-800 mb-6 flex items-center justify-center gap-4">
+              <Smartphone className="w-10 h-10" />
+              Begin Your Magical Journey
+              <Sparkles className="w-8 h-8 animate-sparkle-dance" />
+            </h3>
+            <p className="text-amber-700 text-xl mb-8 max-w-2xl">
+              Download the enchanted notebook that transforms your everyday thoughts into organized productivity magic
+            </p>
+            
+            <div className="flex justify-center gap-8">
+              <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-8 rounded-3xl border-4 border-slate-700 hover:scale-105 transition-transform cursor-pointer shadow-xl">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">📱</span>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-lg opacity-90">Cast spells on the</div>
+                    <div className="text-2xl font-bold">App Store</div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-8 rounded-3xl border-4 border-green-500 hover:scale-105 transition-transform cursor-pointer shadow-xl">
+                <div className="flex items-center gap-4">
+                  <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center">
+                    <span className="text-green-600 text-2xl font-bold">▶</span>
+                  </div>
+                  <div className="text-left">
+                    <div className="text-lg opacity-90">Enchant it on</div>
+                    <div className="text-2xl font-bold">Google Play</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
