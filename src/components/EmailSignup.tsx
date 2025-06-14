@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { X, Mail, Star } from 'lucide-react';
+import { X, Mail, Star, Heart, Sparkles } from 'lucide-react';
 
 interface EmailSignupProps {
   isOpen: boolean;
@@ -28,81 +28,136 @@ export const EmailSignup = ({ isOpen, onClose }: EmailSignupProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 border-2 border-yellow-500/30 rounded-3xl p-8 max-w-md w-full relative animate-scale-in shadow-2xl shadow-yellow-500/20">
+      
+      {/* Main Sticky Note Container */}
+      <div className="bg-gradient-to-br from-yellow-100 via-amber-50 to-yellow-100 border-8 border-amber-300 rounded-3xl p-8 max-w-lg w-full relative shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
+        
+        {/* Sticky Note Tape Effect */}
+        <div className="absolute -top-4 left-8 w-16 h-8 bg-amber-200/80 rounded border border-amber-300/50 transform -rotate-12"></div>
+        <div className="absolute -top-4 right-8 w-16 h-8 bg-yellow-200/80 rounded border border-yellow-300/50 transform rotate-12"></div>
+        
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors p-2 hover:bg-slate-700/50 rounded-full"
+          className="absolute top-4 right-4 text-amber-600 hover:text-amber-800 transition-colors p-2 hover:bg-amber-100 rounded-full"
         >
           <X size={20} />
         </button>
 
         {!isSubmitted ? (
           <>
+            {/* Header Sticky Note */}
             <div className="text-center mb-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-full mb-4 animate-pulse">
-                <Star className="w-8 h-8 text-black" />
-              </div>
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent mb-3">
-                Join the Magic Circle
-              </h3>
-              <p className="text-gray-300 leading-relaxed">
-                Be among the first to experience the magic when Magic Notebook launches. 
-                Get exclusive early access, magical updates, and special wizard perks.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="relative">
-                <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-yellow-400 w-5 h-5" />
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email to join the waitlist"
-                  className="w-full bg-slate-800/50 border-2 border-yellow-500/30 rounded-xl pl-12 pr-4 py-4 text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300"
-                  required
-                />
+              <div className="bg-amber-200 p-6 rounded-2xl border-4 border-yellow-400 transform -rotate-1 hover:rotate-0 transition-transform duration-300 mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-amber-400 to-yellow-400 rounded-full mb-4">
+                  <span className="text-2xl">🧙‍♀️</span>
+                </div>
+                <h3 className="text-3xl font-bold text-amber-800 mb-3">
+                  Join the Magic Circle
+                </h3>
               </div>
               
-              <Button
-                type="submit"
-                className="w-full bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 text-black font-bold py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-yellow-500/25"
-              >
-                🪄 Reserve My Magical Spot
-              </Button>
-            </form>
+              {/* Story Sticky Note */}
+              <div className="bg-yellow-100 p-6 rounded-2xl border-4 border-amber-300 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+                <h4 className="text-xl font-bold text-amber-700 mb-3">✨ Your Magical Journey Awaits</h4>
+                <p className="text-amber-700 leading-relaxed mb-4">
+                  Imagine waking up tomorrow with a personal AI wizard who turns your scattered thoughts into 
+                  powerful life-changing actions. That's exactly what Magic Notebook does.
+                </p>
+                
+                {/* Benefits as mini sticky notes */}
+                <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="bg-amber-50 p-3 rounded-xl border-2 border-yellow-300 transform rotate-1">
+                    <div className="flex items-center gap-2">
+                      <Heart className="w-4 h-4 text-red-500" />
+                      <span className="text-sm font-semibold text-amber-700">Early Access</span>
+                    </div>
+                  </div>
+                  <div className="bg-yellow-50 p-3 rounded-xl border-2 border-amber-300 transform -rotate-1">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-500" />
+                      <span className="text-sm font-semibold text-amber-700">Magic Updates</span>
+                    </div>
+                  </div>
+                  <div className="bg-amber-50 p-3 rounded-xl border-2 border-yellow-300 transform rotate-2">
+                    <div className="flex items-center gap-2">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <span className="text-sm font-semibold text-amber-700">Wizard Perks</span>
+                    </div>
+                  </div>
+                  <div className="bg-yellow-50 p-3 rounded-xl border-2 border-amber-300 transform -rotate-2">
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-blue-500" />
+                      <span className="text-sm font-semibold text-amber-700">VIP Support</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-amber-600 text-sm italic">
+                  "Join 12,000+ people who are already living their dreams with magical productivity."
+                </p>
+              </div>
+            </div>
 
-            <div className="mt-6 text-center">
-              <p className="text-xs text-gray-400">
+            {/* Form Sticky Note */}
+            <div className="bg-gradient-to-br from-amber-100 to-yellow-100 p-6 rounded-2xl border-4 border-amber-400 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email to join the waitlist"
+                    className="w-full bg-white/80 border-3 border-amber-300 rounded-xl pl-12 pr-4 py-4 text-amber-800 placeholder-amber-500 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-300/50 transition-all duration-300"
+                    required
+                  />
+                </div>
+                
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25"
+                >
+                  🪄 Reserve My Magical Spot
+                </Button>
+              </form>
+            </div>
+
+            {/* Footer Sticky Note */}
+            <div className="mt-6 bg-yellow-50 p-4 rounded-xl border-2 border-yellow-300 transform rotate-1">
+              <p className="text-xs text-amber-600 text-center mb-3">
                 No spam, just pure magic. Unsubscribe anytime with a simple spell.
               </p>
-              <div className="flex items-center justify-center gap-4 mt-4 text-xs text-gray-500">
+              <div className="flex items-center justify-center gap-4 text-xs text-amber-500">
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span>10,000+ wizards joined</span>
+                  <span>12,000+ wizards joined</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                  <span>Launching Q2 2024</span>
+                  <Star className="w-3 h-3 text-amber-400 fill-current" />
+                  <span>Launching Soon</span>
                 </div>
               </div>
             </div>
           </>
         ) : (
           <div className="text-center py-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full mb-6 animate-bounce">
-              <span className="text-3xl">🎉</span>
-            </div>
-            <h3 className="text-3xl font-bold text-yellow-400 mb-4">
-              Welcome to the Circle!
-            </h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
-              Your magical journey begins soon. Check your email for confirmation 
-              and prepare for the most enchanting productivity experience ever created.
-            </p>
-            <div className="mt-6 flex items-center justify-center gap-2 text-sm text-gray-400">
-              <Star className="w-4 h-4 text-yellow-400 fill-current" />
-              <span>You're wizard #10,247</span>
+            <div className="bg-green-100 p-8 rounded-2xl border-4 border-green-300 transform rotate-2 hover:rotate-0 transition-transform duration-300">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full mb-6">
+                <span className="text-3xl">🎉</span>
+              </div>
+              <h3 className="text-3xl font-bold text-green-700 mb-4">
+                Welcome to the Circle!
+              </h3>
+              <p className="text-green-700 text-lg leading-relaxed mb-4">
+                Your magical journey begins soon! Check your email for confirmation 
+                and prepare for the most enchanting productivity experience ever created.
+              </p>
+              <div className="bg-green-50 p-3 rounded-xl border-2 border-green-200 inline-block">
+                <div className="flex items-center gap-2 text-sm text-green-600">
+                  <Star className="w-4 h-4 text-green-500 fill-current" />
+                  <span className="font-bold">You're wizard #12,248!</span>
+                </div>
+              </div>
             </div>
           </div>
         )}
