@@ -45,6 +45,13 @@ export const Hero = () => {
       </nav>
 
       <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
+        {/* Main Slogan Text */}
+        <div className="absolute top-28 left-1/2 transform -translate-x-1/2 z-30">
+          <h1 className="text-6xl md:text-8xl font-bold text-center bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 bg-clip-text text-transparent">
+            Write it. Wish it. Watch it happen.
+          </h1>
+        </div>
+
         {/* Floating Slogan Notes */}
         <div className="absolute top-32 left-10 bg-yellow-200 p-4 rounded-2xl border-l-6 border-amber-400 shadow-lg transform rotate-12 hover:rotate-6 transition-transform duration-300 cursor-move z-20 animate-float">
           <p className="text-amber-800 font-bold text-lg">Write it. Wish it. Watch it happen.</p>
@@ -180,10 +187,50 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Nova in iPhone Mockup */}
+          {/* Three Phone Mockups */}
           <div className="relative">
             <div className="relative mx-auto w-96 h-96">
               
+              {/* Left Phone */}
+              <div className="absolute left-0 top-8 z-10">
+                <div className="relative w-48 h-72 bg-slate-900 rounded-[2rem] border-6 border-slate-800 shadow-xl transform rotate-12 hover:rotate-6 transition-transform duration-500 overflow-hidden">
+                  <div className="absolute inset-2 bg-gradient-to-br from-purple-100 to-indigo-50 rounded-[1.5rem] overflow-hidden">
+                    <div className="flex justify-between items-center p-2 text-purple-800 text-xs">
+                      <span className="font-semibold">9:41</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-3 h-1.5 border border-purple-600 rounded-sm">
+                          <div className="w-full h-full bg-green-400 rounded-sm"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-4 pb-2">
+                      <div className="flex items-center gap-2 mb-2 bg-purple-100 p-2 rounded-lg">
+                        <img 
+                          src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                          alt="Magic Notebook Logo" 
+                          className="w-6 h-6"
+                        />
+                        <span className="text-purple-700 font-semibold text-sm">Magic Notebook</span>
+                      </div>
+                    </div>
+                    <div className="px-4 flex-1 flex flex-col items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-300 to-indigo-300 p-1 mb-3">
+                        <div className="w-full h-full bg-purple-500 rounded-full flex items-center justify-center text-white text-lg">
+                          🎯
+                        </div>
+                      </div>
+                      <h3 className="text-sm font-bold text-purple-800 mb-1">Task Magic</h3>
+                      <p className="text-purple-600 text-center text-xs mb-2">Organize your goals</p>
+                      <div className="bg-purple-200 p-2 rounded-lg border border-purple-300 text-center">
+                        <p className="text-purple-700 text-xs font-medium">
+                          "Your tasks, perfectly organized"
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Main Center iPhone with Nova */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative z-20 w-64 h-96 bg-slate-900 rounded-[3rem] border-8 border-slate-800 shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500 overflow-hidden">
@@ -261,6 +308,46 @@ export const Hero = () => {
                         <Mail className="w-4 h-4" />
                         Start Magic Journey
                       </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Phone */}
+              <div className="absolute right-0 top-8 z-10">
+                <div className="relative w-48 h-72 bg-slate-900 rounded-[2rem] border-6 border-slate-800 shadow-xl transform -rotate-12 hover:-rotate-6 transition-transform duration-500 overflow-hidden">
+                  <div className="absolute inset-2 bg-gradient-to-br from-green-100 to-emerald-50 rounded-[1.5rem] overflow-hidden">
+                    <div className="flex justify-between items-center p-2 text-green-800 text-xs">
+                      <span className="font-semibold">9:41</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-3 h-1.5 border border-green-600 rounded-sm">
+                          <div className="w-full h-full bg-green-400 rounded-sm"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="px-4 pb-2">
+                      <div className="flex items-center gap-2 mb-2 bg-green-100 p-2 rounded-lg">
+                        <img 
+                          src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                          alt="Magic Notebook Logo" 
+                          className="w-6 h-6"
+                        />
+                        <span className="text-green-700 font-semibold text-sm">Magic Notebook</span>
+                      </div>
+                    </div>
+                    <div className="px-4 flex-1 flex flex-col items-center justify-center">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-green-300 to-emerald-300 p-1 mb-3">
+                        <div className="w-full h-full bg-green-500 rounded-full flex items-center justify-center text-white text-lg">
+                          ⚡
+                        </div>
+                      </div>
+                      <h3 className="text-sm font-bold text-green-800 mb-1">Auto Magic</h3>
+                      <p className="text-green-600 text-center text-xs mb-2">Workflow automation</p>
+                      <div className="bg-green-200 p-2 rounded-lg border border-green-300 text-center">
+                        <p className="text-green-700 text-xs font-medium">
+                          "Automate everything effortlessly"
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
