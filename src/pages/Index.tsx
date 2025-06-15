@@ -4,6 +4,7 @@ import { WhatItIs } from '@/components/WhatItIs';
 import { Features } from '@/components/Features';
 import { AppMockups } from '@/components/AppMockups';
 import { HowItWorks } from '@/components/HowItWorks';
+import { DemoVideo } from '@/components/DemoVideo';
 import { NotesSection } from '@/components/NotesSection';
 import { TestimonialBook } from '@/components/TestimonialBook';
 import { SubscriptionSection } from '@/components/SubscriptionSection';
@@ -18,10 +19,10 @@ const Index = () => {
       {/* Cleaner Background Pattern */}
       <div className="fixed inset-0 pointer-events-none">
         {/* Reduced magical elements for cleaner UI */}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <div
             key={`charm-bg-${i}`}
-            className="absolute animate-wind-drift opacity-5"
+            className="absolute animate-wind-drift opacity-3"
             style={{
               left: `${20 + Math.random() * 60}%`,
               top: `${20 + Math.random() * 60}%`,
@@ -30,17 +31,18 @@ const Index = () => {
               transform: `rotate(${Math.random() * 360}deg)`
             }}
           >
-            <div className="text-amber-400 text-xl">🌟</div>
+            <div className="text-amber-400 text-lg">🌟</div>
           </div>
         ))}
         
         {/* Subtle paper texture overlay */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.05),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.03),transparent_70%)]" />
       </div>
       
       <Hero />
       <WhatItIs />
       <HowItWorks />
+      <DemoVideo />
       <Features />
       <AppMockups />
       <NotesSection />

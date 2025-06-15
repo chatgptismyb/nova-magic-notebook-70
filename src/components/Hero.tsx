@@ -139,15 +139,6 @@ export const Hero = () => {
       </div>
 
       <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
-        {/* Floating Slogan Notes - Repositioned */}
-        <div className="absolute top-32 left-10 bg-yellow-200 p-4 rounded-2xl border-l-6 border-amber-400 shadow-lg transform rotate-12 hover:rotate-6 transition-transform duration-300 cursor-move z-20 animate-float">
-          <p className="text-amber-800 font-bold text-lg">Write it. Wish it. Watch it happen.</p>
-        </div>
-        
-        <div className="absolute top-40 right-10 bg-amber-200 p-4 rounded-2xl border-l-6 border-yellow-500 shadow-lg transform -rotate-12 hover:-rotate-6 transition-transform duration-300 cursor-move z-20 animate-float" style={{ animationDelay: '2s' }}>
-          <p className="text-amber-800 font-bold text-lg">Pairing intent with magic ✨</p>
-        </div>
-
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
           
           {/* Enhanced story-driven content */}
@@ -162,7 +153,7 @@ export const Hero = () => {
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-amber-700">Magic Notebook</h3>
-                  <p className="text-amber-600 text-sm">Write it. Wish it. Watch it work.</p>
+                  <p className="text-amber-600 text-sm">Write it. Wish it. Watch it happen.</p>
                 </div>
               </div>
             </div>
@@ -172,7 +163,7 @@ export const Hero = () => {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-3 bg-yellow-300/50 px-4 py-2 rounded-full border border-amber-400/40">
                   <Sparkles className="w-5 h-5 text-amber-600 animate-spin-slow" />
-                  <span className="text-amber-700 font-semibold text-sm">The Magical Notebook</span>
+                  <span className="text-amber-700 font-semibold text-sm">Write it. Wish it. Watch it happen.</span>
                 </div>
                 
                 <h1 className="text-4xl md:text-6xl font-bold leading-tight">
@@ -182,7 +173,7 @@ export const Hero = () => {
                   <br />
                   <span className="text-slate-800">Notes Into</span>
                   <br />
-                  <span className="text-amber-600">Actions</span>
+                  <span className="text-amber-600">Magic</span>
                 </h1>
               </div>
             </div>
@@ -192,8 +183,8 @@ export const Hero = () => {
               <h2 className="text-xl font-bold text-amber-800 mb-3">📖 Your Magical Journey</h2>
               <p className="text-slate-700 leading-relaxed">
                 Meet <span className="font-bold text-amber-700">Nova</span>, your AI companion who transforms 
-                scattered thoughts into organized magic. From voice commands to smart automation, 
-                watch your productivity <span className="italic text-amber-600">soar</span>.
+                scattered thoughts into organized magic. Write it. Wish it. 
+                <span className="italic text-amber-600"> Watch it happen</span>.
               </p>
             </div>
 
@@ -472,7 +463,7 @@ export const Hero = () => {
                       <p className="text-green-600 text-center text-xs mb-2">Workflow automation</p>
                       <div className="bg-green-200 p-2 rounded-lg border border-green-300 text-center">
                         <p className="text-green-700 text-xs font-medium">
-                          "Automate everything effortlessly"
+                          "Watch it happen effortlessly"
                         </p>
                       </div>
                     </div>
