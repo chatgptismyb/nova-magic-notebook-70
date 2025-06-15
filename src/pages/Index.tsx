@@ -1,15 +1,9 @@
 
 import { Hero } from '@/components/Hero';
-import { WhatItIs } from '@/components/WhatItIs';
-import { Features } from '@/components/Features';
-import { AppMockups } from '@/components/AppMockups';
-import { HowItWorks } from '@/components/HowItWorks';
-import { DemoVideo } from '@/components/DemoVideo';
-import { NotesSection } from '@/components/NotesSection';
+import { MagicAppDemo } from '@/components/MagicAppDemo';
 import { TestimonialBook } from '@/components/TestimonialBook';
 import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
-import { Community } from '@/components/Community';
 import { DocsSection } from '@/components/DocsSection';
 import { Footer } from '@/components/Footer';
 
@@ -40,16 +34,10 @@ const Index = () => {
       </div>
       
       <Hero />
-      <WhatItIs />
-      <HowItWorks />
-      <DemoVideo />
-      <Features />
-      <AppMockups />
-      <NotesSection />
+      <MagicAppDemo />
       <TestimonialBook />
       <SubscriptionSection />
       <FAQ />
-      <Community />
       <DocsSection />
       <Footer />
     </div>
