@@ -1,50 +1,145 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Download, Mail, Star, ArrowDown, Play, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText } from 'lucide-react';
+import { Mail, Star, ArrowDown, Play, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { EmailSignup } from '@/components/EmailSignup';
 
 export const Hero = () => {
   const [showEmailSignup, setShowEmailSignup] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <>
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-yellow-100/80 backdrop-blur-md border-b-2 border-amber-300">
+      {/* Enhanced Interactive Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-yellow-100/90 backdrop-blur-lg border-b-2 border-amber-300 shadow-lg">
         <div className="max-w-6xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-3">
-              <img 
-                src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
-                alt="Magic Notebook Logo" 
-                className="w-10 h-10"
-              />
-              <span className="text-xl font-bold text-amber-800">Magic Notebook</span>
+            <Link to="/" className="flex items-center gap-3 group">
+              <div className="relative">
+                <img 
+                  src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
+                  alt="Magic Notebook Logo" 
+                  className="w-10 h-10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12"
+                />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-full animate-pulse"></div>
+              </div>
+              <span className="text-xl font-bold text-amber-800 group-hover:text-amber-600 transition-colors">Magic Notebook</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-6">
-              <Link to="/showcase" className="text-amber-700 hover:text-amber-900 font-medium transition-colors">
+              <button 
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-amber-700 hover:text-amber-900 font-medium transition-all duration-300 hover:scale-105 relative group"
+              >
+                How it Works
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full"></span>
+              </button>
+              <Link to="/showcase" className="text-amber-700 hover:text-amber-900 font-medium transition-all duration-300 hover:scale-105 relative group">
                 Demo
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              <Link to="/subscription" className="text-amber-700 hover:text-amber-900 font-medium transition-colors">
+              <Link to="/subscription" className="text-amber-700 hover:text-amber-900 font-medium transition-all duration-300 hover:scale-105 relative group">
                 Pricing
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full"></span>
               </Link>
-              <Link to="/login" className="text-amber-700 hover:text-amber-900 font-medium transition-colors">
+              <button 
+                onClick={() => setSidebarOpen(true)}
+                className="flex items-center gap-2 text-amber-700 hover:text-amber-900 font-medium transition-all duration-300 hover:scale-105"
+              >
+                <BookOpen className="w-4 h-4" />
+                Docs
+              </button>
+              <Link to="/login" className="text-amber-700 hover:text-amber-900 font-medium transition-all duration-300 hover:scale-105">
                 Login
               </Link>
               <Link 
                 to="/signup"
-                className="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-2 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+                className="bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/40 group relative overflow-hidden"
               >
-                Start Free
+                <span className="relative z-10 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 group-hover:animate-spin" />
+                  Start Free
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Link>
             </div>
+
+            {/* Mobile menu button */}
+            <button 
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden p-2 text-amber-700 hover:text-amber-900 transition-colors"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
           </div>
         </div>
       </nav>
 
+      {/* Sidebar */}
+      <div className={`fixed inset-0 z-50 ${sidebarOpen ? '' : 'pointer-events-none'}`}>
+        <div className={`absolute inset-0 bg-black/50 transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0'}`} onClick={() => setSidebarOpen(false)}></div>
+        <div className={`absolute right-0 top-0 h-full w-80 bg-gradient-to-b from-yellow-50 to-amber-50 shadow-2xl transform transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-2xl font-bold text-amber-800">Navigation</h2>
+              <button 
+                onClick={() => setSidebarOpen(false)}
+                className="p-2 text-amber-700 hover:text-amber-900 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              <a href="#how-it-works" onClick={() => { setSidebarOpen(false); document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); }} className="block p-3 rounded-lg hover:bg-amber-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Lightbulb className="w-5 h-5 text-amber-600" />
+                  <span className="font-semibold text-amber-800">How it Works</span>
+                </div>
+              </a>
+              <Link to="/showcase" onClick={() => setSidebarOpen(false)} className="block p-3 rounded-lg hover:bg-amber-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Play className="w-5 h-5 text-amber-600" />
+                  <span className="font-semibold text-amber-800">Demo</span>
+                </div>
+              </Link>
+              <Link to="/subscription" onClick={() => setSidebarOpen(false)} className="block p-3 rounded-lg hover:bg-amber-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Star className="w-5 h-5 text-amber-600" />
+                  <span className="font-semibold text-amber-800">Pricing</span>
+                </div>
+              </Link>
+              <button onClick={() => { setSidebarOpen(false); }} className="block w-full text-left p-3 rounded-lg hover:bg-amber-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <BookOpen className="w-5 h-5 text-amber-600" />
+                  <span className="font-semibold text-amber-800">Documentation</span>
+                </div>
+              </button>
+              <Link to="/login" onClick={() => setSidebarOpen(false)} className="block p-3 rounded-lg hover:bg-amber-100 transition-colors">
+                <div className="flex items-center gap-3">
+                  <Users className="w-5 h-5 text-amber-600" />
+                  <span className="font-semibold text-amber-800">Login</span>
+                </div>
+              </Link>
+            </div>
+            
+            <div className="mt-8 p-4 bg-gradient-to-r from-amber-200 to-yellow-200 rounded-xl">
+              <h3 className="font-bold text-amber-800 mb-2">Ready to start?</h3>
+              <Link 
+                to="/signup"
+                onClick={() => setSidebarOpen(false)}
+                className="block w-full bg-gradient-to-r from-amber-600 to-yellow-600 text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-105"
+              >
+                Start Free Trial
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
-        {/* Floating Slogan Notes */}
+        {/* Floating Slogan Notes - Repositioned */}
         <div className="absolute top-32 left-10 bg-yellow-200 p-4 rounded-2xl border-l-6 border-amber-400 shadow-lg transform rotate-12 hover:rotate-6 transition-transform duration-300 cursor-move z-20 animate-float">
           <p className="text-amber-800 font-bold text-lg">Write it. Wish it. Watch it happen.</p>
         </div>
@@ -55,7 +150,7 @@ export const Hero = () => {
 
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
           
-          {/* Enhanced story-driven content with sticky note style */}
+          {/* Enhanced story-driven content */}
           <div className="space-y-8">
             {/* Logo with M book - Sticky Note Style */}
             <div className="bg-yellow-200 p-6 rounded-2xl shadow-lg border-l-8 border-amber-400 transform rotate-1 hover:rotate-0 transition-transform duration-300">
@@ -137,16 +232,16 @@ export const Hero = () => {
               </div>
             </div>
 
-            {/* CTA sticky note */}
+            {/* Enhanced CTA sticky note */}
             <div className="bg-gradient-to-br from-amber-200 to-yellow-200 p-6 rounded-2xl shadow-xl border-l-8 border-amber-500 transform rotate-1 hover:rotate-0 transition-transform duration-300">
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link 
-                  to="/signup"
+                <button
+                  onClick={() => setShowEmailSignup(true)}
                   className="bg-gradient-to-r from-amber-600 via-yellow-500 to-amber-500 hover:from-amber-700 hover:via-yellow-600 hover:to-amber-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-amber-500/40 group relative overflow-hidden flex items-center justify-center"
                 >
                   <Sparkles className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-                  Start Your Magic Journey
-                </Link>
+                  Get Early Access
+                </button>
                 
                 <Link
                   to="/showcase"
@@ -338,7 +433,7 @@ export const Hero = () => {
                         className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
                       >
                         <Mail className="w-4 h-4" />
-                        Start Magic Journey
+                        Get Early Access
                       </button>
                     </div>
                   </div>
