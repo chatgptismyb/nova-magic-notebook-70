@@ -1,16 +1,8 @@
+
 import { useState } from 'react';
 
 export const Community = () => {
   const [showRoadmap, setShowRoadmap] = useState(false);
-  const [isDoorOpening, setIsDoorOpening] = useState(false);
-
-  const handleDoorClick = () => {
-    setIsDoorOpening(true);
-    // Delay showing roadmap to allow door animation to play
-    setTimeout(() => {
-      setShowRoadmap(true);
-    }, 1000);
-  };
 
   const roadmapItems = [
     {
@@ -65,10 +57,7 @@ export const Community = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <button
-              onClick={() => {
-                setShowRoadmap(false);
-                setIsDoorOpening(false);
-              }}
+              onClick={() => setShowRoadmap(false)}
               className="mb-8 bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 text-white px-6 py-3 rounded-full transition-all duration-300 hover:scale-105 font-semibold"
             >
               ← Back to Magic Door
@@ -210,7 +199,7 @@ export const Community = () => {
               ))}
             </div>
 
-            {/* Nova Wizard Character */}
+            {/* Nova Wizard Character - Using uploaded image as reference */}
             <div className="flex flex-col items-center relative z-10">
               <div className="mb-8 relative">
                 <div className="relative">
@@ -253,6 +242,10 @@ export const Community = () => {
                   {/* Magic aura */}
                   <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-purple-400/20 rounded-full animate-pulse"></div>
                 </div>
+                
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center animate-bounce">
+                  🔑
+                </div>
               </div>
 
               {/* Slogan Text Above Door */}
@@ -262,74 +255,27 @@ export const Community = () => {
                 </h3>
               </div>
 
-              {/* Magical Animated Door */}
-              <div className="relative group cursor-pointer" onClick={handleDoorClick}>
-                <div className={`bg-gradient-to-b from-amber-800 to-amber-900 w-48 h-64 rounded-t-3xl border-4 border-yellow-600/50 shadow-2xl transform transition-all duration-1000 group-hover:scale-105 group-hover:shadow-yellow-500/25 relative overflow-hidden ${
-                  isDoorOpening ? 'animate-pulse' : ''
-                }`}>
-                  
-                  {/* Magical Light Coming Out When Opening */}
-                  {isDoorOpening && (
-                    <div className="absolute inset-0 bg-gradient-to-t from-transparent via-yellow-300/50 to-yellow-100/80 animate-fade-in z-20">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-pulse"></div>
-                      {/* Light rays */}
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        {[...Array(8)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="absolute w-1 bg-gradient-to-t from-yellow-400 to-white opacity-70 animate-pulse"
-                            style={{
-                              height: `${60 + Math.random() * 40}px`,
-                              transform: `rotate(${i * 45}deg)`,
-                              transformOrigin: 'bottom center',
-                              animationDelay: `${i * 0.1}s`
-                            }}
-                          />
-                        ))}
-                      </div>
-                      {/* Sparkles in light */}
-                      {[...Array(12)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="absolute text-white animate-bounce opacity-90"
-                          style={{
-                            left: `${20 + Math.random() * 60}%`,
-                            top: `${20 + Math.random() * 60}%`,
-                            animationDelay: `${Math.random() * 1}s`,
-                            fontSize: '1.2rem'
-                          }}
-                        >
-                          ✨
-                        </div>
-                      ))}
-                    </div>
-                  )}
+              {/* Magical Door */}
+              <div className="relative group cursor-pointer" onClick={() => setShowRoadmap(true)}>
+                <div className="bg-gradient-to-b from-amber-800 to-amber-900 w-48 h-64 rounded-t-3xl border-4 border-yellow-600/50 shadow-2xl transform transition-all duration-500 group-hover:scale-105 group-hover:shadow-yellow-500/25 relative overflow-hidden">
                   
                   {/* Door Details */}
-                  <div className={`absolute inset-4 bg-gradient-to-b from-amber-700 to-amber-800 rounded-t-2xl transition-all duration-1000 ${
-                    isDoorOpening ? 'transform -rotate-y-75 origin-left' : ''
-                  }`}>
+                  <div className="absolute inset-4 bg-gradient-to-b from-amber-700 to-amber-800 rounded-t-2xl">
                     <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-3 h-8 bg-yellow-600 rounded-full"></div>
                     <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-8 h-3 bg-yellow-600 rounded-full"></div>
                   </div>
                   
                   {/* Door Handle */}
-                  <div className={`absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-yellow-500 rounded-full shadow-lg transition-all duration-1000 ${
-                    isDoorOpening ? 'transform -translate-x-8 -translate-y-1/2' : ''
-                  }`}></div>
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-yellow-500 rounded-full shadow-lg"></div>
                   
                   {/* Magical Glow */}
-                  <div className={`absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent transition-opacity duration-1000 ${
-                    isDoorOpening ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                  }`}></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   {/* Golden Sparkles around door */}
                   {[...Array(8)].map((_, i) => (
                     <div
                       key={i}
-                      className={`absolute text-yellow-400 animate-sparkle-dance transition-opacity duration-500 ${
-                        isDoorOpening ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                      }`}
+                      className="absolute text-yellow-400 animate-sparkle-dance opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                       style={{
                         left: `${-20 + Math.random() * 140}%`,
                         top: `${-10 + Math.random() * 120}%`,

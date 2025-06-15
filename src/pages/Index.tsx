@@ -1,63 +1,84 @@
 
 import { Hero } from '@/components/Hero';
-import { HowItWorks } from '@/components/HowItWorks';
-import { DemoVideo } from '@/components/DemoVideo';
-import { NovaInAction } from '@/components/NovaInAction';
-import { SubscriptionCTA } from '@/components/SubscriptionCTA';
+import { WhatItIs } from '@/components/WhatItIs';
+import { Features } from '@/components/Features';
+import { AppMockups } from '@/components/AppMockups';
+import { NotesSection } from '@/components/NotesSection';
+import { TestimonialBook } from '@/components/TestimonialBook';
+import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
-import { DocsSection } from '@/components/DocsSection';
+import { Community } from '@/components/Community';
 import { Footer } from '@/components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-800 text-white relative overflow-x-hidden">
-      {/* Cosmic Background Pattern */}
+    <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-300 text-slate-800 relative overflow-x-hidden">
+      {/* Enhanced Magical Charms Background Pattern */}
       <div className="fixed inset-0 pointer-events-none">
-        {/* Stars */}
-        {[...Array(100)].map((_, i) => (
+        {/* Magical wind charms pattern */}
+        {[...Array(30)].map((_, i) => (
           <div
-            key={`star-${i}`}
-            className="absolute animate-pulse opacity-60"
+            key={`charm-bg-${i}`}
+            className="absolute animate-wind-drift opacity-15"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
+              left: `${10 + Math.random() * 80}%`,
+              top: `${10 + Math.random() * 80}%`,
+              animationDelay: `${Math.random() * 10}s`,
+              animationDuration: `${15 + Math.random() * 10}s`,
+              transform: `rotate(${Math.random() * 360}deg)`
             }}
           >
-            <div className="text-yellow-300 text-xs">✦</div>
+            <div className="text-amber-400 text-2xl">🌟</div>
           </div>
         ))}
         
         {/* Floating sparkles */}
-        {[...Array(30)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <div
-            key={`sparkle-${i}`}
-            className="absolute animate-float opacity-40"
+            key={`sparkle-bg-${i}`}
+            className="absolute animate-sparkle-dance opacity-20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${10 + Math.random() * 80}%`,
+              top: `${10 + Math.random() * 80}%`,
               animationDelay: `${Math.random() * 8}s`,
-              animationDuration: `${6 + Math.random() * 4}s`,
+              animationDuration: `${4 + Math.random() * 3}s`,
             }}
           >
             <div className="text-yellow-400 text-lg">✨</div>
           </div>
         ))}
         
-        {/* Large floating orbs */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl animate-pulse delay-2000" />
+        {/* Magic wands */}
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={`wand-bg-${i}`}
+            className="absolute animate-float opacity-10"
+            style={{
+              left: `${10 + Math.random() * 80}%`,
+              top: `${10 + Math.random() * 80}%`,
+              animationDelay: `${Math.random() * 12}s`,
+              animationDuration: `${8 + Math.random() * 6}s`,
+              transform: `rotate(${Math.random() * 45 - 22.5}deg)`
+            }}
+          >
+            <div className="text-purple-400 text-xl">🪄</div>
+          </div>
+        ))}
+        
+        {/* Enhanced paper texture overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(251,191,36,0.1),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,rgba(245,158,11,0.05)_25%,transparent_25%,transparent_50%,rgba(245,158,11,0.05)_50%,rgba(245,158,11,0.05)_75%,transparent_75%)] bg-[length:20px_20px]" />
       </div>
       
       <Hero />
-      <HowItWorks />
-      <DemoVideo />
-      <NovaInAction />
-      <SubscriptionCTA />
+      <WhatItIs />
+      <Features />
+      <AppMockups />
+      <NotesSection />
+      <TestimonialBook />
+      <SubscriptionSection />
       <FAQ />
-      <DocsSection />
+      <Community />
       <Footer />
     </div>
   );
