@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Wand2, Smartphone } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Wand2, Smartphone, Download } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export const AppMockups = () => {
   const [activeScreen, setActiveScreen] = useState(0);
@@ -105,11 +106,11 @@ export const AppMockups = () => {
         <div className="relative flex justify-center items-center mb-20">
           {/* Main Phone Mockup */}
           <div className="relative z-10 transform hover:scale-105 transition-transform duration-500">
-            <div className="relative w-80 h-[650px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-[3.5rem] border-8 border-slate-700 shadow-2xl overflow-hidden">
+            <div className="relative w-80 h-[650px] bg-gradient-to-br from-slate-800 to-slate-900 rounded-[3.5rem] border-8 border-slate-700 shadow-2xl overflow-hidden cursor-pointer">
               {/* Phone Screen */}
               <div className="w-full h-full bg-gradient-to-br from-yellow-100 via-amber-50 to-yellow-100 relative overflow-hidden">
                 {/* Status Bar */}
-                <div className="flex justify-between items-center p-6 text-amber-800 text-sm border-b-2 border-amber-300">
+                <div className="flex justify-between items-center p-6 text-amber-800 text-sm border-b-2 border-amber-300 z-20 relative">
                   <span className="font-semibold">9:41</span>
                   <span className="font-bold text-amber-700">Magic Notebook</span>
                   <div className="flex items-center gap-2">
@@ -120,7 +121,7 @@ export const AppMockups = () => {
                 </div>
                 
                 {/* Screen Content with Animation */}
-                <div className={`p-6 h-full flex flex-col transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                <div className={`p-6 h-full flex flex-col transition-all duration-500 relative z-10 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
                   {/* Header */}
                   <div className="text-center mb-6">
                     <div className="flex items-center justify-center gap-3 mb-3">
@@ -212,23 +213,6 @@ export const AppMockups = () => {
               </div>
             </div>
           </div>
-          
-          {/* Floating Feature Bubbles */}
-          <div className="absolute top-20 -left-32 bg-yellow-200 p-4 rounded-2xl border-3 border-amber-400 animate-float max-w-xs shadow-xl transform -rotate-12">
-            <div className="text-center">
-              <span className="text-2xl mb-2 block">🧠</span>
-              <h4 className="font-bold text-amber-800 text-sm mb-2">Smart Parsing</h4>
-              <p className="text-amber-700 text-xs">Understands your intent</p>
-            </div>
-          </div>
-          
-          <div className="absolute bottom-20 -right-32 bg-amber-200 p-4 rounded-2xl border-3 border-yellow-400 animate-float max-w-xs shadow-xl transform rotate-12" style={{ animationDelay: '2s' }}>
-            <div className="text-center">
-              <span className="text-2xl mb-2 block">⚡</span>
-              <h4 className="font-bold text-amber-800 text-sm mb-2">Auto Actions</h4>
-              <p className="text-amber-700 text-xs">From notes to reality</p>
-            </div>
-          </div>
         </div>
 
         {/* App Store Download */}
@@ -239,28 +223,34 @@ export const AppMockups = () => {
           </div>
           
           <div className="flex justify-center gap-6">
-            <div className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-6 rounded-3xl border-4 border-slate-700 hover:scale-105 transition-transform cursor-pointer shadow-xl">
+            <Link
+              to="/checkout"
+              className="bg-gradient-to-r from-slate-800 to-slate-900 text-white p-6 rounded-3xl border-4 border-slate-700 hover:scale-105 transition-transform cursor-pointer shadow-xl group"
+            >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
-                  <span className="text-white text-xl font-bold">📱</span>
+                  <Download className="text-white w-6 h-6" />
                 </div>
                 <div className="text-left">
                   <div className="text-sm opacity-90">Download on the</div>
-                  <div className="text-xl font-bold">App Store</div>
+                  <div className="text-xl font-bold group-hover:text-blue-300 transition-colors">App Store</div>
                 </div>
               </div>
-            </div>
-            <div className="bg-gradient-to-r from-green-600 to-green-700 text-white p-6 rounded-3xl border-4 border-green-500 hover:scale-105 transition-transform cursor-pointer shadow-xl">
+            </Link>
+            <Link
+              to="/checkout"
+              className="bg-gradient-to-r from-green-600 to-green-700 text-white p-6 rounded-3xl border-4 border-green-500 hover:scale-105 transition-transform cursor-pointer shadow-xl group"
+            >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
-                  <span className="text-green-600 text-xl font-bold">▶</span>
+                  <Download className="text-green-600 w-6 h-6" />
                 </div>
                 <div className="text-left">
                   <div className="text-sm opacity-90">Get it on</div>
-                  <div className="text-xl font-bold">Google Play</div>
+                  <div className="text-xl font-bold group-hover:text-green-300 transition-colors">Google Play</div>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </div>
