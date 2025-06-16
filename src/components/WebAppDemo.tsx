@@ -1,11 +1,21 @@
 
 import { useState } from 'react';
-import { Maximize2, X, Plus, Search, Settings, Bell, User, Sparkles, Mic, Send, Calendar, FileText, Lightbulb } from 'lucide-react';
+import { Maximize2, X, Plus, Search, Settings, Bell, User, Sparkles, Mic, Send, Calendar, FileText, Lightbulb, MessageCircle, Wand2 } from 'lucide-react';
 
 export const WebAppDemo = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeTab, setActiveTab] = useState('notes');
   const [searchQuery, setSearchQuery] = useState('');
+  const [showNovaChat, setShowNovaChat] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      type: 'nova',
+      content: "Hi! I'm Nova ✨ What would you like to create today?",
+      timestamp: new Date().toLocaleTimeString()
+    }
+  ]);
 
   const demoNotes = [
     {
@@ -14,7 +24,8 @@ export const WebAppDemo = () => {
       content: "Plan weekend trip to Paris - Nova suggested flights, hotels, and created itinerary",
       tags: ["travel", "planning"],
       timestamp: "2 hours ago",
-      status: "completed"
+      status: "completed",
+      novaAction: "Created complete travel itinerary with bookings"
     },
     {
       id: 2,
@@ -22,7 +33,8 @@ export const WebAppDemo = () => {
       content: "Set up automated morning routine: meditation, coffee, check emails",
       tags: ["routine", "automation"],
       timestamp: "1 day ago",
-      status: "active"
+      status: "active",
+      novaAction: "Automated daily routine with smart scheduling"
     },
     {
       id: 3,
@@ -30,12 +42,46 @@ export const WebAppDemo = () => {
       content: "Brainstorm new app features with Nova's AI assistance",
       tags: ["brainstorming", "ideas"],
       timestamp: "3 days ago",
-      status: "in-progress"
+      status: "in-progress",
+      novaAction: "Generated 12 innovative feature concepts"
     }
   ];
 
+  const handleSendMessage = () => {
+    if (!chatInput.trim()) return;
+    
+    const newMessage = {
+      id: Date.now(),
+      type: 'user',
+      content: chatInput,
+      timestamp: new Date().toLocaleTimeString()
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+    setChatInput('');
+    
+    // Simulate Nova response
+    setTimeout(() => {
+      const novaResponses = [
+        "Perfect! Let me help you organize that into actionable steps ✨",
+        "Great idea! I'll create a smart workflow for that 🧙‍♀️",
+        "I understand! Let me break this down and make it magical 🌟",
+        "Wonderful! I'll turn that into an automated process for you ⚡"
+      ];
+      
+      const response = {
+        id: Date.now() + 1,
+        type: 'nova',
+        content: novaResponses[Math.floor(Math.random() * novaResponses.length)],
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setMessages(prev => [...prev, response]);
+    }, 1000);
+  };
+
   return (
-    <section id="web-app-demo" className="py-20 px-6 bg-gradient-to-br from-orange-50 via-white to-yellow-50 relative">
+    <section id="web-app-demo" className="py-16 px-4 bg-gradient-to-br from-orange-50 via-white to-yellow-50 relative">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -53,7 +99,7 @@ export const WebAppDemo = () => {
         </div>
 
         {/* Web App Demo Container */}
-        <div className="relative bg-white rounded-3xl shadow-2xl border-4 border-orange-200 overflow-hidden">
+        <div className="relative bg-white rounded-3xl shadow-2xl border-4 border-orange-200 overflow-hidden max-w-5xl mx-auto">
           {/* Browser Header */}
           <div className="bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-4 border-b-2 border-orange-200 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -77,7 +123,7 @@ export const WebAppDemo = () => {
           </div>
 
           {/* App Interface */}
-          <div className="flex h-96">
+          <div className="flex h-[500px] relative">
             {/* Sidebar */}
             <div className="w-64 bg-gradient-to-b from-orange-50 to-yellow-50 border-r-2 border-orange-200 p-4">
               <div className="flex items-center gap-3 mb-6">
@@ -111,7 +157,7 @@ export const WebAppDemo = () => {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 p-6">
+            <div className="flex-1 p-6 relative">
               {/* Header */}
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-2xl font-bold text-orange-800">
@@ -131,11 +177,11 @@ export const WebAppDemo = () => {
                       className="pl-10 pr-4 py-2 bg-orange-50 border border-orange-200 rounded-lg text-sm focus:outline-none focus:border-orange-400"
                     />
                   </div>
-                  <button className="p-2 hover:bg-orange-100 rounded-lg transition-colors">
-                    <Bell className="w-4 h-4 text-orange-600" />
-                  </button>
-                  <button className="p-2 hover:bg-orange-100 rounded-lg transition-colors">
-                    <Settings className="w-4 h-4 text-orange-600" />
+                  <button 
+                    onClick={() => setShowNovaChat(!showNovaChat)}
+                    className={`p-2 rounded-lg transition-colors ${showNovaChat ? 'bg-orange-200 text-orange-700' : 'hover:bg-orange-100 text-orange-600'}`}
+                  >
+                    <MessageCircle className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -143,14 +189,17 @@ export const WebAppDemo = () => {
               {/* Content Area */}
               {activeTab === 'notes' && (
                 <div className="space-y-4">
-                  <button className="w-full p-4 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-xl text-white font-medium hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                  <button 
+                    onClick={() => setShowNovaChat(true)}
+                    className="w-full p-4 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-xl text-white font-medium hover:scale-105 transition-transform flex items-center justify-center gap-2"
+                  >
                     <Plus className="w-4 h-4" />
                     Create New Magical Note
                   </button>
                   
                   <div className="grid gap-4">
                     {demoNotes.map((note) => (
-                      <div key={note.id} className="bg-white border-2 border-orange-200 rounded-xl p-4 hover:shadow-lg transition-shadow">
+                      <div key={note.id} className="bg-white border-2 border-orange-200 rounded-xl p-4 hover:shadow-lg transition-shadow relative group">
                         <div className="flex items-start justify-between mb-2">
                           <h4 className="font-semibold text-orange-800">{note.title}</h4>
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
@@ -162,6 +211,17 @@ export const WebAppDemo = () => {
                           </span>
                         </div>
                         <p className="text-gray-600 text-sm mb-3">{note.content}</p>
+                        
+                        {/* Nova Action Indicator */}
+                        <div className="bg-gradient-to-r from-orange-100 to-yellow-100 rounded-lg p-2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center gap-2">
+                            <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
+                              <span className="text-white text-xs">🧙‍♀️</span>
+                            </div>
+                            <span className="text-xs text-orange-700 font-medium">Nova: {note.novaAction}</span>
+                          </div>
+                        </div>
+                        
                         <div className="flex items-center justify-between">
                           <div className="flex gap-2">
                             {note.tags.map((tag) => (
@@ -179,32 +239,30 @@ export const WebAppDemo = () => {
               )}
 
               {activeTab === 'nova' && (
-                <div className="bg-white border-2 border-orange-200 rounded-xl p-4 h-64 flex flex-col">
-                  <div className="flex-1 space-y-3">
-                    <div className="flex gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-                        <span className="text-white text-sm">🧙‍♀️</span>
+                <div className="bg-white border-2 border-orange-200 rounded-xl p-4 h-80 flex flex-col">
+                  <div className="flex-1 space-y-3 overflow-y-auto">
+                    {messages.map((message) => (
+                      <div key={message.id} className={`flex gap-3 ${message.type === 'user' ? 'justify-end' : ''}`}>
+                        {message.type === 'nova' && (
+                          <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center animate-pulse">
+                            <span className="text-white text-sm">🧙‍♀️</span>
+                          </div>
+                        )}
+                        <div className={`rounded-xl p-3 max-w-xs animate-fade-in ${
+                          message.type === 'nova' 
+                            ? 'bg-gradient-to-r from-orange-100 to-yellow-100 border-2 border-orange-200' 
+                            : 'bg-blue-100 border-2 border-blue-200'
+                        }`}>
+                          <p className="text-sm text-gray-800">{message.content}</p>
+                          <span className="text-xs text-gray-500 mt-1 block">{message.timestamp}</span>
+                        </div>
+                        {message.type === 'user' && (
+                          <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <User className="w-4 h-4 text-white" />
+                          </div>
+                        )}
                       </div>
-                      <div className="bg-orange-100 rounded-xl p-3 max-w-xs">
-                        <p className="text-sm text-orange-800">Hi! I'm Nova. How can I help you be more productive today?</p>
-                      </div>
-                    </div>
-                    <div className="flex gap-3 justify-end">
-                      <div className="bg-blue-100 rounded-xl p-3 max-w-xs">
-                        <p className="text-sm text-blue-800">Help me plan my week</p>
-                      </div>
-                      <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                        <User className="w-4 h-4 text-white" />
-                      </div>
-                    </div>
-                    <div className="flex gap-3">
-                      <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center">
-                        <span className="text-white text-sm">🧙‍♀️</span>
-                      </div>
-                      <div className="bg-orange-100 rounded-xl p-3 max-w-xs">
-                        <p className="text-sm text-orange-800">Perfect! I'll help you create a magical weekly plan. Let me analyze your calendar and suggest optimizations...</p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                   <div className="flex gap-2 pt-3 border-t border-orange-200">
                     <button className="p-2 hover:bg-orange-100 rounded-lg transition-colors">
@@ -212,10 +270,16 @@ export const WebAppDemo = () => {
                     </button>
                     <input
                       type="text"
-                      placeholder="Type your message..."
+                      placeholder="Ask Nova anything..."
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                       className="flex-1 px-3 py-2 bg-orange-50 border border-orange-200 rounded-lg text-sm focus:outline-none focus:border-orange-400"
                     />
-                    <button className="px-4 py-2 bg-orange-400 text-white rounded-lg hover:bg-orange-500 transition-colors">
+                    <button 
+                      onClick={handleSendMessage}
+                      className="px-4 py-2 bg-orange-400 text-white rounded-lg hover:bg-orange-500 transition-colors"
+                    >
                       <Send className="w-4 h-4" />
                     </button>
                   </div>
@@ -232,6 +296,52 @@ export const WebAppDemo = () => {
                 </div>
               )}
             </div>
+
+            {/* Floating Nova Chat Bubble */}
+            {showNovaChat && activeTab !== 'nova' && (
+              <div className="absolute bottom-6 right-6 w-80 bg-white rounded-2xl shadow-2xl border-4 border-orange-200 animate-scale-in z-30">
+                <div className="flex items-center gap-3 p-4 bg-gradient-to-r from-orange-100 to-yellow-100 rounded-t-2xl border-b-2 border-orange-200">
+                  <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center animate-pulse">
+                    <span className="text-white text-sm">🧙‍♀️</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-orange-800 text-sm">Nova Assistant</h4>
+                    <p className="text-orange-600 text-xs">Ready to help!</p>
+                  </div>
+                  <button 
+                    onClick={() => setShowNovaChat(false)}
+                    className="p-1 hover:bg-orange-200 rounded-lg transition-colors"
+                  >
+                    <X className="w-4 h-4 text-orange-600" />
+                  </button>
+                </div>
+                <div className="p-4 h-40 overflow-y-auto">
+                  <div className="space-y-3">
+                    <div className="bg-gradient-to-r from-orange-100 to-yellow-100 rounded-lg p-3 animate-fade-in">
+                      <p className="text-sm text-orange-800">Hi! I noticed you're working on notes. Would you like me to help organize them or create something new? ✨</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="px-3 py-1 bg-orange-400 text-white rounded-full text-xs hover:bg-orange-500 transition-colors">
+                        Organize Notes
+                      </button>
+                      <button className="px-3 py-1 bg-yellow-400 text-orange-800 rounded-full text-xs hover:bg-yellow-500 transition-colors">
+                        Create New
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex gap-2 p-3 border-t border-orange-200">
+                  <input
+                    type="text"
+                    placeholder="Ask Nova..."
+                    className="flex-1 px-3 py-2 bg-orange-50 border border-orange-200 rounded-lg text-sm focus:outline-none focus:border-orange-400"
+                  />
+                  <button className="p-2 bg-orange-400 text-white rounded-lg hover:bg-orange-500 transition-colors">
+                    <Wand2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

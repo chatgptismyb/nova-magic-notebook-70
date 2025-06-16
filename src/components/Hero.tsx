@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Mail, Star, ArrowDown, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X, Mic, Send, Wand2 } from 'lucide-react';
+import { Mail, Star, ArrowDown, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X, Mic, Send, Wand2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { EmailSignup } from '@/components/EmailSignup';
 import { InteractivePhone } from '@/components/InteractivePhone';
@@ -10,6 +9,7 @@ export const Hero = () => {
   const [showEmailSignup, setShowEmailSignup] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeDemo, setActiveDemo] = useState(0);
+  const [activeMockupIndex, setActiveMockupIndex] = useState(1); // Start with center phone
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showTimedPopup, setShowTimedPopup] = useState(false);
@@ -68,29 +68,62 @@ export const Hero = () => {
     }
   ];
 
-  const phoneScreens = {
-    notes: [
-      { title: "Smart Notes", icon: "📝", color: "from-blue-100 via-cyan-50 to-blue-100", content: "AI-powered writing assistance", description: "Intelligent note-taking with context" },
-      { title: "Voice Input", icon: "🎤", color: "from-indigo-100 via-blue-50 to-indigo-100", content: "Speak your thoughts naturally", description: "Natural voice capture and processing" },
-      { title: "Auto Organize", icon: "📋", color: "from-sky-100 via-blue-50 to-sky-100", content: "Smart categorization system", description: "Effortless organization magic" }
-    ],
-    tasks: [
-      { title: "Task Magic", icon: "🎯", color: "from-orange-100 via-yellow-50 to-orange-100", content: "Goal-oriented organization", description: "Your tasks, perfectly structured" },
-      { title: "Auto Schedule", icon: "📅", color: "from-yellow-100 via-orange-50 to-yellow-100", content: "Smart planning algorithms", description: "Intelligent time management" },
-      { title: "Progress Track", icon: "📊", color: "from-orange-100 via-red-50 to-orange-100", content: "Visual progress insights", description: "Track your productivity journey" }
-    ],
-    nova: [
-      { title: "Meet Nova", icon: "🧙‍♀️", color: "from-orange-100 via-yellow-50 to-orange-100", content: "Your AI productivity companion", description: "Ready to transform your workflow?" },
-      { title: "AI Assistant", icon: "✨", color: "from-yellow-100 via-orange-50 to-yellow-100", content: "Magical guidance and suggestions", description: "Smart assistance always available" },
-      { title: "Personal Magic", icon: "🌟", color: "from-orange-100 via-amber-50 to-orange-100", content: "Tailored magical experience", description: "Magic personalized just for you" }
-    ]
-  };
+  const phoneMockups = [
+    {
+      title: "Smart Notes",
+      screens: [
+        { title: "Voice Notes", icon: "🎤", color: "from-blue-100 via-cyan-50 to-blue-100", content: "Record thoughts naturally", description: "Speak your mind, Nova writes" },
+        { title: "AI Organize", icon: "🧠", color: "from-indigo-100 via-blue-50 to-indigo-100", content: "Smart categorization", description: "Auto-organized by context" },
+        { title: "Action Items", icon: "⚡", color: "from-sky-100 via-blue-50 to-sky-100", content: "Tasks extracted", description: "Notes become actions" }
+      ]
+    },
+    {
+      title: "Nova Chat",
+      screens: [
+        { title: "Meet Nova", icon: "🧙‍♀️", color: "from-orange-100 via-yellow-50 to-orange-100", content: "Your AI companion", description: "Always ready to help" },
+        { title: "Smart Replies", icon: "💬", color: "from-yellow-100 via-orange-50 to-yellow-100", content: "Contextual responses", description: "Understands your needs" },
+        { title: "Magic Actions", icon: "✨", color: "from-orange-100 via-amber-50 to-orange-100", content: "Instant automation", description: "Watch wishes come true" }
+      ]
+    },
+    {
+      title: "Task Magic",
+      screens: [
+        { title: "Auto Schedule", icon: "📅", color: "from-green-100 via-emerald-50 to-green-100", content: "Smart planning", description: "Perfect time management" },
+        { title: "Goal Tracking", icon: "🎯", color: "from-emerald-100 via-green-50 to-emerald-100", content: "Progress insights", description: "Stay on track effortlessly" },
+        { title: "Team Sync", icon: "👥", color: "from-teal-100 via-cyan-50 to-teal-100", content: "Collaboration", description: "Connected productivity" }
+      ]
+    },
+    {
+      title: "Insights",
+      screens: [
+        { title: "Analytics", icon: "📊", color: "from-purple-100 via-violet-50 to-purple-100", content: "Productivity metrics", description: "Data-driven growth" },
+        { title: "Habits", icon: "🔄", color: "from-violet-100 via-purple-50 to-violet-100", content: "Pattern recognition", description: "Build better routines" },
+        { title: "Suggestions", icon: "💡", color: "from-pink-100 via-rose-50 to-pink-100", content: "AI recommendations", description: "Personalized guidance" }
+      ]
+    },
+    {
+      title: "Integration",
+      screens: [
+        { title: "Connect Apps", icon: "🔗", color: "from-gray-100 via-slate-50 to-gray-100", content: "Unified workflow", description: "All tools, one place" },
+        { title: "Automation", icon: "⚙️", color: "from-slate-100 via-gray-50 to-slate-100", content: "Smart workflows", description: "Effortless productivity" },
+        { title: "Sync Data", icon: "🔄", color: "from-zinc-100 via-neutral-50 to-zinc-100", content: "Real-time updates", description: "Always in sync" }
+      ]
+    }
+  ];
 
   // Auto-cycle demo
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveDemo((prev) => (prev + 1) % demoScreens.length);
     }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-cycle phone mockups
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveMockupIndex((prev) => (prev + 1) % phoneMockups.length);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -115,6 +148,14 @@ export const Hero = () => {
       return () => clearInterval(typeInterval);
     }
   }, [activeDemo]);
+
+  const nextMockup = () => {
+    setActiveMockupIndex((prev) => (prev + 1) % phoneMockups.length);
+  };
+
+  const prevMockup = () => {
+    setActiveMockupIndex((prev) => (prev - 1 + phoneMockups.length) % phoneMockups.length);
+  };
 
   const renderDemoContent = (screen: typeof demoScreens[0]) => {
     switch (screen.content.type) {
@@ -231,16 +272,16 @@ export const Hero = () => {
               <Link to="/login" className="text-orange-700 hover:text-orange-900 font-medium transition-all duration-300 hover:scale-105">
                 Login
               </Link>
-              <Link 
-                to="/signup"
+              <button
+                onClick={() => setShowEmailSignup(true)}
                 className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 group-hover:animate-spin" />
-                  Start Free
+                  Join Early
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Link>
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -298,13 +339,12 @@ export const Hero = () => {
             
             <div className="mt-8 p-4 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-xl">
               <h3 className="font-bold text-orange-800 mb-2">Ready to start?</h3>
-              <Link 
-                to="/signup"
-                onClick={() => setSidebarOpen(false)}
+              <button 
+                onClick={() => { setSidebarOpen(false); setShowEmailSignup(true); }}
                 className="block w-full bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-105"
               >
-                Start Free Trial
-              </Link>
+                Join Early Access
+              </button>
             </div>
           </div>
         </div>
@@ -366,7 +406,7 @@ export const Hero = () => {
                   className="bg-gradient-to-r from-orange-600 via-yellow-500 to-orange-500 hover:from-orange-700 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden flex items-center justify-center text-sm sm:text-base"
                 >
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-spin" />
-                  Get Early Access
+                  Join Early Access
                 </button>
               </div>
             </div>
@@ -392,39 +432,80 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Enhanced Interactive Demo with Phone Mockups */}
+          {/* Enhanced Interactive Phone Mockups Carousel */}
           <div className="relative animate-fade-in order-1 lg:order-2" style={{ animationDelay: '1s' }}>
             <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-lg h-96">
               
-              {/* Background phones with small interactive previews */}
-              <div className="absolute -left-4 sm:-left-8 top-12 z-5 transform rotate-[20deg] hover:rotate-[15deg] transition-transform duration-500 hover:scale-110">
-                <InteractivePhone 
-                  screens={phoneScreens.notes}
-                  size="small"
-                />
+              {/* Navigation Controls */}
+              <div className="absolute top-4 left-4 right-4 z-30 flex justify-between items-center">
+                <button 
+                  onClick={prevMockup}
+                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-orange-200"
+                >
+                  <ChevronLeft className="w-5 h-5 text-orange-600" />
+                </button>
+                
+                <div className="flex gap-2">
+                  {phoneMockups.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setActiveMockupIndex(i)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        i === activeMockupIndex 
+                          ? 'bg-orange-600 scale-125' 
+                          : 'bg-orange-300 hover:bg-orange-400'
+                      }`}
+                    />
+                  ))}
+                </div>
+                
+                <button 
+                  onClick={nextMockup}
+                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-orange-200"
+                >
+                  <ChevronRight className="w-5 h-5 text-orange-600" />
+                </button>
               </div>
 
-              <div className="absolute left-0 top-8 z-10 transform rotate-12 hover:rotate-6 transition-transform duration-500 hover:scale-110">
-                <InteractivePhone 
-                  screens={phoneScreens.tasks}
-                  size="medium"
-                />
-              </div>
-
-              {/* Main Center Demo Phone with larger size */}
-              <div className="absolute inset-0 flex items-center justify-center z-20 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                <InteractivePhone 
-                  screens={phoneScreens.nova}
-                  size="large"
-                  showDownload={true}
-                />
-              </div>
-
-              <div className="absolute right-0 top-8 z-10 transform -rotate-12 hover:-rotate-6 transition-transform duration-500 hover:scale-110">
-                <InteractivePhone 
-                  screens={phoneScreens.nova}
-                  size="medium"
-                />
+              {/* Phone Collection Display */}
+              <div className="flex items-center justify-center h-full relative">
+                {phoneMockups.map((mockup, index) => {
+                  const offset = index - activeMockupIndex;
+                  const isActive = index === activeMockupIndex;
+                  const isVisible = Math.abs(offset) <= 2;
+                  
+                  if (!isVisible) return null;
+                  
+                  return (
+                    <div
+                      key={index}
+                      onClick={() => setActiveMockupIndex(index)}
+                      className={`absolute transition-all duration-500 cursor-pointer ${
+                        isActive 
+                          ? 'z-20 scale-100 opacity-100' 
+                          : 'z-10 scale-75 opacity-60 hover:opacity-80 hover:scale-80'
+                      }`}
+                      style={{
+                        transform: `translateX(${offset * 60}px) translateY(${Math.abs(offset) * 20}px) rotate(${offset * 8}deg)`,
+                      }}
+                    >
+                      <InteractivePhone 
+                        screens={mockup.screens}
+                        size={isActive ? "large" : "medium"}
+                        showDownload={isActive}
+                        className="drop-shadow-2xl"
+                      />
+                      
+                      {isActive && (
+                        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center animate-fade-in">
+                          <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-orange-300 shadow-lg">
+                            <h3 className="text-orange-800 font-bold text-sm">{mockup.title}</h3>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
               {/* Call to action arrow */}
