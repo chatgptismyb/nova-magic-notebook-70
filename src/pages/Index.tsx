@@ -1,6 +1,6 @@
 
 import { Hero } from '@/components/Hero';
-import { MagicAppDemo } from '@/components/MagicAppDemo';
+import { ExperienceTheMagic } from '@/components/ExperienceTheMagic';
 import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
 import { DocsSection } from '@/components/DocsSection';
@@ -33,7 +33,7 @@ const Index = () => {
       </div>
       
       <Hero />
-      <MagicAppDemo />
+      <ExperienceTheMagic />
       <SubscriptionSection />
       <FAQ />
       <DocsSection />
