@@ -6,7 +6,7 @@ import { FAQ } from '@/components/FAQ';
 import { DocsSection } from '@/components/DocsSection';
 import { Footer } from '@/components/Footer';
 import { ScrollEngagement } from '@/components/ScrollEngagement';
-import { WebAppDemo } from '@/components/WebAppDemo';
+import { WatchNovaInAction } from '@/components/WatchNovaInAction';
 
 const Index = () => {
   return (
@@ -41,7 +41,7 @@ const Index = () => {
         <Hero />
       </div>
       <div data-scroll-section>
-        <WebAppDemo />
+        <WatchNovaInAction />
       </div>
       <div data-scroll-section>
         <AppMockups />

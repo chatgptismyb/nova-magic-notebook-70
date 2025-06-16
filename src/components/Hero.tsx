@@ -1,18 +1,26 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Mail, Star, ArrowDown, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X, Mic, Send, Wand2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Mail, Star, ArrowDown, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X, Mic, Send, Wand2, ChevronLeft, ChevronRight, Maximize2, Plus, Search, Settings, Bell, User, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { EmailSignup } from '@/components/EmailSignup';
-import { InteractivePhone } from '@/components/InteractivePhone';
 
 export const Hero = () => {
   const [showEmailSignup, setShowEmailSignup] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeDemo, setActiveDemo] = useState(0);
-  const [activeMockupIndex, setActiveMockupIndex] = useState(1); // Start with center phone
-  const [typingText, setTypingText] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
   const [showTimedPopup, setShowTimedPopup] = useState(false);
+  const [activeTab, setActiveTab] = useState('notes');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showNovaChat, setShowNovaChat] = useState(false);
+  const [chatInput, setChatInput] = useState('');
+  const [messages, setMessages] = useState([
+    {
+      id: 1,
+      type: 'nova',
+      content: "Hi! I'm Nova ✨ What would you like to create today?",
+      timestamp: new Date().toLocaleTimeString()
+    }
+  ]);
 
   // Timed popup after 45 seconds
   useEffect(() => {
@@ -23,215 +31,67 @@ export const Hero = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const demoScreens = [
+  const demoNotes = [
     {
-      title: "Write It",
-      subtitle: "Natural voice & text input",
-      background: "from-orange-300 to-yellow-200",
-      content: {
-        type: "input",
-        placeholder: "Try saying: 'Plan my weekend trip to Paris'",
-        demoText: "Plan my weekend trip to Paris",
-        response: "🎯 Got it! Let me help you plan an amazing Paris trip..."
-      },
-      features: ["Voice-to-text magic", "Natural language", "Instant understanding"]
+      id: 1,
+      title: "Weekend Trip Planning",
+      content: "Plan weekend trip to Paris - Nova suggested flights, hotels, and created itinerary",
+      tags: ["travel", "planning"],
+      timestamp: "2 hours ago",
+      status: "completed",
+      novaAction: "Created complete travel itinerary with bookings"
     },
     {
-      title: "Wish It", 
-      subtitle: "Nova transforms your ideas",
-      background: "from-yellow-300 to-orange-300",
-      content: {
-        type: "processing",
-        items: [
-          { icon: "✈️", text: "Flight options researched", status: "complete" },
-          { icon: "🏨", text: "Hotels with best reviews found", status: "complete" },
-          { icon: "🗺️", text: "3-day itinerary created", status: "processing" },
-          { icon: "📅", text: "Calendar events scheduled", status: "pending" }
-        ]
-      },
-      features: ["AI understanding", "Smart organization", "Intelligent planning"]
+      id: 2,
+      title: "Morning Routine",
+      content: "Set up automated morning routine: meditation, coffee, check emails",
+      tags: ["routine", "automation"],
+      timestamp: "1 day ago",
+      status: "active",
+      novaAction: "Automated daily routine with smart scheduling"
     },
     {
-      title: "Watch It Happen",
-      subtitle: "Magic becomes reality",
-      background: "from-yellow-200 to-orange-300",
-      content: {
-        type: "results",
-        items: [
-          { icon: "✅", text: "Flight booked for Friday 9 AM", action: "View confirmation" },
-          { icon: "🏨", text: "Hotel Le Marais reserved", action: "See details" },
-          { icon: "📧", text: "Itinerary shared with friends", action: "Open email" },
-          { icon: "⏰", text: "Reminders set for packing", action: "View tasks" }
-        ]
-      },
-      features: ["Automatic booking", "Real actions", "Complete automation"]
+      id: 3,
+      title: "Project Ideas",
+      content: "Brainstorm new app features with Nova's AI assistance",
+      tags: ["brainstorming", "ideas"],
+      timestamp: "3 days ago",
+      status: "in-progress",
+      novaAction: "Generated 12 innovative feature concepts"
     }
   ];
 
-  const phoneMockups = [
-    {
-      title: "Smart Notes",
-      screens: [
-        { title: "Voice Notes", icon: "🎤", color: "from-blue-100 via-cyan-50 to-blue-100", content: "Record thoughts naturally", description: "Speak your mind, Nova writes" },
-        { title: "AI Organize", icon: "🧠", color: "from-indigo-100 via-blue-50 to-indigo-100", content: "Smart categorization", description: "Auto-organized by context" },
-        { title: "Action Items", icon: "⚡", color: "from-sky-100 via-blue-50 to-sky-100", content: "Tasks extracted", description: "Notes become actions" }
-      ]
-    },
-    {
-      title: "Nova Chat",
-      screens: [
-        { title: "Meet Nova", icon: "🧙‍♀️", color: "from-orange-100 via-yellow-50 to-orange-100", content: "Your AI companion", description: "Always ready to help" },
-        { title: "Smart Replies", icon: "💬", color: "from-yellow-100 via-orange-50 to-yellow-100", content: "Contextual responses", description: "Understands your needs" },
-        { title: "Magic Actions", icon: "✨", color: "from-orange-100 via-amber-50 to-orange-100", content: "Instant automation", description: "Watch wishes come true" }
-      ]
-    },
-    {
-      title: "Task Magic",
-      screens: [
-        { title: "Auto Schedule", icon: "📅", color: "from-green-100 via-emerald-50 to-green-100", content: "Smart planning", description: "Perfect time management" },
-        { title: "Goal Tracking", icon: "🎯", color: "from-emerald-100 via-green-50 to-emerald-100", content: "Progress insights", description: "Stay on track effortlessly" },
-        { title: "Team Sync", icon: "👥", color: "from-teal-100 via-cyan-50 to-teal-100", content: "Collaboration", description: "Connected productivity" }
-      ]
-    },
-    {
-      title: "Insights",
-      screens: [
-        { title: "Analytics", icon: "📊", color: "from-purple-100 via-violet-50 to-purple-100", content: "Productivity metrics", description: "Data-driven growth" },
-        { title: "Habits", icon: "🔄", color: "from-violet-100 via-purple-50 to-violet-100", content: "Pattern recognition", description: "Build better routines" },
-        { title: "Suggestions", icon: "💡", color: "from-pink-100 via-rose-50 to-pink-100", content: "AI recommendations", description: "Personalized guidance" }
-      ]
-    },
-    {
-      title: "Integration",
-      screens: [
-        { title: "Connect Apps", icon: "🔗", color: "from-gray-100 via-slate-50 to-gray-100", content: "Unified workflow", description: "All tools, one place" },
-        { title: "Automation", icon: "⚙️", color: "from-slate-100 via-gray-50 to-slate-100", content: "Smart workflows", description: "Effortless productivity" },
-        { title: "Sync Data", icon: "🔄", color: "from-zinc-100 via-neutral-50 to-zinc-100", content: "Real-time updates", description: "Always in sync" }
-      ]
-    }
-  ];
-
-  // Auto-cycle demo
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveDemo((prev) => (prev + 1) % demoScreens.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Auto-cycle phone mockups
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveMockupIndex((prev) => (prev + 1) % phoneMockups.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Typing animation for demo
-  useEffect(() => {
-    if (activeDemo === 0 && !isTyping) {
-      setIsTyping(true);
-      const text = demoScreens[0].content.demoText;
-      let i = 0;
-      setTypingText('');
+  const handleSendMessage = () => {
+    if (!chatInput.trim()) return;
+    
+    const newMessage = {
+      id: Date.now(),
+      type: 'user',
+      content: chatInput,
+      timestamp: new Date().toLocaleTimeString()
+    };
+    
+    setMessages(prev => [...prev, newMessage]);
+    setChatInput('');
+    
+    // Simulate Nova response
+    setTimeout(() => {
+      const novaResponses = [
+        "Perfect! Let me help you organize that into actionable steps ✨",
+        "Great idea! I'll create a smart workflow for that 🧙‍♀️",
+        "I understand! Let me break this down and make it magical 🌟",
+        "Wonderful! I'll turn that into an automated process for you ⚡"
+      ];
       
-      const typeInterval = setInterval(() => {
-        if (i < text.length) {
-          setTypingText(text.slice(0, i + 1));
-          i++;
-        } else {
-          clearInterval(typeInterval);
-          setIsTyping(false);
-        }
-      }, 100);
-
-      return () => clearInterval(typeInterval);
-    }
-  }, [activeDemo]);
-
-  const nextMockup = () => {
-    setActiveMockupIndex((prev) => (prev + 1) % phoneMockups.length);
-  };
-
-  const prevMockup = () => {
-    setActiveMockupIndex((prev) => (prev - 1 + phoneMockups.length) % phoneMockups.length);
-  };
-
-  const renderDemoContent = (screen: typeof demoScreens[0]) => {
-    switch (screen.content.type) {
-      case 'input':
-        return (
-          <div className="space-y-3">
-            <div className="bg-white/90 p-3 rounded-xl border-2 border-orange-300">
-              <div className="flex items-center gap-2 mb-2">
-                <Mic className="w-4 h-4 text-orange-600 animate-pulse" />
-                <div className="text-orange-700 text-xs font-medium">Voice Input Active</div>
-              </div>
-              <div className="text-orange-800 text-sm min-h-[40px] flex items-center">
-                {typingText}
-                {isTyping && <span className="animate-pulse">|</span>}
-              </div>
-            </div>
-            {typingText && (
-              <div className="bg-gradient-to-r from-orange-400/80 to-yellow-400/80 p-2 rounded-lg border-2 border-orange-500 animate-fade-in">
-                <div className="flex items-center gap-2">
-                  <Wand2 className="w-3 h-3 text-orange-700" />
-                  <p className="text-orange-800 text-xs font-medium">
-                    {screen.content.response}
-                  </p>
-                </div>
-              </div>
-            )}
-          </div>
-        );
-
-      case 'processing':
-        return (
-          <div className="space-y-2">
-            {screen.content.items.map((item, i) => (
-              <div 
-                key={i}
-                className="bg-white/90 p-2 rounded-lg border border-orange-300 flex items-center gap-2 text-xs"
-                style={{ animationDelay: `${i * 200}ms` }}
-              >
-                <span className="text-sm">{item.icon}</span>
-                <div className="flex-1">
-                  <p className="text-orange-800 font-medium">{item.text}</p>
-                </div>
-                <div className={`w-2 h-2 rounded-full ${
-                  item.status === 'complete' ? 'bg-green-400' :
-                  item.status === 'processing' ? 'bg-blue-400 animate-pulse' :
-                  'bg-gray-300'
-                }`} />
-              </div>
-            ))}
-          </div>
-        );
-
-      case 'results':
-        return (
-          <div className="space-y-2">
-            {screen.content.items.map((item, i) => (
-              <div 
-                key={i}
-                className="bg-white/90 p-2 rounded-lg border border-orange-300 hover:scale-105 transition-transform cursor-pointer text-xs"
-                style={{ animationDelay: `${i * 150}ms` }}
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm">{item.icon}</span>
-                  <p className="text-orange-800 font-medium flex-1">{item.text}</p>
-                </div>
-                <button className="text-xs text-orange-600 bg-orange-50 px-2 py-1 rounded hover:bg-orange-100 transition-colors">
-                  {item.action}
-                </button>
-              </div>
-            ))}
-          </div>
-        );
-
-      default:
-        return null;
-    }
+      const response = {
+        id: Date.now() + 1,
+        type: 'nova',
+        content: novaResponses[Math.floor(Math.random() * novaResponses.length)],
+        timestamp: new Date().toLocaleTimeString()
+      };
+      
+      setMessages(prev => [...prev, response]);
+    }, 1000);
   };
 
   return (
@@ -432,86 +292,189 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Enhanced Interactive Phone Mockups Carousel */}
+          {/* Web App Demo */}
           <div className="relative animate-fade-in order-1 lg:order-2" style={{ animationDelay: '1s' }}>
-            <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-lg h-96">
-              
-              {/* Navigation Controls */}
-              <div className="absolute top-4 left-4 right-4 z-30 flex justify-between items-center">
-                <button 
-                  onClick={prevMockup}
-                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-orange-200"
-                >
-                  <ChevronLeft className="w-5 h-5 text-orange-600" />
-                </button>
-                
-                <div className="flex gap-2">
-                  {phoneMockups.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActiveMockupIndex(i)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        i === activeMockupIndex 
-                          ? 'bg-orange-600 scale-125' 
-                          : 'bg-orange-300 hover:bg-orange-400'
-                      }`}
-                    />
-                  ))}
+            <div className="relative bg-white rounded-3xl shadow-2xl border-4 border-orange-200 overflow-hidden max-w-2xl mx-auto">
+              {/* Browser Header */}
+              <div className="bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-4 border-b-2 border-orange-200 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                  </div>
+                  <div className="bg-white rounded-lg px-4 py-2 flex items-center gap-2 ml-4">
+                    <span className="text-green-600">🔒</span>
+                    <span className="text-gray-600 text-sm">magicnotebook.app</span>
+                  </div>
                 </div>
-                
-                <button 
-                  onClick={nextMockup}
-                  className="w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-orange-200"
-                >
-                  <ChevronRight className="w-5 h-5 text-orange-600" />
+                <button className="p-2 hover:bg-orange-200 rounded-lg transition-colors flex items-center gap-2 text-orange-700">
+                  <Maximize2 className="w-4 h-4" />
+                  <span className="text-sm font-medium">View Demo</span>
                 </button>
               </div>
 
-              {/* Phone Collection Display */}
-              <div className="flex items-center justify-center h-full relative">
-                {phoneMockups.map((mockup, index) => {
-                  const offset = index - activeMockupIndex;
-                  const isActive = index === activeMockupIndex;
-                  const isVisible = Math.abs(offset) <= 2;
-                  
-                  if (!isVisible) return null;
-                  
-                  return (
-                    <div
-                      key={index}
-                      onClick={() => setActiveMockupIndex(index)}
-                      className={`absolute transition-all duration-500 cursor-pointer ${
-                        isActive 
-                          ? 'z-20 scale-100 opacity-100' 
-                          : 'z-10 scale-75 opacity-60 hover:opacity-80 hover:scale-80'
-                      }`}
-                      style={{
-                        transform: `translateX(${offset * 60}px) translateY(${Math.abs(offset) * 20}px) rotate(${offset * 8}deg)`,
-                      }}
-                    >
-                      <InteractivePhone 
-                        screens={mockup.screens}
-                        size={isActive ? "large" : "medium"}
-                        showDownload={isActive}
-                        className="drop-shadow-2xl"
-                      />
-                      
-                      {isActive && (
-                        <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 text-center animate-fade-in">
-                          <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full border-2 border-orange-300 shadow-lg">
-                            <h3 className="text-orange-800 font-bold text-sm">{mockup.title}</h3>
-                          </div>
-                        </div>
-                      )}
+              {/* App Interface */}
+              <div className="flex h-[400px] relative">
+                {/* Sidebar */}
+                <div className="w-48 bg-gradient-to-b from-orange-50 to-yellow-50 border-r-2 border-orange-200 p-4">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-lg flex items-center justify-center">
+                      <span className="text-white font-bold text-xs">M</span>
                     </div>
-                  );
-                })}
-              </div>
+                    <span className="font-bold text-orange-800 text-sm">Magic Notebook</span>
+                  </div>
 
-              {/* Call to action arrow */}
-              <div className="absolute -bottom-16 sm:-bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <ArrowDown className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
+                  <nav className="space-y-2">
+                    {[
+                      { id: 'notes', label: 'Smart Notes', icon: FileText },
+                      { id: 'nova', label: 'Chat with Nova', icon: Sparkles },
+                      { id: 'calendar', label: 'Calendar', icon: Calendar },
+                      { id: 'ideas', label: 'Idea Lab', icon: Lightbulb }
+                    ].map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => setActiveTab(item.id)}
+                        className={`w-full flex items-center gap-2 px-2 py-2 rounded-lg transition-colors text-xs ${
+                          activeTab === item.id
+                            ? 'bg-orange-200 text-orange-800'
+                            : 'text-orange-600 hover:bg-orange-100'
+                        }`}
+                      >
+                        <item.icon className="w-3 h-3" />
+                        <span className="font-medium">{item.label}</span>
+                      </button>
+                    ))}
+                  </nav>
+                </div>
+
+                {/* Main Content */}
+                <div className="flex-1 p-4 relative">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-lg font-bold text-orange-800">
+                      {activeTab === 'notes' && 'Smart Notes'}
+                      {activeTab === 'nova' && 'Chat with Nova'}
+                      {activeTab === 'calendar' && 'Calendar'}
+                      {activeTab === 'ideas' && 'Idea Lab'}
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <div className="relative">
+                        <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 w-3 h-3 text-orange-400" />
+                        <input
+                          type="text"
+                          placeholder="Search..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          className="pl-6 pr-2 py-1 bg-orange-50 border border-orange-200 rounded-lg text-xs focus:outline-none focus:border-orange-400"
+                        />
+                      </div>
+                      <button 
+                        onClick={() => setShowNovaChat(!showNovaChat)}
+                        className={`p-1 rounded-lg transition-colors ${showNovaChat ? 'bg-orange-200 text-orange-700' : 'hover:bg-orange-100 text-orange-600'}`}
+                      >
+                        <MessageCircle className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Content Area */}
+                  {activeTab === 'notes' && (
+                    <div className="space-y-3">
+                      <button 
+                        onClick={() => setShowNovaChat(true)}
+                        className="w-full p-3 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-xl text-white font-medium hover:scale-105 transition-transform flex items-center justify-center gap-2 text-xs"
+                      >
+                        <Plus className="w-3 h-3" />
+                        Create New Magical Note
+                      </button>
+                      
+                      <div className="grid gap-2">
+                        {demoNotes.slice(0, 2).map((note) => (
+                          <div key={note.id} className="bg-white border-2 border-orange-200 rounded-xl p-3 hover:shadow-lg transition-shadow relative group">
+                            <div className="flex items-start justify-between mb-1">
+                              <h4 className="font-semibold text-orange-800 text-xs">{note.title}</h4>
+                              <span className={`px-1 py-0.5 rounded-full text-xs font-medium ${
+                                note.status === 'completed' ? 'bg-green-100 text-green-700' :
+                                note.status === 'active' ? 'bg-blue-100 text-blue-700' :
+                                'bg-yellow-100 text-yellow-700'
+                              }`}>
+                                {note.status}
+                              </span>
+                            </div>
+                            <p className="text-gray-600 text-xs mb-2">{note.content.slice(0, 60)}...</p>
+                            
+                            <div className="flex items-center justify-between">
+                              <div className="flex gap-1">
+                                {note.tags.slice(0, 2).map((tag) => (
+                                  <span key={tag} className="px-1 py-0.5 bg-orange-100 text-orange-700 rounded-full text-xs">
+                                    {tag}
+                                  </span>
+                                ))}
+                              </div>
+                              <span className="text-xs text-gray-500">{note.timestamp}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {activeTab === 'nova' && (
+                    <div className="bg-white border-2 border-orange-200 rounded-xl p-3 h-64 flex flex-col">
+                      <div className="flex-1 space-y-2 overflow-y-auto">
+                        {messages.slice(0, 3).map((message) => (
+                          <div key={message.id} className={`flex gap-2 ${message.type === 'user' ? 'justify-end' : ''}`}>
+                            {message.type === 'nova' && (
+                              <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center animate-pulse">
+                                <span className="text-white text-xs">🧙‍♀️</span>
+                              </div>
+                            )}
+                            <div className={`rounded-xl p-2 max-w-xs animate-fade-in text-xs ${
+                              message.type === 'nova' 
+                                ? 'bg-gradient-to-r from-orange-100 to-yellow-100 border-2 border-orange-200' 
+                                : 'bg-blue-100 border-2 border-blue-200'
+                            }`}>
+                              <p className="text-gray-800">{message.content.slice(0, 40)}...</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex gap-1 pt-2 border-t border-orange-200">
+                        <input
+                          type="text"
+                          placeholder="Ask Nova anything..."
+                          value={chatInput}
+                          onChange={(e) => setChatInput(e.target.value)}
+                          onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                          className="flex-1 px-2 py-1 bg-orange-50 border border-orange-200 rounded-lg text-xs focus:outline-none focus:border-orange-400"
+                        />
+                        <button 
+                          onClick={handleSendMessage}
+                          className="px-2 py-1 bg-orange-400 text-white rounded-lg hover:bg-orange-500 transition-colors"
+                        >
+                          <Send className="w-3 h-3" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {(activeTab === 'calendar' || activeTab === 'ideas') && (
+                    <div className="flex items-center justify-center h-48 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl border-2 border-orange-200">
+                      <div className="text-center">
+                        <div className="text-4xl mb-2">✨</div>
+                        <h4 className="text-lg font-bold text-orange-800 mb-1">Coming Soon!</h4>
+                        <p className="text-orange-600 text-xs">This magical feature is being crafted</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
+            </div>
+
+            {/* Call to action arrow */}
+            <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+              <ArrowDown className="w-6 h-6 text-orange-500" />
             </div>
           </div>
         </div>
