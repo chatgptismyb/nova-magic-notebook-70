@@ -1,7 +1,6 @@
 
 import { Hero } from '@/components/Hero';
 import { MagicAppDemo } from '@/components/MagicAppDemo';
-import { TestimonialBook } from '@/components/TestimonialBook';
 import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
 import { DocsSection } from '@/components/DocsSection';
@@ -35,7 +34,6 @@ const Index = () => {
       
       <Hero />
       <MagicAppDemo />
-      <TestimonialBook />
       <SubscriptionSection />
       <FAQ />
       <DocsSection />
