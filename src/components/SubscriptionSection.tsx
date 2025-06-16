@@ -19,7 +19,8 @@ export const SubscriptionSection = () => {
       popular: false,
       gradient: "from-gray-100 to-gray-200",
       borderColor: "border-gray-300",
-      buttonStyle: "bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300"
+      buttonStyle: "bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300",
+      planKey: "free"
     },
     {
       name: "Magic Pro",
@@ -38,7 +39,8 @@ export const SubscriptionSection = () => {
       popular: true,
       gradient: "from-amber-200 to-yellow-200",
       borderColor: "border-amber-400",
-      buttonStyle: "bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white"
+      buttonStyle: "bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white",
+      planKey: "premium"
     },
     {
       name: "Enterprise",
@@ -57,7 +59,8 @@ export const SubscriptionSection = () => {
       popular: false,
       gradient: "from-purple-100 to-purple-200", 
       borderColor: "border-purple-300",
-      buttonStyle: "bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300"
+      buttonStyle: "bg-amber-100 hover:bg-amber-200 text-amber-800 border-2 border-amber-300",
+      planKey: "enterprise"
     }
   ];
 
@@ -123,9 +126,9 @@ export const SubscriptionSection = () => {
                 ))}
               </div>
               
-              {/* CTA Button - Now consistent with pricing page */}
+              {/* CTA Button - Now links to checkout with plan selection */}
               <Link
-                to={plan.name === "Free" ? "/signup" : "/subscription"}
+                to={plan.name === "Free" ? "/signup" : `/checkout?plan=${plan.planKey}&cycle=monthly`}
                 className={`w-full py-4 px-6 rounded-xl font-bold transition-all duration-300 hover:scale-105 shadow-lg text-center block ${plan.buttonStyle}`}
               >
                 {plan.cta}

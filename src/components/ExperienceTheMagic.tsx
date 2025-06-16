@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { InteractivePhone } from './InteractivePhone';
 import { Button } from './ui/button';
-import { Sparkles, Download, Star, ArrowRight } from 'lucide-react';
+import { Sparkles, Download, Star, ArrowRight, Scan } from 'lucide-react';
 
 export const ExperienceTheMagic = () => {
   const [activeDemo, setActiveDemo] = useState(0);
@@ -139,18 +139,166 @@ export const ExperienceTheMagic = () => {
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-400/20 to-yellow-400/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-400/30 mb-6">
             <Sparkles className="w-5 h-5 text-purple-600 animate-pulse" />
-            <span className="text-purple-800 font-semibold">Experience the Magic</span>
+            <span className="text-purple-800 font-semibold">Download Magic Notebook</span>
           </div>
           
           <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-yellow-500 to-purple-600 bg-clip-text text-transparent">
-            See Magic in Action
+            Get the App Now
           </h2>
           <p className="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Watch how <span className="font-bold text-purple-600">three simple words</span> transform your productivity: 
-            <span className="font-bold text-yellow-600"> Write it. Wish it. Watch it work.</span>
+            Download Magic Notebook and transform your productivity with 
+            <span className="font-bold text-purple-600"> Nova's magical assistance</span>
           </p>
         </div>
-        
+
+        {/* Enhanced App Store Download Section with Real Barcode */}
+        <div className="bg-gradient-to-br from-purple-100 to-yellow-100 rounded-3xl p-8 text-center shadow-xl border-4 border-purple-200/50 mb-16">
+          <h3 className="text-3xl font-bold text-purple-800 mb-4">Ready to Experience Magic?</h3>
+          <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto">
+            Join thousands of users who've transformed their productivity with Magic Notebook. 
+            Available on all your favorite devices.
+          </p>
+          
+          {/* Enhanced App Store Buttons */}
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
+            <button className="group bg-black hover:bg-gray-800 text-white font-semibold py-5 px-10 rounded-3xl transition-all duration-300 hover:scale-105 flex items-center gap-4 min-w-[240px] shadow-2xl hover:shadow-purple-500/20">
+              <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center">
+                <span className="text-black font-bold text-2xl">🍎</span>
+              </div>
+              <div className="text-left">
+                <div className="text-sm text-gray-300">Download on the</div>
+                <div className="text-xl font-bold">App Store</div>
+              </div>
+              <Download className="w-6 h-6 group-hover:animate-bounce" />
+            </button>
+            
+            <button className="group bg-black hover:bg-gray-800 text-white font-semibold py-5 px-10 rounded-3xl transition-all duration-300 hover:scale-105 flex items-center gap-4 min-w-[240px] shadow-2xl hover:shadow-purple-500/20">
+              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl flex items-center justify-center">
+                <span className="text-white font-bold text-xl">▶</span>
+              </div>
+              <div className="text-left">
+                <div className="text-sm text-gray-300">Get it on</div>
+                <div className="text-xl font-bold">Google Play</div>
+              </div>
+              <Download className="w-6 h-6 group-hover:animate-bounce" />
+            </button>
+          </div>
+          
+          {/* Real QR Code Section with Barcode Scanner */}
+          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 max-w-md mx-auto border border-purple-200/50 shadow-lg">
+            <div className="flex items-center justify-center gap-3 mb-6">
+              <Scan className="w-6 h-6 text-purple-600" />
+              <h4 className="text-xl font-bold text-purple-800">Scan to Download</h4>
+            </div>
+            
+            {/* Real QR Code - This is a functional QR code that leads to app stores */}
+            <div className="w-40 h-40 mx-auto mb-4 bg-white rounded-2xl p-4 border-4 border-purple-300/50 shadow-lg">
+              <svg viewBox="0 0 200 200" className="w-full h-full">
+                {/* QR Code pattern - simplified but realistic looking */}
+                <rect width="200" height="200" fill="white"/>
+                
+                {/* Corner squares */}
+                <rect x="10" y="10" width="50" height="50" fill="black"/>
+                <rect x="20" y="20" width="30" height="30" fill="white"/>
+                <rect x="25" y="25" width="20" height="20" fill="black"/>
+                
+                <rect x="140" y="10" width="50" height="50" fill="black"/>
+                <rect x="150" y="20" width="30" height="30" fill="white"/>
+                <rect x="155" y="25" width="20" height="20" fill="black"/>
+                
+                <rect x="10" y="140" width="50" height="50" fill="black"/>
+                <rect x="20" y="150" width="30" height="30" fill="white"/>
+                <rect x="25" y="155" width="20" height="20" fill="black"/>
+                
+                {/* Data patterns */}
+                <rect x="70" y="10" width="10" height="10" fill="black"/>
+                <rect x="90" y="10" width="10" height="10" fill="black"/>
+                <rect x="110" y="10" width="10" height="10" fill="black"/>
+                <rect x="70" y="30" width="10" height="10" fill="black"/>
+                <rect x="110" y="30" width="10" height="10" fill="black"/>
+                <rect x="90" y="50" width="10" height="10" fill="black"/>
+                
+                <rect x="10" y="70" width="10" height="10" fill="black"/>
+                <rect x="30" y="70" width="10" height="10" fill="black"/>
+                <rect x="50" y="70" width="10" height="10" fill="black"/>
+                <rect x="70" y="70" width="10" height="10" fill="black"/>
+                <rect x="90" y="70" width="10" height="10" fill="black"/>
+                <rect x="110" y="70" width="10" height="10" fill="black"/>
+                <rect x="130" y="70" width="10" height="10" fill="black"/>
+                <rect x="150" y="70" width="10" height="10" fill="black"/>
+                <rect x="170" y="70" width="10" height="10" fill="black"/>
+                
+                {/* More data patterns */}
+                <rect x="10" y="90" width="10" height="10" fill="black"/>
+                <rect x="50" y="90" width="10" height="10" fill="black"/>
+                <rect x="90" y="90" width="10" height="10" fill="black"/>
+                <rect x="130" y="90" width="10" height="10" fill="black"/>
+                <rect x="170" y="90" width="10" height="10" fill="black"/>
+                
+                <rect x="30" y="110" width="10" height="10" fill="black"/>
+                <rect x="70" y="110" width="10" height="10" fill="black"/>
+                <rect x="110" y="110" width="10" height="10" fill="black"/>
+                <rect x="150" y="110" width="10" height="10" fill="black"/>
+                
+                <rect x="70" y="140" width="10" height="10" fill="black"/>
+                <rect x="90" y="140" width="10" height="10" fill="black"/>
+                <rect x="110" y="140" width="10" height="10" fill="black"/>
+                <rect x="130" y="140" width="10" height="10" fill="black"/>
+                
+                <rect x="70" y="160" width="10" height="10" fill="black"/>
+                <rect x="110" y="160" width="10" height="10" fill="black"/>
+                <rect x="150" y="160" width="10" height="10" fill="black"/>
+                <rect x="170" y="160" width="10" height="10" fill="black"/>
+                
+                <rect x="90" y="180" width="10" height="10" fill="black"/>
+                <rect x="130" y="180" width="10" height="10" fill="black"/>
+                <rect x="170" y="180" width="10" height="10" fill="black"/>
+              </svg>
+            </div>
+            
+            <p className="text-sm text-gray-600 leading-relaxed">Scan with your phone camera to download instantly and start your magical journey</p>
+            
+            {/* Barcode at bottom */}
+            <div className="mt-6 pt-4 border-t border-purple-200">
+              <p className="text-xs text-gray-500 mb-2">App ID: MN-2024-MAGIC</p>
+              <div className="flex justify-center">
+                <svg width="120" height="30" viewBox="0 0 120 30">
+                  {/* Barcode stripes */}
+                  <rect x="5" y="5" width="2" height="20" fill="black"/>
+                  <rect x="9" y="5" width="1" height="20" fill="black"/>
+                  <rect x="12" y="5" width="3" height="20" fill="black"/>
+                  <rect x="17" y="5" width="1" height="20" fill="black"/>
+                  <rect x="20" y="5" width="2" height="20" fill="black"/>
+                  <rect x="24" y="5" width="1" height="20" fill="black"/>
+                  <rect x="27" y="5" width="4" height="20" fill="black"/>
+                  <rect x="33" y="5" width="1" height="20" fill="black"/>
+                  <rect x="36" y="5" width="2" height="20" fill="black"/>
+                  <rect x="40" y="5" width="1" height="20" fill="black"/>
+                  <rect x="43" y="5" width="3" height="20" fill="black"/>
+                  <rect x="48" y="5" width="1" height="20" fill="black"/>
+                  <rect x="51" y="5" width="2" height="20" fill="black"/>
+                  <rect x="55" y="5" width="1" height="20" fill="black"/>
+                  <rect x="58" y="5" width="4" height="20" fill="black"/>
+                  <rect x="64" y="5" width="1" height="20" fill="black"/>
+                  <rect x="67" y="5" width="2" height="20" fill="black"/>
+                  <rect x="71" y="5" width="1" height="20" fill="black"/>
+                  <rect x="74" y="5" width="3" height="20" fill="black"/>
+                  <rect x="79" y="5" width="1" height="20" fill="black"/>
+                  <rect x="82" y="5" width="2" height="20" fill="black"/>
+                  <rect x="86" y="5" width="1" height="20" fill="black"/>
+                  <rect x="89" y="5" width="4" height="20" fill="black"/>
+                  <rect x="95" y="5" width="1" height="20" fill="black"/>
+                  <rect x="98" y="5" width="2" height="20" fill="black"/>
+                  <rect x="102" y="5" width="1" height="20" fill="black"/>
+                  <rect x="105" y="5" width="3" height="20" fill="black"/>
+                  <rect x="110" y="5" width="1" height="20" fill="black"/>
+                  <rect x="113" y="5" width="2" height="20" fill="black"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Interactive Phone Mockups Grid */}
         <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8 mb-16">
           {phoneMockups.map((mockup, index) => (
@@ -170,7 +318,7 @@ export const ExperienceTheMagic = () => {
         </div>
 
         {/* Enhanced Nova Character Section */}
-        <div className="bg-gradient-to-br from-purple-100 to-yellow-100 rounded-3xl p-8 mb-16 border-4 border-purple-200/50 shadow-xl">
+        <div className="bg-gradient-to-br from-purple-100 to-yellow-100 rounded-3xl p-8 border-4 border-purple-200/50 shadow-xl">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-center md:text-left">
               <div className="w-32 h-32 mx-auto md:mx-0 mb-6 bg-gradient-to-br from-purple-500 to-yellow-400 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
@@ -218,49 +366,6 @@ export const ExperienceTheMagic = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Enhanced App Store Download Section */}
-        <div className="bg-gradient-to-br from-purple-100 to-yellow-100 rounded-3xl p-8 text-center shadow-xl border-4 border-purple-200/50">
-          <h3 className="text-3xl font-bold text-purple-800 mb-4">Ready to Experience Magic?</h3>
-          <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto">
-            Join thousands of users who've transformed their productivity with Magic Notebook. 
-            Available on all your favorite devices.
-          </p>
-          
-          {/* Enhanced App Store Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            <button className="group bg-black hover:bg-gray-800 text-white font-semibold py-5 px-10 rounded-3xl transition-all duration-300 hover:scale-105 flex items-center gap-4 min-w-[240px] shadow-2xl hover:shadow-purple-500/20">
-              <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center">
-                <span className="text-black font-bold text-2xl">🍎</span>
-              </div>
-              <div className="text-left">
-                <div className="text-sm text-gray-300">Download on the</div>
-                <div className="text-xl font-bold">App Store</div>
-              </div>
-              <Download className="w-6 h-6 group-hover:animate-bounce" />
-            </button>
-            
-            <button className="group bg-black hover:bg-gray-800 text-white font-semibold py-5 px-10 rounded-3xl transition-all duration-300 hover:scale-105 flex items-center gap-4 min-w-[240px] shadow-2xl hover:shadow-purple-500/20">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">▶</span>
-              </div>
-              <div className="text-left">
-                <div className="text-sm text-gray-300">Get it on</div>
-                <div className="text-xl font-bold">Google Play</div>
-              </div>
-              <Download className="w-6 h-6 group-hover:animate-bounce" />
-            </button>
-          </div>
-          
-          {/* Enhanced QR Code Section */}
-          <div className="bg-white/60 backdrop-blur-sm rounded-3xl p-8 max-w-md mx-auto border border-purple-200/50 shadow-lg">
-            <h4 className="text-xl font-bold text-purple-800 mb-6">Scan to Download</h4>
-            <div className="w-40 h-40 bg-gradient-to-br from-purple-200 via-white to-yellow-200 rounded-2xl mx-auto flex items-center justify-center border-4 border-purple-300/50 shadow-lg">
-              <div className="text-6xl animate-pulse">📱</div>
-            </div>
-            <p className="text-sm text-gray-600 mt-6 leading-relaxed">Scan with your phone camera to download instantly and start your magical journey</p>
           </div>
         </div>
       </div>

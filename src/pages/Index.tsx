@@ -1,12 +1,12 @@
 
 import { Hero } from '@/components/Hero';
-import { ExperienceTheMagic } from '@/components/ExperienceTheMagic';
 import { AppMockups } from '@/components/AppMockups';
 import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
 import { DocsSection } from '@/components/DocsSection';
 import { Footer } from '@/components/Footer';
 import { ScrollEngagement } from '@/components/ScrollEngagement';
+import { WebAppDemo } from '@/components/WebAppDemo';
 
 const Index = () => {
   return (
@@ -41,7 +41,7 @@ const Index = () => {
         <Hero />
       </div>
       <div data-scroll-section>
-        <ExperienceTheMagic />
+        <WebAppDemo />
       </div>
       <div data-scroll-section>
         <AppMockups />

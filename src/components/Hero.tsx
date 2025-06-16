@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, Star, ArrowDown, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X, Mic, Send, Wand2 } from 'lucide-react';
@@ -11,6 +12,16 @@ export const Hero = () => {
   const [activeDemo, setActiveDemo] = useState(0);
   const [typingText, setTypingText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showTimedPopup, setShowTimedPopup] = useState(false);
+
+  // Timed popup after 45 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTimedPopup(true);
+    }, 45000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const demoScreens = [
     {
@@ -186,16 +197,12 @@ export const Hero = () => {
     <>
       {/* Enhanced Interactive Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-orange-100/90 backdrop-blur-lg border-b-2 border-orange-300 shadow-lg">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
                 <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
-                  <img 
-                    src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
-                    alt="Nova" 
-                    className="w-8 h-8 rounded-full"
-                  />
+                  <span className="text-white font-bold text-lg">M</span>
                 </div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-full animate-pulse"></div>
               </div>
@@ -303,37 +310,33 @@ export const Hero = () => {
         </div>
       </div>
 
-      <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden pt-20">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+      <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 relative overflow-hidden pt-20">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           
           {/* Enhanced story-driven content */}
-          <div className="space-y-8 animate-fade-in">
+          <div className="space-y-8 animate-fade-in order-2 lg:order-1">
             {/* Logo with Nova icon */}
-            <div className="bg-orange-200 p-6 rounded-2xl shadow-lg border-l-8 border-orange-400 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105">
+            <div className="bg-orange-200 p-4 sm:p-6 rounded-2xl shadow-lg border-l-8 border-orange-400 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-2xl flex items-center justify-center shadow-lg">
-                  <img 
-                    src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
-                    alt="Nova" 
-                    className="w-12 h-12 rounded-full"
-                  />
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-lg sm:text-xl">M</span>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-orange-700">Magic Notebook</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-orange-700">Magic Notebook</h3>
                   <p className="text-orange-600 text-sm">Write it. Wish it. Watch it happen.</p>
                 </div>
               </div>
             </div>
 
             {/* Main headline sticky note */}
-            <div className="bg-yellow-100 p-8 rounded-2xl shadow-xl border-l-8 border-orange-500 transform -rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="bg-yellow-100 p-6 sm:p-8 rounded-2xl shadow-xl border-l-8 border-orange-500 transform -rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-3 bg-orange-300/50 px-4 py-2 rounded-full border border-orange-400/40">
                   <Sparkles className="w-5 h-5 text-orange-600 animate-pulse" />
                   <span className="text-orange-700 font-semibold text-sm">Write it. Wish it. Watch it happen.</span>
                 </div>
                 
-                <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-orange-600 via-yellow-600 to-orange-600 bg-clip-text text-transparent">
                     Transform Your
                   </span>
@@ -346,9 +349,9 @@ export const Hero = () => {
             </div>
 
             {/* Story sticky note */}
-            <div className="bg-orange-100 p-6 rounded-2xl shadow-lg border-l-6 border-yellow-500 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <h2 className="text-xl font-bold text-orange-800 mb-3">📖 Your Magical Journey</h2>
-              <p className="text-slate-700 leading-relaxed">
+            <div className="bg-orange-100 p-4 sm:p-6 rounded-2xl shadow-lg border-l-6 border-yellow-500 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <h2 className="text-lg sm:text-xl font-bold text-orange-800 mb-3">📖 Your Magical Journey</h2>
+              <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
                 Meet <span className="font-bold text-orange-700">Nova</span>, your AI companion who transforms 
                 scattered thoughts into organized magic. Write it. Wish it. 
                 <span className="italic text-orange-600"> Watch it happen</span>.
@@ -356,13 +359,13 @@ export const Hero = () => {
             </div>
 
             {/* Enhanced CTA sticky note */}
-            <div className="bg-gradient-to-br from-yellow-200 to-orange-200 p-6 rounded-2xl shadow-xl border-l-8 border-orange-500 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="bg-gradient-to-br from-yellow-200 to-orange-200 p-4 sm:p-6 rounded-2xl shadow-xl border-l-8 border-orange-500 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => setShowEmailSignup(true)}
-                  className="bg-gradient-to-r from-orange-600 via-yellow-500 to-orange-500 hover:from-orange-700 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden flex items-center justify-center animate-bounce"
+                  className="bg-gradient-to-r from-orange-600 via-yellow-500 to-orange-500 hover:from-orange-700 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden flex items-center justify-center text-sm sm:text-base"
                 >
-                  <Sparkles className="w-5 h-5 mr-2 group-hover:animate-spin" />
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-spin" />
                   Get Early Access
                 </button>
               </div>
@@ -374,14 +377,14 @@ export const Hero = () => {
                 <div className="flex items-center gap-3">
                   <div className="flex -space-x-2">
                     {[...Array(4)].map((_, i) => (
-                      <div key={i} className="w-8 h-8 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-full border-2 border-orange-100 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+                      <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-full border-2 border-orange-100 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
                     ))}
                   </div>
                   <span className="text-orange-700 font-medium">12,000+ magical users</span>
                 </div>
                 <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-orange-500 fill-current animate-pulse" style={{ animationDelay: `${i * 0.1}s` }} />
+                    <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 text-orange-500 fill-current animate-pulse" style={{ animationDelay: `${i * 0.1}s` }} />
                   ))}
                   <span className="ml-2 text-orange-700 font-medium">4.9/5 rating</span>
                 </div>
@@ -390,41 +393,43 @@ export const Hero = () => {
           </div>
 
           {/* Enhanced Interactive Demo with Phone Mockups */}
-          <div className="relative animate-fade-in" style={{ animationDelay: '1s' }}>
-            <div className="relative mx-auto w-96 h-96">
+          <div className="relative animate-fade-in order-1 lg:order-2" style={{ animationDelay: '1s' }}>
+            <div className="relative mx-auto w-full max-w-sm sm:max-w-md lg:max-w-lg h-96">
               
               {/* Background phones with small interactive previews */}
-              <InteractivePhone 
-                screens={phoneScreens.notes}
-                className="absolute -left-8 top-12 z-5 transform rotate-[20deg] hover:rotate-[15deg] transition-transform duration-500 hover:scale-110"
-                size="small"
-              />
+              <div className="absolute -left-4 sm:-left-8 top-12 z-5 transform rotate-[20deg] hover:rotate-[15deg] transition-transform duration-500 hover:scale-110">
+                <InteractivePhone 
+                  screens={phoneScreens.notes}
+                  size="small"
+                />
+              </div>
 
-              <InteractivePhone 
-                screens={phoneScreens.tasks}
-                className="absolute left-0 top-8 z-10 transform rotate-12 hover:rotate-6 transition-transform duration-500 hover:scale-110"
-                size="medium"
-              />
+              <div className="absolute left-0 top-8 z-10 transform rotate-12 hover:rotate-6 transition-transform duration-500 hover:scale-110">
+                <InteractivePhone 
+                  screens={phoneScreens.tasks}
+                  size="medium"
+                />
+              </div>
 
               {/* Main Center Demo Phone with larger size */}
               <div className="absolute inset-0 flex items-center justify-center z-20 transform rotate-2 hover:rotate-0 transition-transform duration-500">
                 <InteractivePhone 
                   screens={phoneScreens.nova}
-                  className=""
                   size="large"
                   showDownload={true}
                 />
               </div>
 
-              <InteractivePhone 
-                screens={phoneScreens.nova}
-                className="absolute right-0 top-8 z-10 transform -rotate-12 hover:-rotate-6 transition-transform duration-500 hover:scale-110"
-                size="medium"
-              />
+              <div className="absolute right-0 top-8 z-10 transform -rotate-12 hover:-rotate-6 transition-transform duration-500 hover:scale-110">
+                <InteractivePhone 
+                  screens={phoneScreens.nova}
+                  size="medium"
+                />
+              </div>
 
               {/* Call to action arrow */}
-              <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <ArrowDown className="w-8 h-8 text-orange-500" />
+              <div className="absolute -bottom-16 sm:-bottom-20 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <ArrowDown className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
               </div>
             </div>
           </div>
@@ -432,6 +437,11 @@ export const Hero = () => {
       </section>
 
       <EmailSignup isOpen={showEmailSignup} onClose={() => setShowEmailSignup(false)} />
+      <EmailSignup 
+        isOpen={showTimedPopup} 
+        onClose={() => setShowTimedPopup(false)}
+        isTimedPopup={true}
+      />
     </>
   );
 };

@@ -1,13 +1,28 @@
 
-import { useState } from 'react';
-import { ArrowLeft, Check, Star, Download } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { ArrowLeft, Check, Star, Download, ArrowRight } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const Checkout = () => {
+  const [searchParams] = useSearchParams();
   const [selectedPlan, setSelectedPlan] = useState('premium');
   const [billingCycle, setBillingCycle] = useState('monthly');
   const [email, setEmail] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Get plan from URL params if coming from subscription page
+  useEffect(() => {
+    const planFromUrl = searchParams.get('plan');
+    const cycleFromUrl = searchParams.get('cycle');
+    
+    if (planFromUrl && ['basic', 'premium', 'enterprise'].includes(planFromUrl)) {
+      setSelectedPlan(planFromUrl);
+    }
+    
+    if (cycleFromUrl && ['monthly', 'yearly'].includes(cycleFromUrl)) {
+      setBillingCycle(cycleFromUrl);
+    }
+  }, [searchParams]);
 
   const plans = {
     basic: {
@@ -66,13 +81,13 @@ const Checkout = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-purple-800 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-orange-100 via-yellow-50 to-orange-200 text-slate-800">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <div
             key={i}
-            className="absolute animate-pulse opacity-30"
+            className="absolute animate-pulse opacity-20"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -80,47 +95,53 @@ const Checkout = () => {
               animationDuration: `${2 + Math.random() * 2}s`
             }}
           >
-            <div className="text-yellow-300 text-xs">✨</div>
+            <div className="text-orange-400 text-lg">✨</div>
           </div>
         ))}
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 py-12">
         {/* Header */}
         <div className="mb-8">
           <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-yellow-300 hover:text-yellow-400 transition-colors mb-6"
+            to="/subscription" 
+            className="inline-flex items-center gap-2 text-orange-600 hover:text-orange-700 transition-colors mb-6 group"
           >
-            <ArrowLeft className="w-5 h-5" />
-            Back to Home
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            Back to Plans
           </Link>
           
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-amber-400 bg-clip-text text-transparent">
-              Choose Your Magic ✨
+            <div className="inline-flex items-center gap-3 bg-orange-200 p-4 rounded-2xl mb-6">
+              <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold">M</span>
+              </div>
+              <span className="text-orange-800 font-bold text-lg">Magic Notebook</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-yellow-600 bg-clip-text text-transparent">
+              Complete Your Order ✨
             </h1>
-            <p className="text-xl text-gray-300">
-              Select the perfect plan to unlock your productivity potential
+            <p className="text-xl text-orange-700">
+              You're one step away from transforming your productivity
             </p>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* Plan Selection */}
           <div className="space-y-6">
-            <div className="bg-slate-800/60 rounded-2xl border border-purple-500/30 p-6">
-              <h2 className="text-2xl font-bold text-yellow-300 mb-6">Select Your Plan</h2>
+            <div className="bg-white/80 backdrop-blur rounded-2xl border-2 border-orange-200 p-6 shadow-xl">
+              <h2 className="text-2xl font-bold text-orange-800 mb-6">Selected Plan</h2>
               
               {/* Billing Cycle Toggle */}
               <div className="mb-6">
-                <div className="flex items-center justify-center bg-slate-700/50 rounded-xl p-1">
+                <div className="flex items-center justify-center bg-orange-100 rounded-xl p-1">
                   <button
                     onClick={() => setBillingCycle('monthly')}
                     className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
                       billingCycle === 'monthly'
-                        ? 'bg-yellow-600 text-white'
-                        : 'text-gray-300 hover:text-white'
+                        ? 'bg-orange-500 text-white shadow-lg'
+                        : 'text-orange-600 hover:text-orange-800'
                     }`}
                   >
                     Monthly
@@ -129,8 +150,8 @@ const Checkout = () => {
                     onClick={() => setBillingCycle('yearly')}
                     className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
                       billingCycle === 'yearly'
-                        ? 'bg-yellow-600 text-white'
-                        : 'text-gray-300 hover:text-white'
+                        ? 'bg-orange-500 text-white shadow-lg'
+                        : 'text-orange-600 hover:text-orange-800'
                     }`}
                   >
                     Yearly
@@ -147,49 +168,62 @@ const Checkout = () => {
                   <div
                     key={key}
                     onClick={() => setSelectedPlan(key)}
-                    className={`border-2 rounded-xl p-4 cursor-pointer transition-all ${
+                    className={`border-2 rounded-xl p-4 cursor-pointer transition-all hover:scale-105 ${
                       selectedPlan === key
-                        ? 'border-yellow-500 bg-yellow-500/10'
-                        : 'border-slate-600 hover:border-slate-500'
+                        ? 'border-orange-400 bg-orange-50 shadow-lg'
+                        : 'border-orange-200 hover:border-orange-300 bg-white'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-bold text-lg">{plan.name}</h3>
+                        <h3 className="font-bold text-lg text-orange-800">{plan.name}</h3>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-bold text-yellow-300">
+                          <span className="text-2xl font-bold text-orange-600">
                             ${billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
                           </span>
-                          <span className="text-gray-400 text-sm">
+                          <span className="text-orange-500 text-sm">
                             /{billingCycle === 'monthly' ? 'month' : 'year'}
                           </span>
                         </div>
                       </div>
-                      <div className={`w-5 h-5 rounded-full border-2 ${
+                      <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
                         selectedPlan === key
-                          ? 'border-yellow-500 bg-yellow-500'
-                          : 'border-gray-400'
+                          ? 'border-orange-500 bg-orange-500'
+                          : 'border-orange-300'
                       }`}>
                         {selectedPlan === key && (
-                          <Check className="w-3 h-3 text-white m-0.5" />
+                          <Check className="w-3 h-3 text-white" />
                         )}
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+
+              <div className="mt-6 pt-4 border-t border-orange-200">
+                <Link
+                  to="/subscription"
+                  className="text-orange-600 hover:text-orange-700 text-sm flex items-center gap-2 transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Change plan or compare features
+                </Link>
+              </div>
             </div>
 
             {/* Features */}
-            <div className="bg-slate-800/60 rounded-2xl border border-purple-500/30 p-6">
-              <h3 className="text-xl font-bold text-yellow-300 mb-4">
+            <div className="bg-white/80 backdrop-blur rounded-2xl border-2 border-orange-200 p-6 shadow-xl">
+              <h3 className="text-xl font-bold text-orange-800 mb-4 flex items-center gap-2">
+                <Star className="w-5 h-5 text-yellow-500" />
                 {currentPlan.name} Features
               </h3>
               <ul className="space-y-3">
                 {currentPlan.features.map((feature, i) => (
                   <li key={i} className="flex items-center gap-3">
-                    <Star className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-                    <span className="text-gray-300">{feature}</span>
+                    <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center">
+                      <Check className="w-3 h-3 text-green-600" />
+                    </div>
+                    <span className="text-orange-700">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -197,31 +231,34 @@ const Checkout = () => {
           </div>
 
           {/* Checkout Form */}
-          <div className="bg-slate-800/60 rounded-2xl border border-purple-500/30 p-6">
-            <h2 className="text-2xl font-bold text-yellow-300 mb-6">Complete Your Order</h2>
+          <div className="bg-white/80 backdrop-blur rounded-2xl border-2 border-orange-200 p-6 shadow-xl">
+            <h2 className="text-2xl font-bold text-orange-800 mb-6">Payment Details</h2>
             
             {/* Order Summary */}
-            <div className="bg-slate-700/50 rounded-xl p-4 mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-gray-300">{currentPlan.name}</span>
-                <span className="font-bold">${currentPrice}</span>
-              </div>
-              {billingCycle === 'yearly' && savings > 0 && (
-                <div className="flex justify-between items-center text-green-400 text-sm">
-                  <span>Annual savings</span>
-                  <span>-${savings}</span>
+            <div className="bg-orange-50 rounded-xl p-4 mb-6 border border-orange-200">
+              <h4 className="font-semibold text-orange-800 mb-3">Order Summary</h4>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-orange-700">{currentPlan.name}</span>
+                  <span className="font-bold text-orange-800">${currentPrice}</span>
                 </div>
-              )}
-              <hr className="border-slate-600 my-3" />
-              <div className="flex justify-between items-center font-bold text-yellow-300">
-                <span>Total</span>
-                <span>${currentPrice}</span>
+                {billingCycle === 'yearly' && savings > 0 && (
+                  <div className="flex justify-between items-center text-green-600 text-sm">
+                    <span>Annual savings</span>
+                    <span>-${savings}</span>
+                  </div>
+                )}
+                <hr className="border-orange-200 my-3" />
+                <div className="flex justify-between items-center font-bold text-orange-800">
+                  <span>Total</span>
+                  <span>${currentPrice}</span>
+                </div>
               </div>
             </div>
 
             {/* Email Input */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-orange-800 mb-2">
                 Email Address
               </label>
               <input
@@ -229,18 +266,18 @@ const Checkout = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="your@email.com"
-                className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-yellow-500 transition-colors"
+                className="w-full px-4 py-3 bg-white border-2 border-orange-200 rounded-lg text-orange-900 placeholder-orange-400 focus:outline-none focus:border-orange-400 transition-colors"
               />
             </div>
 
             {/* Payment Info Placeholder */}
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-orange-800 mb-2">
                 Payment Information
               </label>
-              <div className="bg-slate-700/30 border-2 border-dashed border-slate-600 rounded-lg p-6 text-center">
-                <div className="text-gray-400 mb-2">Stripe payment form will appear here</div>
-                <div className="text-sm text-gray-500">Secure payment processing coming soon</div>
+              <div className="bg-orange-50 border-2 border-dashed border-orange-300 rounded-lg p-6 text-center">
+                <div className="text-orange-600 mb-2">🔒 Secure Stripe Payment</div>
+                <div className="text-sm text-orange-500">Payment form will appear here during integration</div>
               </div>
             </div>
 
@@ -248,21 +285,24 @@ const Checkout = () => {
             <button
               onClick={handleCheckout}
               disabled={!email || isProcessing}
-              className="w-full bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-700 hover:to-amber-700 disabled:from-gray-600 disabled:to-gray-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg disabled:cursor-not-allowed disabled:scale-100"
+              className="w-full bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg disabled:cursor-not-allowed disabled:scale-100 flex items-center justify-center gap-2"
             >
               {isProcessing ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  Processing...
-                </div>
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  Processing Magic...
+                </>
               ) : (
-                `Start Your Magic Journey - $${currentPrice}/${billingCycle === 'monthly' ? 'mo' : 'yr'}`
+                <>
+                  ✨ Start Your Magic Journey - ${currentPrice}/{billingCycle === 'monthly' ? 'mo' : 'yr'}
+                  <ArrowRight className="w-5 h-5" />
+                </>
               )}
             </button>
 
             {/* Trust Badges */}
             <div className="mt-6 text-center">
-              <div className="flex items-center justify-center gap-4 text-sm text-gray-400">
+              <div className="flex items-center justify-center gap-4 text-sm text-orange-600">
                 <div className="flex items-center gap-1">
                   <Download className="w-4 h-4" />
                   Instant Access
@@ -271,6 +311,12 @@ const Checkout = () => {
                 <div>30-day Money Back</div>
                 <div>•</div>
                 <div>Cancel Anytime</div>
+              </div>
+              
+              <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-green-700 text-sm font-medium">
+                  🛡️ Your payment is protected by industry-leading security
+                </p>
               </div>
             </div>
           </div>

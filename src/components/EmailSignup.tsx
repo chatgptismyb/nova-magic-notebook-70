@@ -1,169 +1,171 @@
 
 import { useState } from 'react';
+import { X, Mail, Sparkles, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { X, Mail, Star, Heart, Sparkles, Zap, Crown } from 'lucide-react';
 
 interface EmailSignupProps {
   isOpen: boolean;
   onClose: () => void;
+  isTimedPopup?: boolean;
 }
 
-export const EmailSignup = ({ isOpen, onClose }: EmailSignupProps) => {
+export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSignupProps) => {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        onClose();
-        setIsSubmitted(false);
-        setEmail('');
-      }, 2000);
-    }
+    setIsSubmitting(true);
+    
+    // Simulate email submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    // Auto close after success
+    setTimeout(() => {
+      onClose();
+      setIsSubmitted(false);
+      setEmail('');
+    }, 2000);
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
-      <div className="relative">
-        {/* Magical glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/30 to-purple-500/30 rounded-3xl blur-xl scale-110"></div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      {/* Backdrop */}
+      <div 
+        className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-fade-in"
+        onClick={onClose}
+      />
+      
+      {/* Modal */}
+      <div className="relative bg-gradient-to-br from-orange-50 to-yellow-50 rounded-3xl shadow-2xl border-4 border-orange-300 max-w-md w-full mx-4 animate-scale-in overflow-hidden">
         
-        {/* Main container */}
-        <div className="relative bg-gradient-to-br from-yellow-50 via-white to-purple-50 border-4 border-gradient-to-r from-yellow-400 to-purple-500 rounded-3xl p-8 max-w-2xl w-full shadow-2xl">
-          
+        {/* Header */}
+        <div className="relative bg-gradient-to-r from-orange-400 to-yellow-400 p-6 text-white">
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-6 right-6 text-purple-600 hover:text-purple-800 transition-colors p-2 hover:bg-purple-100 rounded-full group"
+            className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors"
           >
-            <X size={24} className="group-hover:rotate-90 transition-transform duration-300" />
+            <X className="w-5 h-5" />
           </button>
 
+          {/* Back button for timed popup */}
+          {isTimedPopup && (
+            <button
+              onClick={onClose}
+              className="absolute top-4 left-4 p-2 hover:bg-white/20 rounded-full transition-colors flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm">Back</span>
+            </button>
+          )}
+          
+          <div className="text-center pt-8">
+            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-3xl">🧙‍♀️</span>
+            </div>
+            <h2 className="text-2xl font-bold mb-2">
+              {isTimedPopup ? "Ready to Start Your Magic Journey?" : "Join the Magic Revolution!"}
+            </h2>
+            <p className="text-orange-100">
+              {isTimedPopup 
+                ? "Get early access to Magic Notebook and transform your productivity forever!" 
+                : "Be among the first to experience the future of productivity"
+              }
+            </p>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="p-6">
           {!isSubmitted ? (
-            <>
-              {/* Header */}
-              <div className="text-center mb-8">
-                <div className="relative inline-block mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-purple-500 rounded-full flex items-center justify-center mb-4 mx-auto relative">
-                    <Crown className="w-10 h-10 text-white" />
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center animate-pulse">
-                      <Sparkles className="w-4 h-4 text-purple-600" />
-                    </div>
-                  </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-orange-800 mb-2">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 pl-10 bg-white border-2 border-orange-200 rounded-xl text-orange-900 placeholder-orange-400 focus:outline-none focus:border-orange-500 transition-colors"
+                    required
+                    disabled={isSubmitting}
+                  />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-400" />
                 </div>
-                
-                <h2 className="text-4xl font-bold bg-gradient-to-r from-purple-600 via-yellow-600 to-purple-600 bg-clip-text text-transparent mb-4">
-                  Join the Magic Circle
-                </h2>
-                <p className="text-xl text-gray-700 mb-6">
-                  Be among the first wizards to experience the future of productivity
+              </div>
+
+              <Button
+                type="submit"
+                disabled={isSubmitting || !email}
+                className="w-full bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                {isSubmitting ? (
+                  <div className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Casting Spell...
+                  </div>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-5 h-5" />
+                    {isTimedPopup ? "Get Early Access" : "Join the Waitlist"}
+                  </div>
+                )}
+              </Button>
+
+              <div className="text-center">
+                <p className="text-xs text-orange-600">
+                  🔒 We respect your privacy. No spam, just magic updates.
                 </p>
               </div>
-
-              {/* Benefits grid */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 p-4 rounded-2xl border-2 border-yellow-300 hover:scale-105 transition-transform">
-                  <Heart className="w-6 h-6 text-red-500 mb-2" />
-                  <h4 className="font-bold text-yellow-800 mb-1">Early Access</h4>
-                  <p className="text-yellow-700 text-sm">First to experience magic</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-purple-100 to-purple-200 p-4 rounded-2xl border-2 border-purple-300 hover:scale-105 transition-transform">
-                  <Zap className="w-6 h-6 text-purple-600 mb-2" />
-                  <h4 className="font-bold text-purple-800 mb-1">VIP Updates</h4>
-                  <p className="text-purple-700 text-sm">Exclusive magical news</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-yellow-100 to-purple-100 p-4 rounded-2xl border-2 border-amber-300 hover:scale-105 transition-transform">
-                  <Star className="w-6 h-6 text-amber-500 mb-2" />
-                  <h4 className="font-bold text-amber-800 mb-1">Special Perks</h4>
-                  <p className="text-amber-700 text-sm">Wizard-only benefits</p>
-                </div>
-                
-                <div className="bg-gradient-to-br from-purple-100 to-yellow-100 p-4 rounded-2xl border-2 border-purple-300 hover:scale-105 transition-transform">
-                  <Mail className="w-6 h-6 text-blue-500 mb-2" />
-                  <h4 className="font-bold text-blue-800 mb-1">Premium Support</h4>
-                  <p className="text-blue-700 text-sm">Direct line to magic</p>
-                </div>
-              </div>
-
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-purple-500/20 rounded-2xl blur"></div>
-                  <div className="relative flex">
-                    <div className="relative flex-1">
-                      <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-500 w-5 h-5 z-10" />
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your magical email address"
-                        className="w-full bg-white/90 border-3 border-purple-300 rounded-2xl pl-12 pr-4 py-4 text-purple-800 placeholder-purple-400 focus:outline-none focus:border-yellow-400 focus:ring-4 focus:ring-yellow-300/20 transition-all duration-300 text-lg"
-                        required
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      className="ml-4 bg-gradient-to-r from-purple-600 via-yellow-500 to-purple-600 hover:from-purple-700 hover:via-yellow-600 hover:to-purple-700 text-white font-bold px-8 py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/25 text-lg"
-                    >
-                      <Sparkles className="w-5 h-5 mr-2" />
-                      Join Magic
-                    </Button>
-                  </div>
-                </div>
-              </form>
-
-              {/* Footer */}
-              <div className="mt-8 text-center">
-                <div className="bg-gradient-to-r from-yellow-100 to-purple-100 p-4 rounded-xl border border-purple-200">
-                  <div className="flex items-center justify-center gap-6 text-sm text-gray-600 mb-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <span>12,000+ wizards joined</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                      <span>Launching Soon</span>
-                    </div>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    No spam, just pure magic. Unsubscribe anytime with a simple spell.
-                  </p>
-                </div>
-              </div>
-            </>
+            </form>
           ) : (
-            <div className="text-center py-8">
-              <div className="relative inline-block mb-6">
-                <div className="w-24 h-24 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto relative">
-                  <span className="text-4xl">🎉</span>
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-300 rounded-full flex items-center justify-center animate-bounce">
-                    <Star className="w-4 h-4 text-green-600 fill-current" />
-                  </div>
-                </div>
+            <div className="text-center space-y-4 py-4">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+                <span className="text-3xl">✨</span>
               </div>
-              
-              <h3 className="text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">
-                Welcome to the Circle!
-              </h3>
-              <p className="text-xl text-gray-700 leading-relaxed mb-6">
-                Your magical journey begins soon! Check your email for confirmation 
-                and prepare for the most enchanting productivity experience ever created.
+              <h3 className="text-xl font-bold text-orange-800">Magic Activated!</h3>
+              <p className="text-orange-700">
+                Welcome to the future of productivity. We'll keep you updated on your magical journey!
               </p>
-              <div className="bg-gradient-to-r from-green-100 to-emerald-100 p-4 rounded-xl border-2 border-green-300 inline-block">
-                <div className="flex items-center gap-3 text-green-700">
-                  <Crown className="w-6 h-6 text-green-600" />
-                  <span className="font-bold text-lg">You're wizard #12,248!</span>
-                </div>
-              </div>
             </div>
           )}
         </div>
+
+        {/* Features preview */}
+        {!isSubmitted && (
+          <div className="bg-orange-100/50 p-4 border-t border-orange-200">
+            <h4 className="font-semibold text-orange-800 mb-3 text-center">What you'll get:</h4>
+            <div className="grid grid-cols-2 gap-3 text-sm">
+              <div className="flex items-center gap-2">
+                <span className="text-orange-500">🎯</span>
+                <span className="text-orange-700">Early access</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-orange-500">✨</span>
+                <span className="text-orange-700">Premium features</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-orange-500">🎁</span>
+                <span className="text-orange-700">Special discount</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-orange-500">📱</span>
+                <span className="text-orange-700">Mobile & web</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
