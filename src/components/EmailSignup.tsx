@@ -71,13 +71,10 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
               <span className="text-3xl">🧙‍♀️</span>
             </div>
             <h2 className="text-2xl font-bold mb-2">
-              {isTimedPopup ? "Ready to Start Your Magic Journey?" : "Join the Magic Revolution!"}
+              Our App is Launching Soon!
             </h2>
             <p className="text-orange-100">
-              {isTimedPopup 
-                ? "Get early access to Magic Notebook and transform your productivity forever!" 
-                : "Be among the first to experience the future of productivity"
-              }
+              Subscribe today for release announcements and exclusive content
             </p>
           </div>
         </div>
@@ -113,19 +110,19 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Casting Spell...
+                    Adding You to the List...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5" />
-                    {isTimedPopup ? "Get Early Access" : "Join the Waitlist"}
+                    Get Launch Updates
                   </div>
                 )}
               </Button>
 
               <div className="text-center">
                 <p className="text-xs text-orange-600">
-                  🔒 We respect your privacy. No spam, just magic updates.
+                  🔒 We respect your privacy. No spam, just launch updates and exclusive content.
                 </p>
               </div>
             </form>
@@ -134,9 +131,9 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-3xl">✨</span>
               </div>
-              <h3 className="text-xl font-bold text-orange-800">Magic Activated!</h3>
+              <h3 className="text-xl font-bold text-orange-800">You're All Set!</h3>
               <p className="text-orange-700">
-                Welcome to the future of productivity. We'll keep you updated on your magical journey!
+                We'll keep you updated on our launch and send you exclusive early access content!
               </p>
             </div>
           )}
@@ -148,16 +145,16 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
             <h4 className="font-semibold text-orange-800 mb-3 text-center">What you'll get:</h4>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="flex items-center gap-2">
-                <span className="text-orange-500">🎯</span>
+                <span className="text-orange-500">🚀</span>
+                <span className="text-orange-700">Launch updates</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-orange-500">⭐</span>
                 <span className="text-orange-700">Early access</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-orange-500">✨</span>
-                <span className="text-orange-700">Premium features</span>
-              </div>
-              <div className="flex items-center gap-2">
                 <span className="text-orange-500">🎁</span>
-                <span className="text-orange-700">Special discount</span>
+                <span className="text-orange-700">Exclusive content</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-orange-500">📱</span>

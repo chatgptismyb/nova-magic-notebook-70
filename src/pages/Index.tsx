@@ -7,6 +7,7 @@ import { DocsSection } from '@/components/DocsSection';
 import { Footer } from '@/components/Footer';
 import { ScrollEngagement } from '@/components/ScrollEngagement';
 import { WatchNovaInAction } from '@/components/WatchNovaInAction';
+import { NovaCompanion } from '@/components/NovaCompanion';
 
 const Index = () => {
   return (
@@ -36,6 +37,9 @@ const Index = () => {
       
       {/* Scroll Engagement Layer */}
       <ScrollEngagement />
+      
+      {/* Nova Companion - Floating Chat Bubble */}
+      <NovaCompanion />
       
       <div data-scroll-section>
         <Hero />

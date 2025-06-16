@@ -1,12 +1,10 @@
 
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Sparkles, Download, Play, MessageCircle, X, Wand2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Play } from 'lucide-react';
 import { InteractivePhone } from '@/components/InteractivePhone';
 
 export const WatchNovaInAction = () => {
   const [activeMockupIndex, setActiveMockupIndex] = useState(1);
-  const [showNovaBubble, setShowNovaBubble] = useState(false);
-  const [notePopups, setNotePopups] = useState<Array<{id: number, content: string, x: number, y: number}>>([]);
 
   const phoneMockups = [
     {
@@ -51,51 +49,12 @@ export const WatchNovaInAction = () => {
     }
   ];
 
-  const noteContents = [
-    "✨ Transform your ideas instantly!",
-    "🚀 Boost productivity by 300%",
-    "🧙‍♀️ Nova is crafting your perfect workflow",
-    "💡 Smart suggestions incoming...",
-    "⚡ Automating your tasks now",
-    "🎯 Goals aligned with your vision"
-  ];
-
   // Auto-cycle phone mockups
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveMockupIndex((prev) => (prev + 1) % phoneMockups.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
-
-  // Show Nova bubble periodically
-  useEffect(() => {
-    const bubbleInterval = setInterval(() => {
-      setShowNovaBubble(true);
-      setTimeout(() => setShowNovaBubble(false), 3000);
-    }, 8000);
-    return () => clearInterval(bubbleInterval);
-  }, []);
-
-  // Generate note popups periodically
-  useEffect(() => {
-    const noteInterval = setInterval(() => {
-      const newNote = {
-        id: Date.now(),
-        content: noteContents[Math.floor(Math.random() * noteContents.length)],
-        x: Math.random() * 80 + 10, // 10% to 90% from left
-        y: Math.random() * 60 + 20  // 20% to 80% from top
-      };
-      
-      setNotePopups(prev => [...prev.slice(-2), newNote]); // Keep max 3 notes
-      
-      // Remove note after 4 seconds
-      setTimeout(() => {
-        setNotePopups(prev => prev.filter(note => note.id !== newNote.id));
-      }, 4000);
-    }, 3000);
-    
-    return () => clearInterval(noteInterval);
   }, []);
 
   const nextMockup = () => {
@@ -144,40 +103,6 @@ export const WatchNovaInAction = () => {
 
         {/* Phone Mockups Showcase */}
         <div className="relative">
-          {/* Animated Nova Chat Bubble */}
-          {showNovaBubble && (
-            <div className="absolute top-10 right-10 z-30 animate-scale-in">
-              <div className="bg-gradient-to-r from-orange-400 to-yellow-400 text-white p-4 rounded-2xl shadow-2xl border-4 border-orange-300 max-w-xs">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                    <span className="text-orange-600 text-lg">🧙‍♀️</span>
-                  </div>
-                  <span className="font-bold">Nova</span>
-                </div>
-                <p className="text-sm">I'm actively organizing your notes and creating intelligent workflows! ✨</p>
-                <div className="absolute bottom-0 left-8 w-0 h-0 border-l-8 border-r-8 border-t-8 border-l-transparent border-r-transparent border-t-orange-400"></div>
-              </div>
-            </div>
-          )}
-
-          {/* Note Popups */}
-          {notePopups.map((note) => (
-            <div
-              key={note.id}
-              className="absolute z-20 animate-fade-in pointer-events-none"
-              style={{
-                left: `${note.x}%`,
-                top: `${note.y}%`,
-                transform: 'translate(-50%, -50%)'
-              }}
-            >
-              <div className="bg-yellow-200 border-2 border-orange-300 p-3 rounded-xl shadow-lg transform rotate-3 hover:rotate-0 transition-transform">
-                <p className="text-orange-800 font-medium text-sm whitespace-nowrap">{note.content}</p>
-                <div className="absolute -bottom-1 left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-yellow-200"></div>
-              </div>
-            </div>
-          ))}
-
           {/* Phone Collection Display */}
           <div className="relative mx-auto w-full max-w-4xl h-[600px]">
             
@@ -237,7 +162,7 @@ export const WatchNovaInAction = () => {
                     <InteractivePhone 
                       screens={mockup.screens}
                       size={isActive ? "large" : "medium"}
-                      showDownload={isActive}
+                      showDownload={false}
                       className="drop-shadow-2xl"
                     />
                     

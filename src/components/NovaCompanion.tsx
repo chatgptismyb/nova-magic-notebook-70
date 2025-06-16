@@ -16,7 +16,7 @@ export const NovaCompanion = () => {
     "Let me organize your chaos! 🧠", 
     "Want magical productivity? 🌟",
     "I can turn notes into actions! 🪄",
-    "Shall we create some magic? 💫"
+    "Our app is launching soon! 🚀"
   ];
 
   useEffect(() => {
@@ -68,13 +68,13 @@ export const NovaCompanion = () => {
               </div>
               <h3 className="text-xl font-bold text-amber-800 mb-3">Meet Nova!</h3>
               <p className="text-sm text-amber-700 mb-4 leading-relaxed">
-                I'm your AI productivity companion. I turn your messy notes into organized magic, 
+                I'm your AI productivity companion. Our app is launching soon and will turn your messy notes into organized magic, 
                 automate your tasks, and help you achieve your dreams effortlessly.
               </p>
               
               <div className="bg-amber-50 p-4 rounded-2xl border-2 border-yellow-300 mb-4">
                 <p className="text-xs text-amber-600 font-medium">
-                  💡 Just write "Schedule my morning routine" and watch the magic happen!
+                  🚀 Be first to know when our mobile app launches!
                 </p>
               </div>
               
@@ -86,7 +86,7 @@ export const NovaCompanion = () => {
                 className="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg flex items-center justify-center gap-2"
               >
                 <Mail className="w-4 h-4" />
-                Start My Magic Journey
+                Get Launch Updates
               </button>
             </div>
             
@@ -96,7 +96,7 @@ export const NovaCompanion = () => {
         </div>
       )}
       
-      {/* Simple Nova Avatar */}
+      {/* Nova Avatar - Floating Chat Bubble */}
       <div className="relative animate-float-slow">
         <button
           onClick={handleNovaClick}
