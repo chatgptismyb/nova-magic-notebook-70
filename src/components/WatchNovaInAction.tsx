@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Sparkles, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Sparkles, Play, ArrowDown } from 'lucide-react';
 import { InteractivePhone } from '@/components/InteractivePhone';
 
 export const WatchNovaInAction = () => {
@@ -101,7 +100,7 @@ export const WatchNovaInAction = () => {
           </p>
         </div>
 
-        {/* Phone Mockups Showcase */}
+        {/* Enhanced Phone Mockups Showcase with improved scrolling */}
         <div className="relative">
           {/* Phone Collection Display */}
           <div className="relative mx-auto w-full max-w-4xl h-[600px]">
@@ -137,7 +136,7 @@ export const WatchNovaInAction = () => {
               </button>
             </div>
 
-            {/* Phone Display */}
+            {/* Enhanced Phone Display with better scrolling */}
             <div className="flex items-center justify-center h-full relative">
               {phoneMockups.map((mockup, index) => {
                 const offset = index - activeMockupIndex;
@@ -181,10 +180,18 @@ export const WatchNovaInAction = () => {
                 );
               })}
             </div>
+
+            {/* Enhanced scroll guidance arrows */}
+            <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+              <div className="text-orange-600 text-sm font-medium mb-2">Scroll to explore more</div>
+              <ArrowDown className="w-6 h-6 text-orange-500" />
+              <ArrowDown className="w-4 h-4 text-orange-400 -mt-2" />
+              <ArrowDown className="w-3 h-3 text-orange-300 -mt-1" />
+            </div>
           </div>
 
-          {/* Coming Soon Banner */}
-          <div className="text-center mt-16">
+          {/* Updated Coming Soon Banner with modern styling */}
+          <div className="text-center mt-24">
             <div className="bg-gradient-to-r from-orange-200 to-yellow-200 p-8 rounded-3xl border-4 border-orange-300 shadow-xl max-w-2xl mx-auto">
               <div className="flex items-center justify-center gap-4 mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-2xl flex items-center justify-center animate-pulse">

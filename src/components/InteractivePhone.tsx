@@ -1,5 +1,4 @@
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Download } from 'lucide-react';
 
 interface InteractivePhoneProps {
@@ -23,6 +22,14 @@ export const InteractivePhone = ({
 }: InteractivePhoneProps) => {
   const [activeScreen, setActiveScreen] = useState(0);
 
+  // Auto-cycle through screens for better demonstration
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveScreen((prev) => (prev + 1) % screens.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [screens.length]);
+
   const sizeClasses = {
     small: 'w-40 h-72',
     medium: 'w-56 h-96',
@@ -44,7 +51,7 @@ export const InteractivePhone = ({
         {/* iPhone outer frame */}
         <div className="absolute inset-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-[2.5rem] border border-slate-700">
           
-          {/* Screen with oriole yellow accents */}
+          {/* Screen with enhanced scrolling animation */}
           <div className="absolute inset-3 bg-gradient-to-br from-slate-900 via-orange-950 to-slate-900 rounded-[2rem] overflow-hidden transition-all duration-500 relative">
             
             {/* Dynamic notch */}
@@ -73,7 +80,7 @@ export const InteractivePhone = ({
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
                   <img 
-                    src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
+                    src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
                     alt="Nova" 
                     className="w-8 h-8 rounded-full"
                   />
@@ -85,99 +92,40 @@ export const InteractivePhone = ({
               </div>
             </div>
             
-            {/* Main Content Area */}
+            {/* Enhanced Main Content Area with smooth transitions */}
             <div className="relative z-10 px-6 flex-1 flex flex-col">
-              {/* Welcome message */}
-              {activeScreen === 0 && (
-                <div className="text-center mb-6">
-                  <div className="w-20 h-20 mx-auto mb-4 relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-full animate-pulse opacity-30"></div>
-                    <div className="relative w-full h-full bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center shadow-lg">
-                      <img 
-                        src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
-                        alt="Nova" 
-                        className="w-16 h-16 rounded-full"
-                      />
+              {/* Screen transition container */}
+              <div className="relative overflow-hidden rounded-2xl">
+                <div 
+                  className="flex transition-transform duration-700 ease-in-out"
+                  style={{ transform: `translateX(-${activeScreen * 100}%)` }}
+                >
+                  {screens.map((screen, index) => (
+                    <div key={index} className="w-full flex-shrink-0 p-4">
+                      <div className={`bg-gradient-to-br ${screen.color} rounded-2xl p-6 min-h-[200px] flex flex-col justify-center items-center text-center border-2 border-white/20 shadow-lg`}>
+                        <div className="text-4xl mb-4 animate-bounce">{screen.icon}</div>
+                        <h3 className="text-xl font-bold text-gray-800 mb-2">{screen.title}</h3>
+                        <p className="text-gray-700 text-sm mb-3">{screen.content}</p>
+                        <p className="text-xs text-gray-600 italic">{screen.description}</p>
+                      </div>
                     </div>
-                    <div className="absolute -top-2 -right-2 text-2xl animate-bounce">✨</div>
-                  </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Good morning!</h3>
-                  <p className="text-orange-300 text-sm mb-4">What would you like to do?</p>
-                  
-                  <div className="bg-gradient-to-r from-orange-400 to-yellow-500 rounded-2xl p-4 mb-4 shadow-lg">
-                    <span className="text-orange-900 font-bold text-lg">+ New Spell</span>
-                  </div>
+                  ))}
                 </div>
-              )}
+              </div>
               
-              {/* Task/Spell Cards */}
-              <div className="space-y-3 flex-1">
-                {activeScreen === 1 && (
-                  <>
-                    <div className="bg-gradient-to-r from-yellow-300 to-orange-400 rounded-2xl p-4 flex items-center justify-between shadow-lg">
-                      <div>
-                        <h4 className="font-bold text-orange-900 text-base">Schedule a dentist appointment</h4>
-                        <span className="text-orange-700 text-sm">To-Do</span>
-                      </div>
-                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                        <img 
-                          src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
-                          alt="Nova" 
-                          className="w-6 h-6 rounded-full"
-                        />
-                      </div>
-                    </div>
-                    
-                    <div className="bg-gradient-to-r from-orange-400 to-yellow-500 rounded-2xl p-4 text-center shadow-lg">
-                      <span className="text-white font-medium">Remind me to water the plants every morning</span>
-                    </div>
-                    
-                    <div className="bg-gradient-to-r from-blue-300 to-orange-400 rounded-2xl p-4 flex items-center justify-between shadow-lg">
-                      <div>
-                        <h4 className="font-bold text-orange-900 text-base">I felt overwhelmed at work today</h4>
-                        <span className="text-orange-700 text-sm">Feeling</span>
-                      </div>
-                      <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-                        <img 
-                          src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
-                          alt="Nova" 
-                          className="w-6 h-6 rounded-full"
-                        />
-                      </div>
-                    </div>
-                  </>
-                )}
-                
-                {activeScreen === 2 && (
-                  <>
-                    <div className="bg-gradient-to-r from-yellow-300 to-orange-400 rounded-2xl p-4 shadow-lg">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
-                          <img 
-                            src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
-                            alt="Nova" 
-                            className="w-6 h-6 rounded-full"
-                          />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-orange-900">Remind me to water the plants every morning</h4>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-white/80 rounded-xl p-3 mb-3">
-                        <span className="text-orange-900 font-medium">1. Sure!</span>
-                      </div>
-                      
-                      <div className="bg-white/80 rounded-xl p-3 mb-3">
-                        <span className="text-orange-900 font-medium">2. Create a to-do for this task</span>
-                      </div>
-                      
-                      <div className="bg-white/80 rounded-xl p-3">
-                        <span className="text-orange-900 font-medium">3. Set it to repeat daily</span>
-                      </div>
-                    </div>
-                  </>
-                )}
+              {/* Enhanced Navigation indicators */}
+              <div className="mt-6 flex justify-center gap-2">
+                {screens.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveScreen(i)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      i === activeScreen 
+                        ? 'bg-orange-400 scale-125 shadow-lg' 
+                        : 'bg-white/30 hover:bg-white/50'
+                    }`}
+                  />
+                ))}
               </div>
               
               {/* Bottom Navigation Bar */}
@@ -197,7 +145,7 @@ export const InteractivePhone = ({
                 <div className="flex flex-col items-center">
                   <div className="w-6 h-6 mb-1">
                     <img 
-                      src="/lovable-uploads/be91958b-2280-433a-a64a-5e34429b27ea.png" 
+                      src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
                       alt="Nova" 
                       className="w-6 h-6 rounded-full"
                     />
@@ -217,20 +165,6 @@ export const InteractivePhone = ({
                   <ChevronLeft className="w-5 h-5 text-white" />
                 </button>
                 
-                <div className="flex gap-2">
-                  {screens.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={(e) => { e.stopPropagation(); setActiveScreen(i); }}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        i === activeScreen 
-                          ? 'bg-orange-400 scale-125 shadow-lg' 
-                          : 'bg-white/30 hover:bg-white/50'
-                      }`}
-                    />
-                  ))}
-                </div>
-                
                 <button 
                   onClick={(e) => { e.stopPropagation(); nextScreen(); }}
                   className="w-10 h-10 bg-orange-500/30 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-orange-400/40 transition-colors border border-orange-400/40 shadow-lg"
@@ -240,9 +174,9 @@ export const InteractivePhone = ({
               </div>
             )}
             
-            {/* Magical particles */}
+            {/* Enhanced magical particles */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              {[...Array(8)].map((_, i) => (
+              {[...Array(12)].map((_, i) => (
                 <div
                   key={i}
                   className="absolute animate-ping opacity-30"

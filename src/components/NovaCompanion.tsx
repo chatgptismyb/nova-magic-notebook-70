@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { X, Mail, Sparkles } from 'lucide-react';
+import { X, Mail, Sparkles, ArrowLeft } from 'lucide-react';
 import { EmailSignup } from '@/components/EmailSignup';
 
 export const NovaCompanion = () => {
@@ -64,7 +63,11 @@ export const NovaCompanion = () => {
             
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-amber-300 to-yellow-300 rounded-2xl flex items-center justify-center">
-                <Sparkles className="w-8 h-8 text-amber-700" />
+                <img 
+                  src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                  alt="Nova" 
+                  className="w-12 h-12 rounded-xl"
+                />
               </div>
               <h3 className="text-xl font-bold text-amber-800 mb-3">Meet Nova!</h3>
               <p className="text-sm text-amber-700 mb-4 leading-relaxed">
@@ -96,14 +99,14 @@ export const NovaCompanion = () => {
         </div>
       )}
       
-      {/* Nova Avatar - Floating Chat Bubble */}
+      {/* Nova Avatar - Updated with new image */}
       <div className="relative animate-float-slow">
         <button
           onClick={handleNovaClick}
           className="group relative w-20 h-20 bg-gradient-to-br from-yellow-300 via-amber-200 to-yellow-300 rounded-2xl flex items-center justify-center shadow-xl hover:shadow-amber-500/50 transition-all duration-500 hover:scale-110 overflow-hidden border-4 border-amber-400 hover:border-amber-500 transform rotate-2 hover:rotate-0 cursor-pointer"
         >
           
-          {/* Nova's picture */}
+          {/* Nova's updated picture */}
           <div className={`relative z-10 w-16 h-16 rounded-xl overflow-hidden border-3 border-yellow-300 bg-gradient-to-br from-yellow-100 to-amber-100 shadow-inner transition-all duration-300 ${
             isGlowing ? 'shadow-lg shadow-amber-400/60' : ''
           }`}>

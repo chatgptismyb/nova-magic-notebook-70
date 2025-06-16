@@ -1,12 +1,10 @@
-
 import { Hero } from '@/components/Hero';
-import { AppMockups } from '@/components/AppMockups';
+import { WatchNovaInAction } from '@/components/WatchNovaInAction';
 import { SubscriptionSection } from '@/components/SubscriptionSection';
 import { FAQ } from '@/components/FAQ';
 import { DocsSection } from '@/components/DocsSection';
 import { Footer } from '@/components/Footer';
 import { ScrollEngagement } from '@/components/ScrollEngagement';
-import { WatchNovaInAction } from '@/components/WatchNovaInAction';
 import { NovaCompanion } from '@/components/NovaCompanion';
 
 const Index = () => {
@@ -46,9 +44,6 @@ const Index = () => {
       </div>
       <div data-scroll-section>
         <WatchNovaInAction />
-      </div>
-      <div data-scroll-section>
-        <AppMockups />
       </div>
       <div data-scroll-section>
         <SubscriptionSection />

@@ -1,14 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, Star, ArrowDown, Users, BookOpen, Sparkles, Calendar, Lightbulb, FileText, Menu, X, Mic, Send, Wand2, ChevronLeft, ChevronRight, Maximize2, Plus, Search, Settings, Bell, User, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { EmailSignup } from '@/components/EmailSignup';
 
 export const Hero = () => {
-  const [showEmailSignup, setShowEmailSignup] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [showTimedPopup, setShowTimedPopup] = useState(false);
   const [activeTab, setActiveTab] = useState('notes');
   const [searchQuery, setSearchQuery] = useState('');
   const [showNovaChat, setShowNovaChat] = useState(false);
@@ -21,15 +17,6 @@ export const Hero = () => {
       timestamp: new Date().toLocaleTimeString()
     }
   ]);
-
-  // Timed popup after 45 seconds
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowTimedPopup(true);
-    }, 45000);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const demoNotes = [
     {
@@ -132,16 +119,17 @@ export const Hero = () => {
               <Link to="/login" className="text-orange-700 hover:text-orange-900 font-medium transition-all duration-300 hover:scale-105">
                 Login
               </Link>
-              <button
-                onClick={() => setShowEmailSignup(true)}
+              {/* Updated Try Now Button */}
+              <Link
+                to="/showcase"
                 className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 group-hover:animate-spin" />
-                  Join Early
+                  Try Now
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </button>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -199,12 +187,13 @@ export const Hero = () => {
             
             <div className="mt-8 p-4 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-xl">
               <h3 className="font-bold text-orange-800 mb-2">Ready to start?</h3>
-              <button 
-                onClick={() => { setSidebarOpen(false); setShowEmailSignup(true); }}
+              <Link 
+                to="/showcase"
+                onClick={() => setSidebarOpen(false)}
                 className="block w-full bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-105"
               >
-                Join Early Access
-              </button>
+                Try Now
+              </Link>
             </div>
           </div>
         </div>
@@ -213,7 +202,7 @@ export const Hero = () => {
       <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 relative overflow-hidden pt-20">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
           
-          {/* Enhanced story-driven content */}
+          {/* Enhanced story-driven content with updated prompts */}
           <div className="space-y-8 animate-fade-in order-2 lg:order-1">
             {/* Logo with Nova icon */}
             <div className="bg-orange-200 p-4 sm:p-6 rounded-2xl shadow-lg border-l-8 border-orange-400 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105">
@@ -228,23 +217,26 @@ export const Hero = () => {
               </div>
             </div>
 
-            {/* Main headline sticky note */}
+            {/* Updated Main headline sticky note with new prompt */}
             <div className="bg-yellow-100 p-6 sm:p-8 rounded-2xl shadow-xl border-l-8 border-orange-500 transform -rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-3 bg-orange-300/50 px-4 py-2 rounded-full border border-orange-400/40">
                   <Sparkles className="w-5 h-5 text-orange-600 animate-pulse" />
-                  <span className="text-orange-700 font-semibold text-sm">Write it. Wish it. Watch it happen.</span>
+                  <span className="text-orange-700 font-semibold text-sm">Turn Your Thoughts into Action</span>
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
                   <span className="bg-gradient-to-r from-orange-600 via-yellow-600 to-orange-600 bg-clip-text text-transparent">
-                    Transform Your
+                    Where Great Ideas
                   </span>
                   <br />
-                  <span className="text-slate-800">Notes Into</span>
-                  <br />
-                  <span className="text-orange-600">Magic</span>
+                  <span className="text-slate-800">Take Shape</span>
                 </h1>
+                
+                {/* Updated prompt */}
+                <p className="text-lg text-slate-700 leading-relaxed">
+                  Describe your idea, and watch the Magic Notebook bring it to life.
+                </p>
               </div>
             </div>
 
@@ -253,21 +245,20 @@ export const Hero = () => {
               <h2 className="text-lg sm:text-xl font-bold text-orange-800 mb-3">📖 Your Magical Journey</h2>
               <p className="text-slate-700 leading-relaxed text-sm sm:text-base">
                 Meet <span className="font-bold text-orange-700">Nova</span>, your AI companion who transforms 
-                scattered thoughts into organized magic. Write it. Wish it. 
-                <span className="italic text-orange-600"> Watch it happen</span>.
+                scattered thoughts into organized magic. Just enter a simple prompt. Our AI will help you brainstorm, outline, and structure your next big project.
               </p>
             </div>
 
-            {/* Enhanced CTA sticky note */}
+            {/* Enhanced CTA sticky note with Try Now button */}
             <div className="bg-gradient-to-br from-yellow-200 to-orange-200 p-4 sm:p-6 rounded-2xl shadow-xl border-l-8 border-orange-500 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               <div className="flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setShowEmailSignup(true)}
+                <Link
+                  to="/showcase"
                   className="bg-gradient-to-r from-orange-600 via-yellow-500 to-orange-500 hover:from-orange-700 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden flex items-center justify-center text-sm sm:text-base"
                 >
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-spin" />
-                  Join Early Access
-                </button>
+                  Try Now
+                </Link>
               </div>
             </div>
 
@@ -427,7 +418,11 @@ export const Hero = () => {
                           <div key={message.id} className={`flex gap-2 ${message.type === 'user' ? 'justify-end' : ''}`}>
                             {message.type === 'nova' && (
                               <div className="w-6 h-6 bg-gradient-to-br from-orange-400 to-yellow-500 rounded-full flex items-center justify-center animate-pulse">
-                                <span className="text-white text-xs">🧙‍♀️</span>
+                                <img 
+                                  src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                                  alt="Nova" 
+                                  className="w-4 h-4 rounded-full"
+                                />
                               </div>
                             )}
                             <div className={`rounded-xl p-2 max-w-xs animate-fade-in text-xs ${
@@ -479,13 +474,6 @@ export const Hero = () => {
           </div>
         </div>
       </section>
-
-      <EmailSignup isOpen={showEmailSignup} onClose={() => setShowEmailSignup(false)} />
-      <EmailSignup 
-        isOpen={showTimedPopup} 
-        onClose={() => setShowTimedPopup(false)}
-        isTimedPopup={true}
-      />
     </>
   );
 };
