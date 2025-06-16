@@ -11,29 +11,29 @@ export const Hero = () => {
 
   const phoneScreens = {
     notes: [
-      { title: "Smart Notes", icon: "📝", color: "from-blue-100 to-cyan-50", content: "AI-powered writing", description: "Intelligent note-taking" },
-      { title: "Voice Input", icon: "🎤", color: "from-blue-100 to-indigo-50", content: "Speak your thoughts", description: "Natural voice capture" },
-      { title: "Auto Organize", icon: "📋", color: "from-blue-100 to-sky-50", content: "Smart categorization", description: "Effortless organization" }
+      { title: "Smart Notes", icon: "📝", color: "from-blue-100 via-cyan-50 to-blue-100", content: "AI-powered writing assistance", description: "Intelligent note-taking with context" },
+      { title: "Voice Input", icon: "🎤", color: "from-indigo-100 via-blue-50 to-indigo-100", content: "Speak your thoughts naturally", description: "Natural voice capture and processing" },
+      { title: "Auto Organize", icon: "📋", color: "from-sky-100 via-blue-50 to-sky-100", content: "Smart categorization system", description: "Effortless organization magic" }
     ],
     tasks: [
-      { title: "Task Magic", icon: "🎯", color: "from-purple-100 to-indigo-50", content: "Goal organization", description: "Your tasks, perfectly organized" },
-      { title: "Auto Schedule", icon: "📅", color: "from-purple-100 to-violet-50", content: "Smart planning", description: "Intelligent scheduling" },
-      { title: "Progress Track", icon: "📊", color: "from-purple-100 to-purple-50", content: "Visual insights", description: "Track your journey" }
+      { title: "Task Magic", icon: "🎯", color: "from-purple-100 via-violet-50 to-purple-100", content: "Goal-oriented organization", description: "Your tasks, perfectly structured" },
+      { title: "Auto Schedule", icon: "📅", color: "from-violet-100 via-purple-50 to-violet-100", content: "Smart planning algorithms", description: "Intelligent time management" },
+      { title: "Progress Track", icon: "📊", color: "from-purple-100 via-indigo-50 to-purple-100", content: "Visual progress insights", description: "Track your productivity journey" }
     ],
     nova: [
-      { title: "Meet Nova", icon: "🧙‍♀️", color: "from-yellow-100 to-amber-50", content: "Your AI companion", description: "Ready to transform your notes?" },
-      { title: "AI Assistant", icon: "✨", color: "from-yellow-100 to-orange-50", content: "Magical guidance", description: "Smart suggestions always" },
-      { title: "Personal Magic", icon: "🌟", color: "from-yellow-100 to-yellow-50", content: "Tailored experience", description: "Magic personalized for you" }
+      { title: "Meet Nova", icon: "🧙‍♀️", color: "from-yellow-100 via-amber-50 to-yellow-100", content: "Your AI productivity companion", description: "Ready to transform your workflow?" },
+      { title: "AI Assistant", icon: "✨", color: "from-amber-100 via-yellow-50 to-amber-100", content: "Magical guidance and suggestions", description: "Smart assistance always available" },
+      { title: "Personal Magic", icon: "🌟", color: "from-yellow-100 via-orange-50 to-yellow-100", content: "Tailored magical experience", description: "Magic personalized just for you" }
     ],
     automation: [
-      { title: "Auto Magic", icon: "⚡", color: "from-green-100 to-emerald-50", content: "Workflow automation", description: "Watch it happen effortlessly" },
-      { title: "Smart Connect", icon: "🔗", color: "from-green-100 to-teal-50", content: "App integration", description: "Everything connected seamlessly" },
-      { title: "Real Actions", icon: "🚀", color: "from-green-100 to-lime-50", content: "Actual results", description: "Magic becomes reality" }
+      { title: "Auto Magic", icon: "⚡", color: "from-green-100 via-emerald-50 to-green-100", content: "Workflow automation engine", description: "Watch it happen effortlessly" },
+      { title: "Smart Connect", icon: "🔗", color: "from-emerald-100 via-green-50 to-emerald-100", content: "Seamless app integration", description: "Everything connected intelligently" },
+      { title: "Real Actions", icon: "🚀", color: "from-lime-100 via-green-50 to-lime-100", content: "Actual results delivered", description: "Magic becomes reality" }
     ],
     inspiration: [
-      { title: "Spark Ideas", icon: "🔥", color: "from-orange-100 to-red-50", content: "Instant inspiration", description: "Ideas that ignite action" },
-      { title: "Creative Flow", icon: "🎨", color: "from-orange-100 to-pink-50", content: "Unleash creativity", description: "Your imagination, amplified" },
-      { title: "Innovation Hub", icon: "💡", color: "from-orange-100 to-amber-50", content: "Breakthrough thinking", description: "Where great ideas are born" }
+      { title: "Spark Ideas", icon: "🔥", color: "from-orange-100 via-red-50 to-orange-100", content: "Instant inspiration generator", description: "Ideas that ignite immediate action" },
+      { title: "Creative Flow", icon: "🎨", color: "from-pink-100 via-rose-50 to-pink-100", content: "Unleash creative potential", description: "Your imagination, amplified" },
+      { title: "Innovation Hub", icon: "💡", color: "from-amber-100 via-yellow-50 to-amber-100", content: "Breakthrough thinking space", description: "Where brilliant ideas are born" }
     ]
   };
 
@@ -45,11 +45,10 @@ export const Hero = () => {
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-3 group">
               <div className="relative">
-                <img 
-                  src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
-                  alt="Magic Notebook Logo" 
-                  className="w-10 h-10 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12"
-                />
+                {/* Fixed logo - removed white edges by using a gradient background instead */}
+                <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-lg flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
+                  <span className="text-white font-bold text-xl">M</span>
+                </div>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-full animate-pulse"></div>
               </div>
               <span className="text-xl font-bold text-amber-800 group-hover:text-amber-600 transition-colors">Magic Notebook</span>
@@ -171,14 +170,12 @@ export const Hero = () => {
           
           {/* Enhanced story-driven content */}
           <div className="space-y-8">
-            {/* Logo with M book - Sticky Note Style */}
+            {/* Logo with M book - Updated to match nav */}
             <div className="bg-yellow-200 p-6 rounded-2xl shadow-lg border-l-8 border-amber-400 transform rotate-1 hover:rotate-0 transition-transform duration-300">
               <div className="flex items-center gap-4">
-                <img 
-                  src="/lovable-uploads/cb8ad732-ec0b-4d19-8ec7-5886d9f5bda1.png" 
-                  alt="Magic Notebook Logo" 
-                  className="w-16 h-16"
-                />
+                <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <span className="text-white font-bold text-2xl">M</span>
+                </div>
                 <div>
                   <h3 className="text-2xl font-bold text-amber-700">Magic Notebook</h3>
                   <p className="text-amber-600 text-sm">Write it. Wish it. Watch it happen.</p>
@@ -293,39 +290,39 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Interactive Phone Mockups */}
+          {/* Enhanced Interactive Phone Mockups */}
           <div className="relative">
             <div className="relative mx-auto w-96 h-96">
               
-              {/* Far Left Phone */}
+              {/* Far Left Phone - Enhanced */}
               <InteractivePhone 
                 screens={phoneScreens.notes}
                 className="absolute -left-8 top-12 z-5 transform rotate-[20deg] hover:rotate-[15deg] transition-transform duration-500"
                 size="small"
               />
 
-              {/* Left Phone */}
+              {/* Left Phone - Enhanced */}
               <InteractivePhone 
                 screens={phoneScreens.tasks}
                 className="absolute left-0 top-8 z-10 transform rotate-12 hover:rotate-6 transition-transform duration-500"
                 size="medium"
               />
 
-              {/* Main Center iPhone with Nova */}
+              {/* Main Center iPhone with Nova - Enhanced */}
               <InteractivePhone 
                 screens={phoneScreens.nova}
                 className="absolute inset-0 flex items-center justify-center z-20 transform rotate-2 hover:rotate-0 transition-transform duration-500"
                 size="large"
               />
 
-              {/* Right Phone */}
+              {/* Right Phone - Enhanced */}
               <InteractivePhone 
                 screens={phoneScreens.automation}
                 className="absolute right-0 top-8 z-10 transform -rotate-12 hover:-rotate-6 transition-transform duration-500"
                 size="medium"
               />
 
-              {/* Far Right Phone */}
+              {/* Far Right Phone - Enhanced */}
               <InteractivePhone 
                 screens={phoneScreens.inspiration}
                 className="absolute -right-8 top-12 z-5 transform -rotate-[20deg] hover:-rotate-[15deg] transition-transform duration-500"
