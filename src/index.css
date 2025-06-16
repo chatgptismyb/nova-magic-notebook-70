@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ... keep existing code (CSS variables) the same ... */
+/* ... keep existing code (CSS variables) */
 
 @layer base {
   * {
@@ -20,7 +20,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar styling with yellow theme */
+/* Custom scrollbar styling with oriole yellow theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -30,18 +30,18 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #f59e0b, #d97706);
+  background: linear-gradient(45deg, #ea580c, #f59e0b);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #d97706, #b45309);
+  background: linear-gradient(45deg, #c2410c, #d97706);
 }
 
-/* Enhanced focus styles with yellow theme */
+/* Enhanced focus styles with oriole yellow theme */
 button:focus-visible,
 a:focus-visible {
-  outline: 2px solid #f59e0b;
+  outline: 2px solid #ea580c;
   outline-offset: 2px;
 }
 
@@ -66,17 +66,17 @@ a:focus-visible {
   }
   50% { 
     transform: scale(1.02);
-    filter: brightness(1.15) contrast(1.1) drop-shadow(0 0 8px rgba(245, 158, 11, 0.6));
+    filter: brightness(1.15) contrast(1.1) drop-shadow(0 0 8px rgba(234, 88, 12, 0.6));
   }
 }
 
 @keyframes magical-glow {
   0%, 100% { 
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+    box-shadow: 0 0 10px rgba(234, 88, 12, 0.3);
     transform: scale(1);
   }
   50% { 
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.6), 0 0 30px rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 20px rgba(234, 88, 12, 0.6), 0 0 30px rgba(234, 88, 12, 0.4);
     transform: scale(1.05);
   }
 }
@@ -152,6 +152,17 @@ a:focus-visible {
   }
 }
 
+@keyframes nova-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.7);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 0 10px rgba(234, 88, 12, 0);
+  }
+}
+
 /* Animation utility classes */
 .animate-float {
   animation: float 6s ease-in-out infinite;
@@ -163,6 +174,10 @@ a:focus-visible {
 
 .animate-nova-breathe {
   animation: nova-breathe 4s ease-in-out infinite;
+}
+
+.animate-nova-pulse {
+  animation: nova-pulse 2s ease-in-out infinite;
 }
 
 .animate-magical-glow {
@@ -202,11 +217,11 @@ a:focus-visible {
   animation: sparkle-dance 2s ease-in-out infinite;
 }
 
-/* Sticky note specific styles */
+/* Sticky note specific styles with oriole yellow */
 .sticky-note {
   position: relative;
-  background: linear-gradient(135deg, #fef3c7 0%, #fcd34d 100%);
-  border-left: 4px solid #f59e0b;
+  background: linear-gradient(135deg, #fed7aa 0%, #fb923c 100%);
+  border-left: 4px solid #ea580c;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -223,16 +238,16 @@ a:focus-visible {
   left: 10%;
   width: 20px;
   height: 10px;
-  background: rgba(245, 158, 11, 0.3);
+  background: rgba(234, 88, 12, 0.3);
   border-radius: 2px;
-  border: 1px solid rgba(245, 158, 11, 0.5);
+  border: 1px solid rgba(234, 88, 12, 0.5);
 }
 
 /* Paper texture background */
 .bg-paper {
   background-image: 
-    linear-gradient(45deg, rgba(245, 158, 11, 0.03) 25%, transparent 25%, transparent 50%, rgba(245, 158, 11, 0.03) 50%, rgba(245, 158, 11, 0.03) 75%, transparent 75%),
-    radial-gradient(circle at center, rgba(251, 191, 36, 0.1), transparent 70%);
+    linear-gradient(45deg, rgba(234, 88, 12, 0.03) 25%, transparent 25%, transparent 50%, rgba(234, 88, 12, 0.03) 50%, rgba(234, 88, 12, 0.03) 75%, transparent 75%),
+    radial-gradient(circle at center, rgba(251, 146, 60, 0.1), transparent 70%);
   background-size: 20px 20px, 100% 100%;
 }
 
@@ -262,12 +277,44 @@ a:focus-visible {
   border-width: 8px;
 }
 
-/* Nova specific enhancements */
+/* Nova specific enhancements with oriole yellow */
 .nova-glow {
-  box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 20px rgba(234, 88, 12, 0.4);
   animation: magical-glow 3s ease-in-out infinite;
 }
 
 .nova-thinking {
   animation: nova-breathe 4s ease-in-out infinite;
+}
+
+/* Enhanced animations for magical elements */
+@keyframes magical-float {
+  0%, 100% { 
+    transform: translateY(0px) scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  33% { 
+    transform: translateY(-20px) scale(1.1) rotate(5deg);
+    opacity: 1;
+  }
+  66% { 
+    transform: translateY(-10px) scale(0.95) rotate(-3deg);
+    opacity: 0.9;
+  }
+}
+
+.animate-magical-float {
+  animation: magical-float 6s ease-in-out infinite;
+}
+
+/* Oriole yellow gradient utilities */
+.bg-oriole-gradient {
+  background: linear-gradient(135deg, #ea580c 0%, #f59e0b 50%, #fb923c 100%);
+}
+
+.text-oriole-gradient {
+  background: linear-gradient(135deg, #ea580c 0%, #f59e0b 50%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
