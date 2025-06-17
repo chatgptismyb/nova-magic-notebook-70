@@ -11,6 +11,9 @@ import Checkout from "./pages/Checkout";
 import Showcase from "./pages/Showcase";
 import MagicNotebook from "./pages/MagicNotebook";
 import Spellbook from "./pages/Spellbook";
+import Dashboard from "./pages/Dashboard";
+import TodoListPage from "./pages/TodoListPage";
+import TodoNotePage from "./pages/TodoNotePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +33,9 @@ const App = () => (
           <Route path="/showcase" element={<Showcase />} />
           <Route path="/magic-notebook" element={<MagicNotebook />} />
           <Route path="/spellbook" element={<Spellbook />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/todos" element={<TodoListPage />} />
+          <Route path="/todos/:noteId" element={<TodoNotePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
