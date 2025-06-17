@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, Lock, User, ArrowLeft, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { AIFormValidation } from '@/components/ui/ai-form-validation';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,14 +12,44 @@ const Signup = () => {
     confirmPassword: ''
   });
 
+  const [validations, setValidations] = useState({
+    name: false,
+    email: false,
+    password: false,
+    confirmPassword: false
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Signup attempt:', formData);
+    
+    // Check if all fields are valid
+    const isFormValid = Object.values(validations).every(Boolean);
+    
+    if (isFormValid) {
+      console.log('Signup attempt:', formData);
+      // In a real app, you would submit the form data to your backend
+    } else {
+      alert('Please fix the errors in the form before submitting.');
+    }
   };
 
   const handleChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
+
+  const handleValidation = (field: string, value: string, isValid: boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setValidations(prev => ({ ...prev, [field]: isValid }));
+  };
+
+  // Special validation for confirm password
+  const validateConfirmPassword = (value: string) => {
+    const isValid = value === formData.password;
+    setValidations(prev => ({ ...prev, confirmPassword: isValid }));
+  };
+
+  const isFormValid = Object.values(validations).every(Boolean) && 
+                     formData.password === formData.confirmPassword;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-300 relative overflow-hidden">
@@ -78,9 +108,14 @@ const Signup = () => {
                     onChange={(e) => handleChange('name', e.target.value)}
                     className="w-full bg-white/80 border-2 border-amber-200 rounded-xl pl-12 pr-4 py-3 text-amber-800 focus:outline-none focus:border-amber-500 transition-colors"
                     placeholder="Your magical name"
-                    required
                   />
                 </div>
+                <AIFormValidation
+                  value={formData.name}
+                  fieldType="name"
+                  theme="orange"
+                  onChange={(value, isValid) => handleValidation('name', value, isValid)}
+                />
               </div>
 
               {/* Email Input */}
@@ -94,9 +129,14 @@ const Signup = () => {
                     onChange={(e) => handleChange('email', e.target.value)}
                     className="w-full bg-white/80 border-2 border-amber-200 rounded-xl pl-12 pr-4 py-3 text-amber-800 focus:outline-none focus:border-amber-500 transition-colors"
                     placeholder="your@email.com"
-                    required
                   />
                 </div>
+                <AIFormValidation
+                  value={formData.email}
+                  fieldType="email"
+                  theme="orange"
+                  onChange={(value, isValid) => handleValidation('email', value, isValid)}
+                />
               </div>
 
               {/* Password Input */}
@@ -110,9 +150,15 @@ const Signup = () => {
                     onChange={(e) => handleChange('password', e.target.value)}
                     className="w-full bg-white/80 border-2 border-amber-200 rounded-xl pl-12 pr-4 py-3 text-amber-800 focus:outline-none focus:border-amber-500 transition-colors"
                     placeholder="Create a magical password"
-                    required
                   />
                 </div>
+                <AIFormValidation
+                  value={formData.password}
+                  fieldType="password"
+                  showStrengthMeter={true}
+                  theme="orange"
+                  onChange={(value, isValid) => handleValidation('password', value, isValid)}
+                />
               </div>
 
               {/* Confirm Password Input */}
@@ -123,18 +169,42 @@ const Signup = () => {
                   <input
                     type="password"
                     value={formData.confirmPassword}
-                    onChange={(e) => handleChange('confirmPassword', e.target.value)}
+                    onChange={(e) => {
+                      handleChange('confirmPassword', e.target.value);
+                      validateConfirmPassword(e.target.value);
+                    }}
                     className="w-full bg-white/80 border-2 border-amber-200 rounded-xl pl-12 pr-4 py-3 text-amber-800 focus:outline-none focus:border-amber-500 transition-colors"
                     placeholder="Confirm your password"
-                    required
                   />
                 </div>
+                {formData.confirmPassword && (
+                  <div className="mt-2 text-sm">
+                    <div className={`flex items-center gap-2 p-2 rounded-md border ${
+                      formData.confirmPassword === formData.password
+                        ? 'bg-green-50 text-green-600 border-green-200'
+                        : 'bg-red-50 text-red-600 border-red-200'
+                    }`}>
+                      {formData.confirmPassword === formData.password ? (
+                        <>
+                          <Check className="w-4 h-4" />
+                          <span>Passwords match</span>
+                        </>
+                      ) : (
+                        <>
+                          <X className="w-4 h-4" />
+                          <span>Passwords don't match</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25"
+                disabled={!isFormValid}
+                className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <Sparkles className="w-5 h-5 mr-2" />
                 Begin Your Magical Journey
