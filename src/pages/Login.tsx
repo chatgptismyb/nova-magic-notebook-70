@@ -1,17 +1,40 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Mail, Lock, ArrowLeft, Star } from 'lucide-react';
+import { Mail, Lock, ArrowLeft, Star, X, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { AIFormValidation } from '@/components/ui/ai-form-validation';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const [validations, setValidations] = useState({
+    email: false,
+    password: false
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password });
+    
+    // Check if all fields are valid
+    const isFormValid = Object.values(validations).every(Boolean);
+    
+    if (isFormValid) {
+      console.log('Login attempt:', formData);
+      // In a real app, you would submit the form data to your backend
+    } else {
+      alert('Please fix the errors in the form before submitting.');
+    }
   };
+
+  const handleValidation = (field: string, value: string, isValid: boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setValidations(prev => ({ ...prev, [field]: isValid }));
+  };
+
+  const isFormValid = validations.email && validations.password;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-200 via-amber-100 to-yellow-300 relative overflow-hidden">
@@ -66,13 +89,18 @@ const Login = () => {
                   <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
                   <input
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={formData.email}
+                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                     className="w-full bg-white/80 border-2 border-amber-200 rounded-xl pl-12 pr-4 py-3 text-amber-800 focus:outline-none focus:border-amber-500 transition-colors"
                     placeholder="your@email.com"
-                    required
                   />
                 </div>
+                <AIFormValidation
+                  value={formData.email}
+                  fieldType="email"
+                  theme="orange"
+                  onChange={(value, isValid) => handleValidation('email', value, isValid)}
+                />
               </div>
 
               {/* Password Input */}
@@ -82,19 +110,25 @@ const Login = () => {
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-amber-500 w-5 h-5" />
                   <input
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={formData.password}
+                    onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
                     className="w-full bg-white/80 border-2 border-amber-200 rounded-xl pl-12 pr-4 py-3 text-amber-800 focus:outline-none focus:border-amber-500 transition-colors"
                     placeholder="Your magical password"
-                    required
                   />
                 </div>
+                <AIFormValidation
+                  value={formData.password}
+                  fieldType="password"
+                  theme="orange"
+                  onChange={(value, isValid) => handleValidation('password', value, isValid)}
+                />
               </div>
 
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25"
+                disabled={!isFormValid}
+                className="w-full bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white font-bold py-4 rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-amber-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 <Star className="w-5 h-5 mr-2" />
                 Cast Login Spell
