@@ -119,9 +119,9 @@ export const Hero = () => {
               <Link to="/login" className="text-orange-700 hover:text-orange-900 font-medium transition-all duration-300 hover:scale-105">
                 Login
               </Link>
-              {/* Updated Try Now Button */}
+              {/* Updated Try Now Button to link to Magic Notebook */}
               <Link
-                to="/showcase"
+                to="/magic-notebook"
                 className="bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -188,7 +188,7 @@ export const Hero = () => {
             <div className="mt-8 p-4 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-xl">
               <h3 className="font-bold text-orange-800 mb-2">Ready to start?</h3>
               <Link 
-                to="/showcase"
+                to="/magic-notebook"
                 onClick={() => setSidebarOpen(false)}
                 className="block w-full bg-gradient-to-r from-orange-600 to-yellow-600 text-white font-bold py-3 px-4 rounded-lg text-center transition-all duration-300 hover:scale-105"
               >
@@ -253,7 +253,7 @@ export const Hero = () => {
             <div className="bg-gradient-to-br from-yellow-200 to-orange-200 p-4 sm:p-6 rounded-2xl shadow-xl border-l-8 border-orange-500 transform rotate-1 hover:rotate-0 transition-transform duration-300 hover:scale-105 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  to="/showcase"
+                  to="/magic-notebook"
                   className="bg-gradient-to-r from-orange-600 via-yellow-500 to-orange-500 hover:from-orange-700 hover:via-yellow-600 hover:to-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl transition-all duration-300 hover:scale-110 shadow-lg hover:shadow-orange-500/40 group relative overflow-hidden flex items-center justify-center text-sm sm:text-base"
                 >
                   <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-spin" />
