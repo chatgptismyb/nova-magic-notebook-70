@@ -6,6 +6,7 @@ import { FolderGrid } from './FolderGrid';
 import { RecentNotes } from './RecentNotes';
 import { QuickActions } from './QuickActions';
 import { supabase } from '@/lib/supabase';
+import { useNavigate } from 'react-router-dom';
 
 interface Folder {
   id: string;
@@ -32,16 +33,49 @@ export const DashboardLayout = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUserId] = useState('demo-user-123'); // In production, get from auth
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    loadDashboardData();
+    checkAuthAndLoadData();
   }, []);
 
-  const loadDashboardData = async () => {
+  const checkAuthAndLoadData = async () => {
     try {
       setIsLoading(true);
+      setAuthError(null);
       
+      // Get current user
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      
+      if (authError) {
+        console.error('Auth error:', authError);
+        setAuthError('Authentication failed');
+        navigate('/login');
+        return;
+      }
+      
+      if (!user) {
+        setAuthError('No authenticated user');
+        navigate('/login');
+        return;
+      }
+      
+      setCurrentUserId(user.id);
+      await loadDashboardData(user.id);
+      
+    } catch (error) {
+      console.error('Error checking auth:', error);
+      setAuthError('Failed to authenticate');
+      navigate('/login');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadDashboardData = async (userId: string) => {
+    try {
       // Load folders with note counts
       const { data: foldersData, error: foldersError } = await supabase
         .from('folders')
@@ -49,7 +83,7 @@ export const DashboardLayout = () => {
           *,
           notes(count)
         `)
-        .eq('user_id', currentUserId);
+        .eq('user_id', userId);
 
       if (foldersError) throw foldersError;
 
@@ -65,7 +99,7 @@ export const DashboardLayout = () => {
       const { data: notesData, error: notesError } = await supabase
         .from('notes')
         .select('*')
-        .eq('user_id', currentUserId)
+        .eq('user_id', userId)
         .order('updated_at', { ascending: false })
         .limit(6);
 
@@ -74,12 +108,13 @@ export const DashboardLayout = () => {
 
     } catch (error) {
       console.error('Error loading dashboard data:', error);
-    } finally {
-      setIsLoading(false);
+      setAuthError('Failed to load dashboard data');
     }
   };
 
   const handleCreateFolder = async (folderData: Partial<Folder>) => {
+    if (!currentUserId) return;
+    
     try {
       const { data, error } = await supabase
         .from('folders')
@@ -101,6 +136,8 @@ export const DashboardLayout = () => {
   };
 
   const handleCreateNote = async (noteData: Partial<Note>) => {
+    if (!currentUserId) return;
+    
     try {
       const { data, error } = await supabase
         .from('notes')
@@ -148,6 +185,21 @@ export const DashboardLayout = () => {
             <span className="text-white text-2xl">📝</span>
           </div>
           <p className="text-gray-600 font-medium">Loading your workspace...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (authError) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-red-500 text-2xl">!</span>
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Authentication Error</h2>
+          <p className="text-gray-600 mb-6">{authError}</p>
+          <Button onClick={() => navigate('/login')}>Go to Login</Button>
         </div>
       </div>
     );

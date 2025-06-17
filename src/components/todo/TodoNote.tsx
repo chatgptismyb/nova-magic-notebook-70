@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CheckCircle, Circle, Plus, Trash2, Edit, MoreHorizontal, Calendar, Tag, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 
 interface Task {
@@ -26,33 +26,84 @@ interface Note {
 
 export const TodoNote = () => {
   const { noteId } = useParams<{ noteId: string }>();
+  const navigate = useNavigate();
   const [note, setNote] = useState<Note | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskText, setNewTaskText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUserId] = useState('demo-user-123'); // In production, get from auth
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
   const [editingTaskId, setEditingTaskId] = useState<string | null>(null);
   const [editingText, setEditingText] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (noteId) {
-      loadNoteAndTasks();
-    }
+    checkAuthAndLoadData();
   }, [noteId]);
 
-  const loadNoteAndTasks = async () => {
+  const checkAuthAndLoadData = async () => {
     try {
       setIsLoading(true);
+      setError(null);
+      
+      // Get current user
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
+      
+      if (authError) {
+        console.error('Auth error:', authError);
+        setError('Authentication failed');
+        navigate('/login');
+        return;
+      }
+      
+      if (!user) {
+        setError('No authenticated user');
+        navigate('/login');
+        return;
+      }
+      
+      setCurrentUserId(user.id);
+      
+      if (noteId) {
+        await loadNoteAndTasks(user.id, noteId);
+      } else {
+        setError('No note ID provided');
+      }
+      
+    } catch (error) {
+      console.error('Error checking auth:', error);
+      setError('Failed to authenticate');
+      navigate('/login');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadNoteAndTasks = async (userId: string, noteId: string) => {
+    try {
+      // Validate that noteId looks like a UUID
+      const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+      if (!uuidRegex.test(noteId)) {
+        setError('Invalid note ID format');
+        return;
+      }
       
       // Load note
       const { data: noteData, error: noteError } = await supabase
         .from('notes')
         .select('*')
         .eq('id', noteId)
-        .eq('user_id', currentUserId)
+        .eq('user_id', userId)
         .single();
 
-      if (noteError) throw noteError;
+      if (noteError) {
+        if (noteError.code === 'PGRST116') {
+          setError('Note not found or you do not have access to it');
+        } else {
+          throw noteError;
+        }
+        return;
+      }
+      
       setNote(noteData);
 
       // Load tasks
@@ -66,13 +117,12 @@ export const TodoNote = () => {
       setTasks(tasksData || []);
     } catch (error) {
       console.error('Error loading note and tasks:', error);
-    } finally {
-      setIsLoading(false);
+      setError('Failed to load note and tasks');
     }
   };
 
   const handleAddTask = async () => {
-    if (!newTaskText.trim() || !noteId) return;
+    if (!newTaskText.trim() || !noteId || !currentUserId) return;
     
     try {
       const newTask = {
@@ -198,6 +248,23 @@ export const TodoNote = () => {
             <ListTodo className="w-8 h-8 text-white" />
           </div>
           <p className="text-gray-600 font-medium">Loading your to-do list...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-red-500 text-2xl">!</span>
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Error</h2>
+          <p className="text-gray-600 mb-6">{error}</p>
+          <Link to="/dashboard">
+            <Button>Return to Dashboard</Button>
+          </Link>
         </div>
       </div>
     );
