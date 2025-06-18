@@ -1,8 +1,8 @@
-
 import { useState } from 'react';
 import { InteractivePhone } from './InteractivePhone';
 import { Button } from './ui/button';
-import { Sparkles, Download, Star, ArrowRight, Scan } from 'lucide-react';
+import { Sparkles, Star, ArrowRight, Scan } from 'lucide-react';
+import { DownloadAppButton } from './ui/download-app-button';
 
 export const ExperienceTheMagic = () => {
   const [activeDemo, setActiveDemo] = useState(0);
@@ -115,7 +115,7 @@ export const ExperienceTheMagic = () => {
   ];
 
   return (
-    <section id="experience-magic" className="py-20 px-6 bg-gradient-to-br from-purple-50 via-yellow-50 to-purple-100 relative overflow-hidden">
+    <section id="experience-magic" className="py-20 px-6 bg-gradient-to-br from-purple-50 via-indigo-50 to-purple-100 relative overflow-hidden">
       {/* Magical background elements */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
@@ -137,12 +137,12 @@ export const ExperienceTheMagic = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-400/20 to-yellow-400/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-400/30 mb-6">
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-purple-400/20 to-indigo-400/20 backdrop-blur-sm px-6 py-3 rounded-full border border-purple-400/30 mb-6">
             <Sparkles className="w-5 h-5 text-purple-600 animate-pulse" />
             <span className="text-purple-800 font-semibold">Download Magic Notebook</span>
           </div>
           
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-yellow-500 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-indigo-500 to-purple-600 bg-clip-text text-transparent">
             Get the App Now
           </h2>
           <p className="text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
@@ -152,7 +152,7 @@ export const ExperienceTheMagic = () => {
         </div>
 
         {/* Enhanced App Store Download Section with Real Barcode */}
-        <div className="bg-gradient-to-br from-purple-100 to-yellow-100 rounded-3xl p-8 text-center shadow-xl border-4 border-purple-200/50 mb-16">
+        <div className="bg-gradient-to-br from-purple-100 to-indigo-100 rounded-3xl p-8 text-center shadow-xl border-4 border-purple-200/50 mb-16">
           <h3 className="text-3xl font-bold text-purple-800 mb-4">Ready to Experience Magic?</h3>
           <p className="text-gray-700 text-lg mb-8 max-w-2xl mx-auto">
             Join thousands of users who've transformed their productivity with Magic Notebook. 
@@ -161,27 +161,7 @@ export const ExperienceTheMagic = () => {
           
           {/* Enhanced App Store Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-8">
-            <button className="group bg-black hover:bg-gray-800 text-white font-semibold py-5 px-10 rounded-3xl transition-all duration-300 hover:scale-105 flex items-center gap-4 min-w-[240px] shadow-2xl hover:shadow-purple-500/20">
-              <div className="w-10 h-10 bg-white rounded-2xl flex items-center justify-center">
-                <span className="text-black font-bold text-2xl">🍎</span>
-              </div>
-              <div className="text-left">
-                <div className="text-sm text-gray-300">Download on the</div>
-                <div className="text-xl font-bold">App Store</div>
-              </div>
-              <Download className="w-6 h-6 group-hover:animate-bounce" />
-            </button>
-            
-            <button className="group bg-black hover:bg-gray-800 text-white font-semibold py-5 px-10 rounded-3xl transition-all duration-300 hover:scale-105 flex items-center gap-4 min-w-[240px] shadow-2xl hover:shadow-purple-500/20">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-blue-500 rounded-2xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">▶</span>
-              </div>
-              <div className="text-left">
-                <div className="text-sm text-gray-300">Get it on</div>
-                <div className="text-xl font-bold">Google Play</div>
-              </div>
-              <Download className="w-6 h-6 group-hover:animate-bounce" />
-            </button>
+            <DownloadAppButton theme="purple" size="lg" showPlatforms={true} />
           </div>
           
           {/* Real QR Code Section with Barcode Scanner */}
@@ -260,7 +240,7 @@ export const ExperienceTheMagic = () => {
             
             {/* Barcode at bottom */}
             <div className="mt-6 pt-4 border-t border-purple-200">
-              <p className="text-xs text-gray-500 mb-2">App ID: MN-2024-MAGIC</p>
+              <p className="text-xs text-gray-500 mb-2">App ID: MN-2025-MAGIC</p>
               <div className="flex justify-center">
                 <svg width="120" height="30" viewBox="0 0 120 30">
                   {/* Barcode stripes */}
@@ -318,13 +298,17 @@ export const ExperienceTheMagic = () => {
         </div>
 
         {/* Enhanced Nova Character Section */}
-        <div className="bg-gradient-to-br from-purple-100 to-yellow-100 rounded-3xl p-8 border-4 border-purple-200/50 shadow-xl">
+        <div className="bg-gradient-to-br from-purple-100 to-indigo-100 rounded-3xl p-8 border-4 border-purple-200/50 shadow-xl">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="text-center md:text-left">
-              <div className="w-32 h-32 mx-auto md:mx-0 mb-6 bg-gradient-to-br from-purple-500 to-yellow-400 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-300/30 to-yellow-300/30 animate-pulse"></div>
-                <div className="relative text-6xl">🧙‍♀️</div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-purple-400 to-yellow-400 rounded-full animate-bounce flex items-center justify-center">
+              <div className="w-32 h-32 mx-auto md:mx-0 mb-6 bg-gradient-to-br from-purple-500 to-indigo-400 rounded-full flex items-center justify-center shadow-2xl relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-300/30 to-indigo-300/30 animate-pulse"></div>
+                <img 
+                  src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                  alt="Nova - AI Companion" 
+                  className="w-24 h-24 object-cover"
+                />
+                <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-purple-400 to-indigo-400 rounded-full animate-bounce flex items-center justify-center">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
               </div>
@@ -334,7 +318,7 @@ export const ExperienceTheMagic = () => {
                 Nova understands context, learns your patterns, and makes things happen automatically.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button className="bg-gradient-to-r from-purple-600 to-yellow-600 hover:from-purple-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                <Button className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 flex items-center gap-2">
                   <Star className="w-5 h-5" />
                   Chat with Nova
                 </Button>
@@ -353,7 +337,7 @@ export const ExperienceTheMagic = () => {
                   <span>Understand natural language</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
                   <span>Create smart workflows</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
@@ -361,7 +345,7 @@ export const ExperienceTheMagic = () => {
                   <span>Connect your favorite apps</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-700">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
                   <span>Learn from your habits</span>
                 </div>
               </div>

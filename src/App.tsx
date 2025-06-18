@@ -17,7 +17,9 @@ import TodoNotePage from "./pages/TodoNotePage";
 import CreateNote from "./pages/CreateNote";
 import CreateTask from "./pages/CreateTask";
 import DeployPage from "./pages/DeployPage";
+import AIIntegration from "./pages/AIIntegration";
 import NotFound from "./pages/NotFound";
+import { EarlyAccessBanner } from "./components/ui/early-access-banner";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <EarlyAccessBanner theme="purple" />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
@@ -42,6 +45,7 @@ const App = () => (
           <Route path="/create-note" element={<CreateNote />} />
           <Route path="/create-task" element={<CreateTask />} />
           <Route path="/deploy" element={<DeployPage />} />
+          <Route path="/ai-integration" element={<AIIntegration />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

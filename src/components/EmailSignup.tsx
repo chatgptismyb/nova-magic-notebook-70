@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { X, Mail, Sparkles, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -43,10 +42,10 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
       />
       
       {/* Modal */}
-      <div className="relative bg-gradient-to-br from-orange-50 to-yellow-50 rounded-3xl shadow-2xl border-4 border-orange-300 max-w-md w-full mx-4 animate-scale-in overflow-hidden">
+      <div className="relative bg-gradient-to-br from-purple-50 to-indigo-50 rounded-3xl shadow-2xl border-4 border-purple-300 max-w-md w-full mx-4 animate-scale-in overflow-hidden">
         
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-orange-400 to-yellow-400 p-6 text-white">
+        <div className="relative bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
           {/* Close button */}
           <button
             onClick={onClose}
@@ -68,13 +67,17 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
           
           <div className="text-center pt-8">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-3xl">🧙‍♀️</span>
+              <img 
+                src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                alt="Nova" 
+                className="w-12 h-12 rounded-full"
+              />
             </div>
             <h2 className="text-2xl font-bold mb-2">
-              Our App is Launching Soon!
+              Magic Notebook Early Access
             </h2>
-            <p className="text-orange-100">
-              Subscribe today for release announcements and exclusive content
+            <p className="text-purple-100">
+              Join our exclusive early access program and be the first to experience the magic!
             </p>
           </div>
         </div>
@@ -84,7 +87,7 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
           {!isSubmitted ? (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-orange-800 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium text-purple-800 mb-2">
                   Email Address
                 </label>
                 <div className="relative">
@@ -94,35 +97,35 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-3 pl-10 bg-white border-2 border-orange-200 rounded-xl text-orange-900 placeholder-orange-400 focus:outline-none focus:border-orange-500 transition-colors"
+                    className="w-full px-4 py-3 pl-10 bg-white border-2 border-purple-200 rounded-xl text-purple-900 placeholder-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     required
                     disabled={isSubmitting}
                   />
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-orange-400" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-purple-400" />
                 </div>
               </div>
 
               <Button
                 type="submit"
                 disabled={isSubmitting || !email}
-                className="w-full bg-gradient-to-r from-orange-600 to-yellow-600 hover:from-orange-700 hover:to-yellow-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Adding You to the List...
+                    Processing...
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
                     <Sparkles className="w-5 h-5" />
-                    Get Launch Updates
+                    Get Early Access
                   </div>
                 )}
               </Button>
 
               <div className="text-center">
-                <p className="text-xs text-orange-600">
-                  🔒 We respect your privacy. No spam, just launch updates and exclusive content.
+                <p className="text-xs text-purple-600">
+                  🔒 We respect your privacy. No spam, just updates and exclusive content.
                 </p>
               </div>
             </form>
@@ -131,8 +134,8 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
                 <span className="text-3xl">✨</span>
               </div>
-              <h3 className="text-xl font-bold text-orange-800">You're All Set!</h3>
-              <p className="text-orange-700">
+              <h3 className="text-xl font-bold text-purple-800">You're All Set!</h3>
+              <p className="text-purple-700">
                 We'll keep you updated on our launch and send you exclusive early access content!
               </p>
             </div>
@@ -141,24 +144,24 @@ export const EmailSignup = ({ isOpen, onClose, isTimedPopup = false }: EmailSign
 
         {/* Features preview */}
         {!isSubmitted && (
-          <div className="bg-orange-100/50 p-4 border-t border-orange-200">
-            <h4 className="font-semibold text-orange-800 mb-3 text-center">What you'll get:</h4>
+          <div className="bg-purple-100/50 p-4 border-t border-purple-200">
+            <h4 className="font-semibold text-purple-800 mb-3 text-center">What you'll get:</h4>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="flex items-center gap-2">
-                <span className="text-orange-500">🚀</span>
-                <span className="text-orange-700">Launch updates</span>
+                <span className="text-purple-500">🚀</span>
+                <span className="text-purple-700">Early access</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-orange-500">⭐</span>
-                <span className="text-orange-700">Early access</span>
+                <span className="text-purple-500">⭐</span>
+                <span className="text-purple-700">Premium features</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-orange-500">🎁</span>
-                <span className="text-orange-700">Exclusive content</span>
+                <span className="text-purple-500">🎁</span>
+                <span className="text-purple-700">Exclusive content</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-orange-500">📱</span>
-                <span className="text-orange-700">Mobile & web</span>
+                <span className="text-purple-500">📱</span>
+                <span className="text-purple-700">Mobile & web</span>
               </div>
             </div>
           </div>
