@@ -14,6 +14,8 @@ import Spellbook from "./pages/Spellbook";
 import Dashboard from "./pages/Dashboard";
 import TodoListPage from "./pages/TodoListPage";
 import TodoNotePage from "./pages/TodoNotePage";
+import CreateNote from "./pages/CreateNote";
+import CreateTask from "./pages/CreateTask";
 import DeployPage from "./pages/DeployPage";
 import NotFound from "./pages/NotFound";
 
@@ -37,6 +39,8 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/todos" element={<TodoListPage />} />
           <Route path="/todos/:noteId" element={<TodoNotePage />} />
+          <Route path="/create-note" element={<CreateNote />} />
+          <Route path="/create-task" element={<CreateTask />} />
           <Route path="/deploy" element={<DeployPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
