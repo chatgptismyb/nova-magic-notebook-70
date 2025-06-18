@@ -370,7 +370,7 @@ export class NovaAgent {
         responseStyle = 'I can sense you might be feeling a bit overwhelmed. Let me help make this easier for you. ';
         break;
       case 'happy':
-        responseStyle = 'I love your enthusiasm! Let's make some magic happen! ';
+        responseStyle = 'I love your enthusiasm! Let\'s make some magic happen! ';
         break;
       case 'excited':
         responseStyle = 'Ooh, this sounds like a fun challenge! ';
