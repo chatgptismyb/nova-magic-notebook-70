@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Send, X, Sparkles, Mic, Bot, User, ChevronDown, ChevronUp } from 'lucide-react';
+import { Send, X, Sparkles, Mic, Bot, User, ChevronDown, ChevronUp, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { novaAgent, NovaMessage } from '@/lib/nova-agent';
+import { getWittyMagicalPhrase } from '@/lib/novaPersona';
 
 interface AIChatbotProps {
   initialOpen?: boolean;
@@ -19,6 +20,11 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [currentTypingMessage, setCurrentTypingMessage] = useState('');
+  const [fullTypingMessage, setFullTypingMessage] = useState('');
+  const [typingSpeed, setTypingSpeed] = useState(30); // ms per character
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [currentUserId] = useState('demo-user-123'); // In production, get from auth
 
@@ -63,15 +69,37 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
     const welcomeMessage: NovaMessage = {
       id: 'welcome',
       type: 'nova',
-      content: "✨ Hi there! I'm Nova, your AI assistant. How can I help you today?",
+      content: `${getWittyMagicalPhrase()} I'm Nova, your magical AI assistant. I can help you create notes, organize tasks, cast automation spells, and much more! What would you like to accomplish today?`,
       timestamp: new Date()
     };
     setMessages([welcomeMessage]);
+    
+    // Start typing animation for welcome message
+    setFullTypingMessage(welcomeMessage.content);
+    setIsTyping(true);
   }, []);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isOpen]);
+  }, [messages, isOpen, currentTypingMessage]);
+
+  useEffect(() => {
+    if (isTyping && fullTypingMessage) {
+      if (currentTypingMessage.length < fullTypingMessage.length) {
+        const timeout = setTimeout(() => {
+          setCurrentTypingMessage(fullTypingMessage.substring(0, currentTypingMessage.length + 1));
+        }, typingSpeed);
+        
+        return () => clearTimeout(timeout);
+      } else {
+        setIsTyping(false);
+        // If we're typing the welcome message, update it in the messages array
+        if (messages.length === 1 && messages[0].id === 'welcome') {
+          setMessages([{...messages[0], content: fullTypingMessage}]);
+        }
+      }
+    }
+  }, [isTyping, currentTypingMessage, fullTypingMessage, typingSpeed]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -97,6 +125,13 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
     try {
       // Process with Nova agent
       const response = await novaAgent.processMessage(userInput, currentUserId);
+      
+      // Set up typing animation for Nova's response
+      setFullTypingMessage(response.content);
+      setCurrentTypingMessage('');
+      setIsTyping(true);
+      
+      // Add Nova's response to messages
       setMessages(prev => [...prev, response]);
     } catch (error) {
       console.error('Error processing message:', error);
@@ -107,6 +142,11 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
+      
+      // Set up typing animation for error message
+      setFullTypingMessage(errorMessage.content);
+      setCurrentTypingMessage('');
+      setIsTyping(true);
     } finally {
       setIsLoading(false);
     }
@@ -116,6 +156,39 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
+    }
+  };
+
+  const startVoiceInput = () => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+      const recognition = new SpeechRecognition();
+      
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onresult = (event: any) => {
+        const transcript = event.results[0][0].transcript;
+        setInputValue(transcript);
+        setIsListening(false);
+      };
+
+      recognition.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.start();
+    } else {
+      alert('Speech recognition is not supported in your browser.');
     }
   };
 
@@ -129,7 +202,7 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
           onClick={() => setIsOpen(true)}
           className={`w-14 h-14 rounded-full bg-gradient-to-r ${currentTheme.primary} text-white flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300`}
         >
-          <Sparkles className="w-6 h-6" />
+          <Wand2 className="w-6 h-6" />
         </button>
       )}
 
@@ -139,8 +212,17 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
           {/* Header */}
           <div className={`bg-gradient-to-r ${currentTheme.primary} p-4 text-white flex items-center justify-between`}>
             <div className="flex items-center gap-2">
-              <Bot className="w-5 h-5" />
-              <h3 className="font-bold">Nova Assistant</h3>
+              <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                  alt="Nova" 
+                  className="w-6 h-6 rounded-full"
+                />
+              </div>
+              <div>
+                <h3 className="font-bold">Nova</h3>
+                <p className="text-xs text-white/80">Magical Assistant</p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button 
@@ -162,14 +244,18 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
           {!isMinimized && (
             <>
               <div className="h-80 overflow-y-auto p-4 space-y-4">
-                {messages.map((message) => (
+                {messages.map((message, index) => (
                   <div
                     key={message.id}
                     className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     {message.type === 'nova' && (
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center mr-2 flex-shrink-0">
-                        <Sparkles className="w-4 h-4 text-white" />
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center mr-2 flex-shrink-0">
+                        <img 
+                          src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                          alt="Nova" 
+                          className="w-6 h-6 rounded-full"
+                        />
                       </div>
                     )}
                     
@@ -178,7 +264,14 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
                         ? `${currentTheme.userBubble} text-white` 
                         : `${currentTheme.botBubble} ${currentTheme.botText} border`
                     }`}>
-                      <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                      <p className="text-sm whitespace-pre-wrap">
+                        {index === messages.length - 1 && message.type === 'nova' && isTyping
+                          ? currentTypingMessage
+                          : message.content}
+                        {index === messages.length - 1 && message.type === 'nova' && isTyping && (
+                          <span className="inline-block w-2 h-4 bg-current animate-pulse ml-1">|</span>
+                        )}
+                      </p>
                       <div className="text-xs opacity-70 mt-1">
                         {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </div>
@@ -192,10 +285,14 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
                   </div>
                 ))}
                 
-                {isLoading && (
+                {isLoading && !isTyping && (
                   <div className="flex justify-start">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-400 to-yellow-400 flex items-center justify-center mr-2 flex-shrink-0 animate-pulse">
-                      <Sparkles className="w-4 h-4 text-white" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 flex items-center justify-center mr-2 flex-shrink-0 animate-pulse">
+                      <img 
+                        src="/lovable-uploads/c7ece047-1e18-4f14-a65c-f13365eedddc.png" 
+                        alt="Nova" 
+                        className="w-6 h-6 rounded-full"
+                      />
                     </div>
                     <div className={`rounded-2xl p-3 ${currentTheme.botBubble} border`}>
                       <div className="flex space-x-1">
@@ -213,13 +310,25 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
               {/* Input Area */}
               <div className="p-4 border-t border-gray-200">
                 <div className="flex gap-2">
+                  <button
+                    onClick={startVoiceInput}
+                    disabled={isListening || isLoading}
+                    className={`p-2 rounded-full ${
+                      isListening 
+                        ? 'bg-red-100 text-red-600 animate-pulse' 
+                        : `${currentTheme.secondary} ${currentTheme.text}`
+                    } transition-colors`}
+                  >
+                    <Mic className="w-5 h-5" />
+                  </button>
                   <input
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Ask Nova anything..."
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    disabled={isLoading}
                   />
                   <button
                     onClick={handleSendMessage}
@@ -230,7 +339,8 @@ export const AIChatbot: React.FC<AIChatbotProps> = ({
                   </button>
                 </div>
                 <div className="text-center mt-2">
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 flex items-center justify-center gap-1">
+                    <Wand2 className="w-3 h-3" />
                     Powered by Nova AI
                   </p>
                 </div>
