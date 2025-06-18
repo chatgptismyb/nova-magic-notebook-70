@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Search, Plus, Grid, List, Filter, Bell, Settings, Menu, X, Home, BookOpen, ListTodo, Folder, Sparkles } from 'lucide-react';
+import { Search, Plus, Grid, List, Filter, Bell, Settings, Menu, X, Home, BookOpen, ListTodo, Folder, Sparkles, Rocket } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AIChatbot } from '@/components/ui/ai-chatbot';
 import { AISearch } from '@/components/ui/ai-search';
@@ -28,6 +28,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({
     { path: '/magic-notebook', label: 'Magic Notebook', icon: Sparkles },
     { path: '/todos', label: 'To-Do List', icon: ListTodo },
     { path: '/spellbook', label: 'Spellbook', icon: BookOpen },
+    { path: '/deploy', label: 'Deploy', icon: Rocket }
   ];
 
   return (
