@@ -1,303 +1,228 @@
-# Comprehensive Web Application Development Plan
+# Magic Notebook Project Plan
 
 ## Project Overview
-Based on the design reference images, we'll create a modern note-taking and project management application with:
-1. A clean, card-based interface for note organization
-2. Folder-based document management system
-3. Interactive to-do list functionality
-4. Real-time collaboration features
 
-## Phase 1: Core Infrastructure Setup
+We'll build a magical note-taking and productivity assistant app: **Magic Notebook**, powered by the Nova AI agent. The app is a card-based, dynamic canvas for managing notes, tasks, folders, and automations called "Spells."
 
-### 1.1 Database Schema Enhancement
+### Key Features:
+
+1. Card-based notes with drag-and-drop layout
+2. Folder organization with color and icon customization
+3. Smart to-do task lists with categorization
+4. Spell system for automating tasks
+5. Real-time collaboration with Nova
+6. Emotion-aware interactions from Nova
+
+---
+
+## Phase 1: Infrastructure Setup
+
+### 1.1 Database Schema (PostgreSQL via Supabase)
+
 ```sql
--- Enhanced notes table with folder support
-ALTER TABLE notes ADD COLUMN folder_id UUID REFERENCES folders(id);
-ALTER TABLE notes ADD COLUMN color TEXT DEFAULT 'blue';
-ALTER TABLE notes ADD COLUMN position_x INTEGER DEFAULT 0;
-ALTER TABLE notes ADD COLUMN position_y INTEGER DEFAULT 0;
-ALTER TABLE notes ADD COLUMN note_type TEXT DEFAULT 'standard'; -- standard, sticky, todo
-
--- New folders table
+-- Folder support
 CREATE TABLE folders (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES users(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
-  color TEXT DEFAULT 'blue',
-  icon TEXT DEFAULT 'folder',
+  color TEXT DEFAULT 'purple',
+  icon TEXT DEFAULT 'magic',
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
--- Enhanced tasks table for todo functionality
+-- Enhanced notes
+ALTER TABLE notes ADD COLUMN folder_id UUID REFERENCES folders(id);
+ALTER TABLE notes ADD COLUMN color TEXT DEFAULT 'lavender';
+ALTER TABLE notes ADD COLUMN position_x INTEGER DEFAULT 0;
+ALTER TABLE notes ADD COLUMN position_y INTEGER DEFAULT 0;
+ALTER TABLE notes ADD COLUMN note_type TEXT DEFAULT 'magic';
+
+-- Task integration
 ALTER TABLE tasks ADD COLUMN note_id UUID REFERENCES notes(id);
 ALTER TABLE tasks ADD COLUMN position INTEGER DEFAULT 0;
-ALTER TABLE tasks ADD COLUMN category TEXT DEFAULT 'general';
+ALTER TABLE tasks ADD COLUMN category TEXT DEFAULT 'spell';
 ```
 
-### 1.2 API Endpoints Design
-```typescript
-// Core API endpoints
+### 1.2 API Endpoints
+
+```ts
 /api/folders
   GET    /           - List user folders
-  POST   /           - Create new folder
+  POST   /           - Create folder
   PUT    /:id        - Update folder
   DELETE /:id        - Delete folder
 
 /api/notes
-  GET    /           - List user notes
-  GET    /folder/:id - List notes in folder
-  POST   /           - Create new note
+  GET    /           - List notes
+  GET    /folder/:id - Notes in folder
+  POST   /           - Create note
   PUT    /:id        - Update note
   DELETE /:id        - Delete note
-  POST   /:id/move   - Move note to folder
+  POST   /:id/move   - Move note
 
 /api/tasks
-  GET    /           - List user tasks
-  POST   /           - Create new task
+  GET    /           - List tasks
+  POST   /           - Create task
   PUT    /:id        - Update task
   DELETE /:id        - Delete task
-  POST   /:id/toggle - Toggle task completion
+  POST   /:id/toggle - Toggle complete
 ```
 
-## Phase 2: Component Architecture
+---
 
-### 2.1 Main Dashboard Component
-```typescript
-interface DashboardProps {
-  user: User;
-  folders: Folder[];
-  recentNotes: Note[];
-}
+## Phase 2: UI Component Architecture
 
-// Components to create:
+### 2.1 Main Interface
+
+```ts
+- NovaCommandBar (spell input)
+- NovaStatusBar (feedback + suggestions)
 - DashboardHeader
 - FolderGrid
 - RecentNotesSection
-- QuickActions
 - SearchBar
 ```
 
-### 2.2 Note Management Components
-```typescript
-interface NoteCardProps {
-  note: Note;
-  onEdit: (note: Note) => void;
-  onDelete: (id: string) => void;
-  onMove: (noteId: string, folderId: string) => void;
-}
+### 2.2 Note & Folder Components
 
-// Components to create:
-- NoteCard
-- NoteEditor
-- NotePreview
-- NoteTags
-- NoteActions
+```ts
+NoteCard, NoteEditor, NotePreview, NoteTags, NoteActions
+FolderCard, FolderModal, FolderSettings, NewFolderButton
 ```
 
-### 2.3 Folder Management Components
-```typescript
-interface FolderCardProps {
-  folder: Folder;
-  noteCount: number;
-  onOpen: (folder: Folder) => void;
-  onEdit: (folder: Folder) => void;
-  onDelete: (id: string) => void;
-}
+### 2.3 Spell Automation System
 
-// Components to create:
-- FolderCard
-- FolderModal
-- FolderSettings
-- NewFolderButton
+```ts
+SpellInputBox, SpellHistoryPanel, SpellResultCards
 ```
 
-## Phase 3: Implementation Tasks
+---
 
-### Task 1: Enhanced Database Schema
-- [ ] Create folders table migration
-- [ ] Add folder_id to notes table
-- [ ] Add color and positioning fields
-- [ ] Create indexes for performance
-- [ ] Update RLS policies
+## Phase 3: Tasks Breakdown
 
-### Task 2: Folder Management System
-- [ ] Create Folder API endpoints
-- [ ] Implement FolderCard component
-- [ ] Add folder creation modal
-- [ ] Implement folder editing
-- [ ] Add folder deletion with confirmation
+### 📁 Folder System
 
-### Task 3: Enhanced Note System
-- [ ] Update Note API for folder support
-- [ ] Create color-coded note cards
-- [ ] Implement drag-and-drop functionality
-- [ ] Add note positioning system
-- [ ] Create note preview modal
+* Create and manage folders with color and icon customization
+* Display folder grid in dashboard
+* Folder-level filtering of notes
 
-### Task 4: Dashboard Interface
-- [ ] Create main dashboard layout
-- [ ] Implement folder grid view
-- [ ] Add recent notes section
-- [ ] Create search functionality
-- [ ] Add quick action buttons
+### 📝 Note Management
 
-### Task 5: To-Do List Integration
-- [ ] Enhanced task API endpoints
-- [ ] Create todo-specific note type
-- [ ] Implement task completion tracking
-- [ ] Add task categorization
-- [ ] Create task progress indicators
+* Create/edit/delete draggable note cards
+* Assign to folders, move with drag-and-drop
+* Sticky notes, todos, markdown support
 
-### Task 6: Real-time Features
-- [ ] WebSocket connection setup
-- [ ] Real-time note updates
-- [ ] Live collaboration indicators
-- [ ] Conflict resolution system
-- [ ] Offline sync capability
+### ✅ To-Do List
+
+* Smart task notes with sub-tasks and categories
+* Completion tracking and status syncing
+
+### 🧠 Nova AI Features
+
+* Real-time interaction via NovaCommandBar
+* Emotional feedback and smart suggestions
+* Agent-to-agent task routing (Bolt, parser, deployer)
+
+### 💫 Real-Time Collaboration
+
+* WebSocket-based updates
+* Shared editing sessions
+* Presence + typing indicators
+
+---
 
 ## Phase 4: Advanced Features
 
-### 4.1 Search and Filtering
-- [ ] Full-text search implementation
-- [ ] Filter by folder, date, tags
-- [ ] Search suggestions
-- [ ] Recent searches
-- [ ] Advanced search modal
+### 🔍 Search & Filtering
 
-### 4.2 Collaboration Features
-- [ ] Share folder functionality
-- [ ] User permissions system
-- [ ] Comment system on notes
-- [ ] Activity feed
-- [ ] Notification system
+* Full-text + semantic search
+* Folder + tag filters
+* Advanced spell search
 
-### 4.3 Export and Import
-- [ ] Export notes to PDF/Markdown
-- [ ] Import from other platforms
-- [ ] Backup and restore
-- [ ] Data migration tools
-- [ ] Bulk operations
+### 🧙 Spell System
 
-## Phase 5: Testing and Quality Assurance
+* Reusable automation templates
+* Spell history + edits
+* Nova executes wishes
 
-### 5.1 Unit Testing
-- [ ] API endpoint tests
-- [ ] Component unit tests
-- [ ] Database operation tests
-- [ ] Authentication tests
-- [ ] Error handling tests
+### 🛠️ Import/Export
 
-### 5.2 Integration Testing
-- [ ] End-to-end user flows
-- [ ] Real-time feature testing
-- [ ] Cross-browser compatibility
-- [ ] Mobile responsiveness
-- [ ] Performance testing
+* Export: Markdown, PDF, image
+* Import: Notion, Obsidian
+* Backup & restore
 
-### 5.3 Security Testing
-- [ ] Authentication security
-- [ ] Data validation
-- [ ] SQL injection prevention
-- [ ] XSS protection
-- [ ] Rate limiting
+---
 
-## Technical Specifications
+## Phase 5: QA & Testing
 
-### Frontend Stack
-- React 18 with TypeScript
-- Tailwind CSS for styling
-- React Query for state management
-- React Hook Form for forms
-- Framer Motion for animations
+### 🔬 Testing
 
-### Backend Stack
-- Supabase for database and auth
-- Real-time subscriptions
-- Row Level Security (RLS)
-- Edge functions for complex logic
+* Unit + Integration via Jest
+* Mobile + Desktop responsiveness
+* Security: XSS, auth, validation
 
-### Development Tools
-- Vite for build tooling
-- ESLint and Prettier
-- Husky for git hooks
-- Jest for testing
-- Storybook for component docs
+### ⚙️ Tooling
 
-## Success Metrics
+* Supabase RLS
+* Vite + Tailwind
+* ESLint, Prettier
+* Storybook
+* React Query, Hook Form
 
-### Performance Targets
-- Page load time < 2 seconds
-- API response time < 500ms
-- Real-time updates < 100ms latency
-- 99.9% uptime
-- Mobile-first responsive design
+---
 
-### User Experience Goals
-- Intuitive folder organization
-- Seamless note creation/editing
-- Efficient search and discovery
-- Smooth collaboration features
-- Accessible to all users
+## Phase 6: Agent Prompt System
 
-## Timeline and Milestones
+### 🔧 Agent Prompt Library
 
-### Week 1-2: Foundation
-- Database schema updates
-- Basic API endpoints
-- Core component structure
+1. **Project Plan Prompt** – End-to-end app plan
+2. **Database Schema Prompt** – Supabase design
+3. **API Design Prompt** – REST endpoints
+4. **Nova Abilities Prompt** – All features Nova supports
+5. **Bolt Agent Prompt** – Build/code/test anything
+6. **Payment/Subscription Prompt** – Stripe, wallet
+7. **UI Design Prompt** – Magical interface instructions
+8. **Command Bar Prompt** – Parsing freeform input
+9. **Spell System Prompt** – Automations framework
+10. **Testing + Debugging Prompt** – Smart retry loop
+11. **Reasoning Prompt** – Thought process + feedback
+12. **Note Parser Prompt** – Styling to structure
+13. **Brand/Avatar Prompt** – Purple wizard girl
+14. **Mobile App Prompt** – Expo/TS native version
+15. **Agent Network Prompt** – CrewAI-style roles
 
-### Week 3-4: Core Features
-- Folder management
-- Enhanced note system
-- Dashboard interface
+---
 
-### Week 5-6: Advanced Features
-- To-do integration
-- Real-time features
-- Search functionality
+## Timeline
 
-### Week 7-8: Polish and Testing
-- UI/UX refinements
-- Comprehensive testing
-- Performance optimization
+### Week 1-2
 
-### Week 9-10: Deployment and Documentation
-- Production deployment
-- User documentation
-- API documentation
-- Training materials
+* Database + APIs
+* Command Bar parser
 
-## Risk Mitigation
+### Week 3-4
 
-### Technical Risks
-- Database performance with large datasets
-- Real-time sync conflicts
-- Mobile performance optimization
-- Cross-browser compatibility issues
+* Notes, folders
+* Nova integration begins
 
-### Mitigation Strategies
-- Implement pagination and virtualization
-- Use operational transformation for conflict resolution
-- Progressive web app features
-- Comprehensive browser testing
+### Week 5-6
 
-## Documentation Requirements
+* Real-time + spellbook
+* Full UI polish
 
-### API Documentation
-- OpenAPI/Swagger specifications
-- Authentication guides
-- Rate limiting information
-- Error code references
+### Week 7-8
 
-### User Documentation
-- Getting started guide
-- Feature tutorials
-- Best practices
-- Troubleshooting guide
+* Testing, docs
+* Live deployment
 
-### Developer Documentation
-- Setup instructions
-- Architecture overview
-- Contributing guidelines
-- Deployment procedures
+---
+
+## UX Goals
+
+* App feels alive (Nova interacts)
+* Zero-friction spell input
+* Delightful, responsive UI
+* Magical tone and animations
+
+Let me know if you want each agent prompt exported individually or bundled.
